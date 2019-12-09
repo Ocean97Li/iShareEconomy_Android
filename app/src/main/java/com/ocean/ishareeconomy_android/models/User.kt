@@ -14,7 +14,7 @@ package com.ocean.ishareeconomy_android.models
  */
 class User(
     val id: String,
-    val fistname: String,
+    val firstname: String,
     val lastname: String,
     val username: String,
     val address: String,
@@ -22,6 +22,6 @@ class User(
     val distance: Double) {
 
     val fullname: String
-        get() = "$fistname $lastname"
+        get() = "$firstname $lastname"
 
 }
