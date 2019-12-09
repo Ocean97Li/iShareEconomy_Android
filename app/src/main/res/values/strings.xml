@@ -1,6 +1,34 @@
 <resources>
-    <string name="app_name">iShareEconomy_Android</string>
+    <string name="app_name">iShareEconomy</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="login_text">Login</string>
+
+    <!-- API calls and related-->
+    <string name="BASE_URL_API" translatable="false">https://ishare-economy-backend.herokuapp.com/API</string>
+    <string name="login_login_response" translatable="false">com.ishareEconomy_android.login.loginResponse</string>
+    <string name="login_username" translatable="false">com.ishareEconomy_android.login.username</string>
+    <string name="login_password" translatable="false">com.ishareEconomy_android.login.password</string>
+    <string name="something_went_wrong_login">Something went wrong, please ensure you are connected to the internet</string>
+    <!-- String related to Shared Preference -->
+    <string name="sp_user_token" translatable="false">com.ishareEconomy_android.login.token</string>
+
+    <!-- Strings related to Common Use -->
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
+    <string name="sluiten_van_app">Are You sure you want to quit the app?</string>
+
+    <!-- Strings related to Login -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="error_username">Username can\'t be empty</string>
+    <string name="error_password">Password can\'t be empty</string>
+    <string name="succesfull_login">Succesfully logged in</string>
+    <string name="welcome">Welcome</string>
+    <string name="wrong_login_credentials">Incorrect username or password</string>
+    <string name="sign_up_link_text">No account yet? Click here to </string>
+
 </resources>
