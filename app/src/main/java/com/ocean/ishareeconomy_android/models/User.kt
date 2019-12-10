@@ -19,7 +19,8 @@ class User(
     val username: String,
     val address: String,
     val rating: String,
-    val distance: Double) {
+    val distance: Double,
+    val lending: List<LendingObject>) {
 
     val fullname: String
         get() = "$firstname $lastname"
