@@ -12,8 +12,9 @@
     <string name="login_username" translatable="false">com.ishareEconomy_android.login.username</string>
     <string name="login_password" translatable="false">com.ishareEconomy_android.login.password</string>
     <string name="something_went_wrong_login">Something went wrong, please ensure you are connected to the internet</string>
-    <!-- String related to Shared Preference -->
+    <!-- Id's for Shared Preference values -->
     <string name="sp_user_token" translatable="false">com.ishareEconomy_android.login.token</string>
+    <string name="" translatable="false">com.ishareEconomy_android.login.token</string>
 
     <!-- Strings related to Common Use -->
     <string name="close">Close</string>
