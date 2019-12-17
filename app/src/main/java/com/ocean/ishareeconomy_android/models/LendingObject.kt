@@ -1,4 +1,7 @@
 package com.ocean.ishareeconomy_android.models
+
+import com.google.gson.annotations.SerializedName
+
 /**
  * Part of *models*.
  *
@@ -12,11 +15,14 @@ package com.ocean.ishareeconomy_android.models
  * @property waitingList a list of Users that is the lendobject's future users
  */
 class LendingObject(
-    id: String,
-    name: String,
-    description: String,
-    type: LendObjectType,
-    owner: ObjectOwner,
-    user: ObjectUser,
-    waitingList: List<LendingObject>
-)
+    @SerializedName("_id")
+    val id: String,
+    val name: String,
+    val description: String,
+    var type: String,
+    val owner: ObjectOwner,
+    var user: ObjectUser?,
+    var waitingList: List<ObjectUser>
+) {
+    val lendObjectTypepe = LendObjectType.fromString(type)
+}

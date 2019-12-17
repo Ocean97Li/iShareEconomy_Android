@@ -11,8 +11,8 @@ import java.util.*
  * @property name the owner's full name
  */
 open class ObjectOwner(
-    id: String,
-    name: String
+    val id: String,
+    val name: String
 )
 
 /**
@@ -24,5 +24,5 @@ open class ObjectOwner(
  *  @property fromDate the start of the lending period
  *  @property toDate the end of the lending period
  */
-class ObjectUser(id: String, name: String, from: Date, to: Date) : ObjectOwner(id, name) {
+class ObjectUser(id: String, name: String, val from: Date, val to: Date) : ObjectOwner(id, name) {
 }
