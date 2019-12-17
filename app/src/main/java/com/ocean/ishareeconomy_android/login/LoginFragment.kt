@@ -134,18 +134,6 @@ class LoginFragment : Fragment() {
     }
 
     /**
-     * Help method that takes a string token and turns it into a login response object, if valid
-     * @return LoginResponseObject?
-     */
-    private fun jwtToLoginResponseObject(token: String): LoginResponseObject? {
-        val jwt = JWT(token)
-        if (jwt.expiresAt!! <=  Date()) {
-            return null
-        }
-        return jwt.getClaim("user").asObject(LoginResponseObject::class.java)
-    }
-
-    /**
      * Method that takes a auth token and does a fetch of the users, including the logged in user
      * if successful the user is logged in and taken to the next activity
      */
