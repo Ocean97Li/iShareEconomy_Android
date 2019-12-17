@@ -1,5 +1,8 @@
 <resources>
     <dimen name="padding">8dp</dimen>
+    <dimen name="double_padding">16dp</dimen>
+    <dimen name="triple_padding">32dp</dimen>
+
     <dimen name="half_margin">8dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="double_margin">32dp</dimen>

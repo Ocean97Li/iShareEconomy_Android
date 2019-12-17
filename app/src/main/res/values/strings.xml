@@ -12,9 +12,9 @@
     <string name="login_username" translatable="false">com.ishareEconomy_android.login.username</string>
     <string name="login_password" translatable="false">com.ishareEconomy_android.login.password</string>
     <string name="something_went_wrong_login">Something went wrong, please ensure you are connected to the internet</string>
+
     <!-- Id's for Shared Preference values -->
     <string name="sp_user_token" translatable="false">com.ishareEconomy_android.login.token</string>
-    <string name="" translatable="false">com.ishareEconomy_android.login.token</string>
 
     <!-- Strings related to Common Use -->
     <string name="close">Close</string>
@@ -31,5 +31,10 @@
     <string name="welcome">Welcome</string>
     <string name="wrong_login_credentials">Incorrect username or password</string>
     <string name="sign_up_link_text">No account yet? Click here to </string>
+
+    <!-- Strings related to LendingScreen -->
+    <string name="object_type_image_content_desc">An object</string>
+    <string name="service_type_image_content_desc">A Service</string>
+    <string name="transport_type_image_content_desc">A mode of transportation</string>
 
 </resources>
