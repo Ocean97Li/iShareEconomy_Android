@@ -195,7 +195,7 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
 }
 
 /**
- * ViewHolder for DevByte items. All work is done by data binding.
+ * ViewHolder for LendObject items. All work is done by data binding.
  */
 class LendObjectViewHolder(val viewDataBinding: ListItemLendobjectBinding) :
     RecyclerView.ViewHolder(viewDataBinding.root) {
