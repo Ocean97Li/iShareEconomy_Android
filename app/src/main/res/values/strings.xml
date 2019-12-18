@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">iShareEconomy</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <!-- Bottom Navigation-->
+    <string name="title_lending">Lending</string>
+    <string name="title_using">Using</string>
+    <string name="title_requests">Requests</string>
 
     <string name="login_text">Login</string>
 
