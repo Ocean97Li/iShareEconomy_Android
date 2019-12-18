@@ -13,22 +13,19 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.auth0.android.jwt.JWT
 import com.google.android.material.textfield.TextInputLayout
-import com.ocean.ishareeconomy_android.MainActivity
 import com.ocean.ishareeconomy_android.R
+import com.ocean.ishareeconomy_android.lending.LendingActivity
 import com.ocean.ishareeconomy_android.models.LoginObject
 import com.ocean.ishareeconomy_android.models.LoginResponse
-import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.models.User
+import com.ocean.ishareeconomy_android.network.Network
+import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.repositories.LoginAPI
-import com.ocean.ishareeconomy_android.repositories.UserAPI
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
-import java.util.*
 
 /**
  * Part of *login*.
@@ -119,7 +116,6 @@ class LoginFragment : Fragment() {
         return passwordInput.text != null && passwordInput.text.trim().length >= 8
     }
 
-
     /**
      * Help method that fills the login inputs with the stored username and password from the sharedPreferences
      *
@@ -134,18 +130,6 @@ class LoginFragment : Fragment() {
     }
 
     /**
-     * Help method that takes a string token and turns it into a login response object, if valid
-     * @return LoginResponseObject?
-     */
-    private fun jwtToLoginResponseObject(token: String): LoginResponseObject? {
-        val jwt = JWT(token)
-        if (jwt.expiresAt!! <=  Date()) {
-            return null
-        }
-        return jwt.getClaim("user").asObject(LoginResponseObject::class.java)
-    }
-
-    /**
      * Method that takes a auth token and does a fetch of the users, including the logged in user
      * if successful the user is logged in and taken to the next activity
      */
@@ -155,8 +139,9 @@ class LoginFragment : Fragment() {
         // Prepare token for the request header
         val requestToken = "Bearer $token"
 
-        // Fetch the actual User
-        val call2 = UserAPI.repository.getUsers(user._id, requestToken)
+        // Fetch the actual Users
+
+        val call2 = Network.users.getUsers(user._id, requestToken)
         call2.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful) {
@@ -165,11 +150,10 @@ class LoginFragment : Fragment() {
                     // Get the logged in user
                     val index = users.indexOfFirst { user -> user.id == user!!.id }!!
                     val loggedInUser = users.get(index)
-                    users = users.drop(index+1)
                     // Display toast
                     Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullname}!", Toast.LENGTH_LONG).show()
                     // goto the HomeActivity
-                    val intent = Intent(activity, MainActivity::class.java)
+                    val intent = Intent(activity, LendingActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
 
@@ -210,6 +194,8 @@ class LoginFragment : Fragment() {
         val user = LoginObject(username, password)
 
         val call = LoginAPI.repository.login(user)
+
+
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {

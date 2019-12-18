@@ -1,5 +1,7 @@
 package com.ocean.ishareeconomy_android.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Part of *models*.
  *
@@ -13,13 +15,15 @@ package com.ocean.ishareeconomy_android.models
  * @property distance the user's distance from the logged in user
  */
 class User(
+    @SerializedName("_id")
     val id: String,
     val firstname: String,
     val lastname: String,
     val username: String,
     val address: String,
-    val rating: String,
-    val distance: Double) {
+    val rating: Int,
+    val distance: Double,
+    var lending: List<LendingObject>) {
 
     val fullname: String
         get() = "$firstname $lastname"

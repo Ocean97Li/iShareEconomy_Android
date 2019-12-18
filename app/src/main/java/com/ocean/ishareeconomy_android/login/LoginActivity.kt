@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ocean.ishareeconomy_android.R
 
 /**
- * Deel van *login*.
+ * Part of *login*.
  *
- * Activy verantwoordelijk voor het inloggen van gebruikers
- * @property loginFragment Bouwt het inlogscherm op en bevat de achterliggende functionaliteit
+ * Activity responsible for logging in users
+ * @property loginFragment builds the actual screen and contains the underlying functionality
  *
  */
 class LoginActivity : AppCompatActivity() {
