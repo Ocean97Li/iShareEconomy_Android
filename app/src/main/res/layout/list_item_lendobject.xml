@@ -58,7 +58,7 @@
                     android:layout_height="42dp" app:srcCompat="@drawable/ic_user_circle_solid"
                     android:id="@+id/user_image"/>
             <TextView
-                    android:text="@{Integer.toString(object.data.waitingList.size)}"
+                    android:text="@{Integer.toString(object.data.waitingList.size+(object.data.user!=null?1:0))}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/users_number" android:textAlignment="center"/>
         </LinearLayout>

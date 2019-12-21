@@ -21,7 +21,7 @@ data class LendObjectWithObjectUsers(
 
 fun List<LendObjectWithObjectUsers>.asDomainModel(): List<LendingObject> {
     return map {
-        val user =  findUser(it.users.asDomainModel())
+        val user =  findUser(it.users)?.asDomainModel()
         LendingObject(
             id = it.lendobject.object_id,
             name = it.lendobject.name,
@@ -29,13 +29,13 @@ fun List<LendObjectWithObjectUsers>.asDomainModel(): List<LendingObject> {
             type = it.lendobject.type,
             owner = ObjectOwner(it.lendobject.object_owner_id, it.lendobject.object_owner_name),
             user = user,
-            waitingList = it.users.asDomainModel().filter { objcuser -> objcuser.id != user?.id }
+            waitingList = it.users.asDomainModel().filter { objcuser -> objcuser.objectuserid != user?.objectuserid }
         )
     }
 }
 
-fun findUser(list: List<ObjectUser>): ObjectUser? {
+fun findUser(list: List<DatabaseObjectUser>): DatabaseObjectUser? {
     return list.find {  objectUser ->
-        objectUser.from.after(Date.valueOf(LocalDate.now().toString()))
+        objectUser.current
     }
 }

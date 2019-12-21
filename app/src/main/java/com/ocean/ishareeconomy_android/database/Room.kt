@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.room.*
 import com.ocean.ishareeconomy_android.database.converters.DateConverter
 import com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao
+import com.ocean.ishareeconomy_android.database.dao.ObjectUserDatabaseDao
 import com.ocean.ishareeconomy_android.database.dao.UserDatabaseDao
 import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser
@@ -31,6 +32,7 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 abstract class iShareDataBase : RoomDatabase() {
     abstract val users: UserDatabaseDao
     abstract val objects: LendObjectDatabaseDao
+    abstract  val objectUsers: ObjectUserDatabaseDao
 }
 
 // singleton
