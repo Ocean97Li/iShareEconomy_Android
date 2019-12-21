@@ -1,4 +1,4 @@
-package com.ocean.ishareeconomy_android.lending
+package com.ocean.ishareeconomy_android.using
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -6,52 +6,51 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.using.UsingActivity
-import kotlinx.android.synthetic.main.activity_lending.*
+import com.ocean.ishareeconomy_android.lending.LendingActivity
 
 /**
  * Part of *lending*.
  *
- * Activity responsible for displaying the lendobjects currently shared by the user
- * @property lendingFragment Builds the lending overview screen
+ * Activity responsible for showing the lendobjects currently used by the user
+ * @property usingFragment builds the using overview screen
  *
  */
-class LendingActivity : AppCompatActivity() {
+class UsingActivity : AppCompatActivity() {
 
-    var lendingFragment =  LendingMasterFragment()
+    var usingFragment =  UsingMasterFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lending)
+        setContentView(R.layout.activity_using)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.lending_container, lendingFragment)
+                    .add(R.id.using_container, usingFragment)
                     .commit()
         }
 
         window.enterTransition = null
         window.exitTransition = null
 
-        navView.menu.getItem(0).isChecked = true
+        navView.menu.getItem(1).isChecked = true
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_lending -> {
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_using -> {
-                val intent = Intent(this, UsingActivity::class.java)
+                val intent = Intent(this, LendingActivity::class.java)
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
                 this.finish()
-                return@OnNavigationItemSelectedListener true
+//                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_using -> {
+//                return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_requests -> {
-                return@OnNavigationItemSelectedListener true
+//                return@OnNavigationItemSelectedListener true
             }
         }
         false

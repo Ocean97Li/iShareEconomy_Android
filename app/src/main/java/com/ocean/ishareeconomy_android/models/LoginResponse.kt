@@ -1,7 +1,5 @@
 package com.ocean.ishareeconomy_android.models
 
-import android.util.Base64
-
 /**
  * Part of *models*.
  *

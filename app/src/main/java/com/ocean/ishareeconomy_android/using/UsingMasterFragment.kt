@@ -1,8 +1,8 @@
-package com.ocean.ishareeconomy_android.lending
+package com.ocean.ishareeconomy_android.using
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,26 +15,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendobjectAdapter
-import com.ocean.ishareeconomy_android.databinding.FragmentLendingBinding
+import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.viewmodels.LendingViewModel
+import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
-class LendingMasterFragment: Fragment() {
+class UsingMasterFragment: Fragment() {
 
     /**
      * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
      * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
      * do in this Fragment.
      */
-    private val viewModel: LendingViewModel by lazy {
+    private val viewModel: UsingViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
         ViewModelProviders.of(this,
-            LendingViewModel.Factory(activity.application, loginResponseObject._id, token))
-            .get(LendingViewModel::class.java)
+            UsingViewModel.Factory(activity.application, loginResponseObject._id, token))
+            .get(UsingViewModel::class.java)
     }
 
     /**
@@ -48,7 +49,7 @@ class LendingMasterFragment: Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var spEditor: SharedPreferences.Editor
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
     }
 
@@ -64,9 +65,9 @@ class LendingMasterFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.lending.observe(viewLifecycleOwner, Observer<List<LendingObject>> { lending ->
-            lending?.apply {
-                viewModelAdapter?.objects = lending
+        viewModel.using.observe(viewLifecycleOwner, Observer<List<LendingObject>> { using ->
+            using?.apply {
+                viewModelAdapter?.objects = using
             }
         })
     }
@@ -95,9 +96,9 @@ class LendingMasterFragment: Fragment() {
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!
 
-        val binding: FragmentLendingBinding = DataBindingUtil.inflate(
+        val binding: FragmentUsingBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_lending,
+            R.layout.fragment_using,
             container,
             false)
         // Set the lifecycleOwner so DataBinding can observe LiveData

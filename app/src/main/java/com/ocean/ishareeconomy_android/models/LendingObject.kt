@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
  * @property user refers to User that is the lendobject's current user
  * @property waitingList a list of Users that is the lendobject's future users
  */
-class LendingObject(
+class LendingObject constructor(
     @SerializedName("_id")
     val id: String,
     val name: String,
@@ -22,7 +22,18 @@ class LendingObject(
     var type: String,
     val owner: ObjectOwner,
     var user: ObjectUser?,
+    @SerializedName("waitinglist")
     var waitingList: List<ObjectUser>
 ) {
-    val lendObjectTypepe = LendObjectType.fromString(type)
+    val lendObjectType: LendObjectType
+
+    init {
+        if (waitingList == null) {
+            waitingList = emptyList()
+        }
+        lendObjectType = LendObjectType.fromString(type)
+    }
+
+
+
 }
