@@ -37,5 +37,5 @@
     <string name="object_type_image_content_desc">An object</string>
     <string name="service_type_image_content_desc">A Service</string>
     <string name="transport_type_image_content_desc">A mode of transportation</string>
-
+    <string name="add_lending_object_button">Share new</string>
 </resources>

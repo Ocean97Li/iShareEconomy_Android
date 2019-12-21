@@ -3,9 +3,12 @@ package com.ocean.ishareeconomy_android.lending
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
+import com.ocean.ishareeconomy_android.R.id.add_lending_object_button
 import com.ocean.ishareeconomy_android.using.UsingActivity
 import kotlinx.android.synthetic.main.activity_lending.*
 
@@ -23,8 +26,7 @@ class LendingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lending)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -36,7 +38,22 @@ class LendingActivity : AppCompatActivity() {
         window.enterTransition = null
         window.exitTransition = null
 
-        navView.menu.getItem(0).isChecked = true
+        nav_view.menu.getItem(0).isChecked = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            add_lending_object_button -> {
+                // ADD Lendobject Add fragment
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.lending_top_nav_menu, menu)
+        return true
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
