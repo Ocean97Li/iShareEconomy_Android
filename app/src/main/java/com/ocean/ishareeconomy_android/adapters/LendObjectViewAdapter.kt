@@ -62,8 +62,9 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
     override fun onBindViewHolder(holder: LendObjectViewHolder, position: Int) {
         holder.viewDataBinding.also {
             val obj = objects[position]
-            it.`object` = LendObjectViewModel(obj,getObjectUsageColor(obj))
-
+            val vm = LendObjectViewModel(obj,getObjectUsageColor(obj))
+            it.`object` = vm
+            it.lendobjectType.setImageResource(vm.type())
 //            it.callback = callback
         }
     }

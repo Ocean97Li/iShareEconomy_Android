@@ -35,12 +35,12 @@
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout2" android:layout_marginEnd="8dp"
                 android:gravity="fill">
             <TextView
-                    android:text="@{object.data.name}"
+                    android:text="@{object.name}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/title_text"
                     android:textSize="@dimen/title_text_size"/>
             <TextView
-                    android:text="@{object.data.description}"
+                    android:text="@{object.description}"
                     android:layout_width="match_parent"
                     android:layout_height="32dp" android:id="@+id/description_text"
                     android:textSize="@dimen/regular_text_size"/>
@@ -58,7 +58,7 @@
                     android:layout_height="42dp" app:srcCompat="@drawable/ic_user_circle_solid"
                     android:id="@+id/user_image"/>
             <TextView
-                    android:text="@{Integer.toString(object.data.waitingList.size+(object.data.user!=null?1:0))}"
+                    android:text="@{object.numberOfUsers}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/users_number" android:textAlignment="center"/>
         </LinearLayout>
