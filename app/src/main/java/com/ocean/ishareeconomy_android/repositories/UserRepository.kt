@@ -16,7 +16,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class UserRepository(private val loggedInUserId: String, private val database: iShareDataBase) {
+class RepositoryParams(val loggedInUserId: String, val database: iShareDataBase)
+
+class UserRepository private constructor(params: RepositoryParams) {
+
+    private val loggedInUserId: String = params.loggedInUserId
+    private val  database: iShareDataBase = params.database
+
+    companion object : ReusableRepositorySingleton<UserRepository, RepositoryParams>(::UserRepository)
 
     private val succes = MutableLiveData<String>()
     private val error = MutableLiveData<String>()
