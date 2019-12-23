@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorBlack</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!-- Animation Transitions -->
         <!-- enable window content transitions -->
@@ -17,5 +17,35 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <!-- Buttons themes-->
+    <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ic_rounded_button</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">@dimen/double_padding</item>
+    </style>
+    <style name="AppTheme.RoundedCornerImageButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/ic_rounded_button</item>
+    </style>
+
+    <!-- Object Input fields theme-->
+    <style name="AppTheme.MaterialEditText" parent="Widget.AppCompat.EditText">
+        android:id="@+id/description_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/choose_description_hint"
+        android:inputType="textPersonName"
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:maxLength">25</item>
+        <item name="android:hint">@string/choose_description_hint</item>
+        <item name="android:padding">@dimen/double_padding</item>
+    </style>
+
 
 </resources>
