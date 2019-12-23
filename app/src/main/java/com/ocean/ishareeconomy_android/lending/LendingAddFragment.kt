@@ -2,35 +2,64 @@ package com.ocean.ishareeconomy_android.lending
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendobjectAdapter
-import com.ocean.ishareeconomy_android.databinding.FragmentLendingBinding
-import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.databinding.FragmentAddLendingBinding
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
-import com.ocean.ishareeconomy_android.viewmodels.LendingViewModel
+import com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel
+import kotlinx.android.synthetic.main.fragment_add_lending.*
 
-class LendingAddFragment: Fragment() {
+class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
+
     /**
-     * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
-     * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
-     * do in this Fragment.
+     * Implementation of interface [OnShareListener]
+     *  Gets the [LendingActivity] and
+     *  navigates back to the lending objects overview: [LendingMasterFragment]
      */
-    private val viewModel: LendingViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
+    override fun navigateBackToMaster() {
+        (activity as LendingActivity).navigateToMaster()
+    }
+
+    /**
+     * Method to set the buttons
+     */
+    override fun setSelected(type: String) {
+        val grey = ContextCompat.getColor(context!!, R.color.colorGrey)
+        val blue = ContextCompat.getColor(context!!, R.color.colorAccent)
+
+        transportation_button.setBackgroundColor(grey)
+        val tool_shape = GradientDrawable()
+        val service_shape = GradientDrawable()
+        val transport_shape = GradientDrawable()
+
+        tool_shape.setColor(grey)
+        service_shape.setColor(grey)
+        transport_shape.setColor(grey)
+
+        tool_shape.cornerRadius = 26f
+        service_shape.cornerRadius = 26f
+        transport_shape.cornerRadius = 26f
+
+        tool_button.background = tool_shape
+        service_button.background = service_shape
+        transportation_button.background = transport_shape
+
+        when(type) {
+            "tool" -> tool_shape.setColor(blue)
+            "service" -> service_shape.setColor(blue)
+            "transportation" -> transport_shape.setColor(blue)
         }
-        ViewModelProviders.of(this,
-            LendingViewModel.Factory(activity.application, loginResponseObject._id, token))
-            .get(LendingViewModel::class.java)
     }
 
     /**
@@ -60,11 +89,11 @@ class LendingAddFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.lending.observe(viewLifecycleOwner, Observer<List<LendingObject>> { lending ->
-            lending?.apply {
-                viewModelAdapter?.objects = lending
-            }
-        })
+//        viewModel.lending.observe(viewLifecycleOwner, Observer<List<LendingObject>> { lending ->
+//            lending?.apply {
+//                viewModelAdapter?.objects = lending
+//            }
+//        })
     }
 
     /**
@@ -91,22 +120,20 @@ class LendingAddFragment: Fragment() {
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!
 
-        val binding: FragmentLendingBinding = DataBindingUtil.inflate(
+        val binding: FragmentAddLendingBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_lending,
+            R.layout.fragment_add_lending,
             container,
             false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
         binding.setLifecycleOwner(viewLifecycleOwner)
 
+        val viewModel= ViewModelProviders.of(this,
+            AddLendingViewModel.Factory(activity!!.application, loginResponseObject._id, token))
+            .get(AddLendingViewModel::class.java)
+        viewModel.colorSetter = this
+        viewModel.navigateBack = this
         binding.viewModel = viewModel
-
-        viewModelAdapter = LendobjectAdapter()
-
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = viewModelAdapter
-        }
 
         return binding.root
     }

@@ -28,7 +28,7 @@ class UsingActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.using_container, usingFragment)
+                    .add(R.id.frame_layout, usingFragment)
                     .commit()
         }
 
@@ -44,7 +44,7 @@ class UsingActivity : AppCompatActivity() {
                 val intent = Intent(this, LendingActivity::class.java)
                 startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
                 this.finish()
-//                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_using -> {
 //                return@OnNavigationItemSelectedListener true

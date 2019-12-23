@@ -43,6 +43,17 @@ fun List<User>.asDatabaseModel(): Array<DatabaseUser> {
     }.toTypedArray()
 }
 
+fun LendingObject.asDatabaseModel(): DatabaseLendObject {
+    return DatabaseLendObject(
+        object_id = this.id,
+        object_owner_id = this.owner.id,
+        object_owner_name = this.owner.name,
+        name = this.name,
+        description = this.description,
+        type = this.type
+    )
+}
+
 fun List<LendingObject>.asDatabaseModel(): Array<DatabaseLendObject> {
     return map {
         DatabaseLendObject (

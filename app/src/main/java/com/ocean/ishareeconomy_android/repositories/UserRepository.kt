@@ -2,15 +2,18 @@ package com.ocean.ishareeconomy_android.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.iShareDataBase
 import com.ocean.ishareeconomy_android.database.relationships.asDomainModel
 import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.network.Network
 import com.ocean.ishareeconomy_android.network.asDatabaseModel
 import com.ocean.ishareeconomy_android.network.asDatabaseModels
+import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,8 +30,15 @@ class UserRepository private constructor(params: RepositoryParams) {
 
     private val succes = MutableLiveData<String>()
     private val error = MutableLiveData<String>()
+    private var _loggedInUser: User? = null
 
-    private lateinit var loggedInUser: User
+    val loggedInUser: LiveData<User> = Transformations.map(database.users.getAllUsers()) {
+        it.asDomainModel().map {
+                user ->
+            user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
+            user
+        }.find { user -> user.id == loggedInUserId }
+    }
 
     val users: LiveData<List<User>> = Transformations.map(database.users.getAllUsers()) {
         it.asDomainModel().map {
@@ -48,6 +58,30 @@ class UserRepository private constructor(params: RepositoryParams) {
         it.asDomainModel()
     }
 
+    suspend fun addLendObject(id: String, auth: String, name: String, description: String, type: String) {
+        withContext(Dispatchers.IO) {
+            val lendindObject = LendingObject(
+                id = "",
+                name = name,
+                description = description,
+                type = type,
+                owner = ObjectOwner(_loggedInUser!!.id, _loggedInUser!!.fullname),
+                user = null,
+                waitingList = emptyList()
+            )
+            val response = Network.lending.postLendObject(id, auth, lendindObject).await()
+            if (response.isSuccessful) {
+               response.body()?.let {
+                   database.objects.insertAllLendObjects(it.asDatabaseModel())
+               }
+            } else {
+                GlobalScope.launch(Dispatchers.Main) {
+                    error.value = response.message()
+                }
+            }
+        }
+    }
+
     suspend fun refreshUsers(id: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.users.getUsersAsync(id, auth).await()
@@ -56,7 +90,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 var users = response.body()!!
 
                 // Get the logged in user
-                loggedInUser = users.find { user -> user.id == id }!!
+                _loggedInUser = users.find { user -> user.id == id }!!
 
                 // Get all LendObjects
                 val lendObjects = users.flatMap { user -> user.lending }!!
@@ -84,7 +118,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
 
                 GlobalScope.launch(Dispatchers.Main) {
-                    succes.value = loggedInUser.fullname
+                    succes.value = _loggedInUser!!.fullname
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {
