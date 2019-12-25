@@ -82,6 +82,21 @@ class UserRepository private constructor(params: RepositoryParams) {
         }
     }
 
+    suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
+        withContext(Dispatchers.IO) {
+            val response = Network.lending.deleteLendObject(userId, objectId, auth).await()
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    database.objects
+                }
+            } else {
+                GlobalScope.launch(Dispatchers.Main) {
+                    error.value = response.message()
+                }
+            }
+        }
+    }
+
     suspend fun refreshUsers(id: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.users.getUsersAsync(id, auth).await()

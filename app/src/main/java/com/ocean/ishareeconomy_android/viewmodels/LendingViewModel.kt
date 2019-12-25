@@ -3,6 +3,7 @@ package com.ocean.ishareeconomy_android.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.ocean.ishareeconomy_android.database.getDatabase
+import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -36,9 +37,10 @@ class LendingViewModel(application: Application, val id: String, val auth: Strin
      * viewModelJob.cancel()
      */
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     private val dataBase = getDatabase(application)
     private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
+
+    val lending = repository.lending
 
     init {
         viewModelScope.launch {
@@ -46,7 +48,11 @@ class LendingViewModel(application: Application, val id: String, val auth: Strin
         }
     }
 
-    val lending = repository.lending
+    fun removeObject(lendObject: LendingObject) {
+        viewModelScope.launch {
+            repository.removeLendObject(id, lendObject.id, auth)
+        }
+    }
 
     /**
      * Cancel all coroutines when the ViewModel is cleared

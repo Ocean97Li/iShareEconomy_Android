@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.relationships.LendObjectWithObjectUsers
+import retrofit2.http.DELETE
 
 @Dao
 interface LendObjectDatabaseDao {
@@ -16,10 +17,6 @@ interface LendObjectDatabaseDao {
     @Query("SELECT * from lendobjects where object_owner_id = :id")
     fun lendingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
 
-
-    // I may need to write a query here to fetch the lendobjects that are asociated with the passed user id,
-    // filtered on the current period (from date <= current date) signalling that the lending period has started
-    // Since the lend objects table should be cleared when new information
     @Transaction
     @Query(
         """
@@ -32,5 +29,9 @@ interface LendObjectDatabaseDao {
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllLendObjects(vararg objects: DatabaseLendObject)
+
+    @Query("DELETE FROM lendobjects WHERE object_id = :id")
+    fun deleteObjectById(id: String)
+
 
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/add_lending_object_button"
-          android:id="@+id/add_lending_object_button"
-          android:icon="@drawable/ic_add_white_24dp"
-          app:showAsAction="ifRoom|withText"/>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/add_lending_object_button"
+            android:icon="@drawable/ic_add_white_24dp"
+            android:title="@string/add_lending_object_button"
+            app:showAsAction="ifRoom|withText" />
+    <item
+            android:id="@+id/remove_lending_object_button"
+            android:icon="@drawable/ic_delete_grey_24dp"
+            android:title="@string/remove_lending_object_button"
+            app:showAsAction="ifRoom|withText" />
 </menu>

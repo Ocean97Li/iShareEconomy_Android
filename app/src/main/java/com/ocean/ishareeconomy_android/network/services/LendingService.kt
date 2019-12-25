@@ -15,4 +15,12 @@ interface LendingService {
         @Body lendObject: LendingObject
     ): Deferred<Response<LendingObject>>
 
+    @Headers("Content-type: application/json")
+    @DELETE("users/{user_id}/lending/{object_id}")
+    fun deleteLendObject(
+        @Path("user_id") userId: String,
+        @Path("object_id") objectId: String,
+        @Header("Authorization") auth: String
+    ): Deferred<Response<LendingObject>>
+
 }

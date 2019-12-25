@@ -22,6 +22,7 @@ buildscript {
         version_work = "1.0.1"
         version_timber = "4.7.1"
         version_time = "1.2.1"
+        version_swipe_decorator = "1.2.2"
     }
     repositories {
         google()

@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.R.id.add_lending_object_button
@@ -42,24 +43,6 @@ class LendingActivity : AppCompatActivity() {
         window.exitTransition = null
 
         nav_view.menu.getItem(0).isChecked = true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            add_lending_object_button -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frame_layout, addFragment)
-                    .commit()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.lending_top_nav_menu, menu)
-        return true
     }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
