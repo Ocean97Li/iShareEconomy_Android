@@ -25,9 +25,9 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
     var context: Context? = null
 
     /**
-     * The videos that our Adapter will show
+     * The Lendobject items that our Adapter will show
      */
-    var objects: List<LendingObject> = emptyList()
+    var objects: MutableList<LendingObject> = mutableListOf()
         set(value) {
             field = value
             // For an extra challenge, update this to use the paging library.
@@ -73,6 +73,11 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
         } else {
             return ColorDrawable(ContextCompat.getColor(context!!, R.color.customGreen))
         }
+    }
+
+    fun removeItem(viewHolder: LendObjectViewHolder) {
+        objects.removeAt(viewHolder.adapterPosition)
+        notifyItemRemoved(viewHolder.adapterPosition)
     }
 
 }

@@ -67,7 +67,7 @@ class UsingMasterFragment: Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.using.observe(viewLifecycleOwner, Observer<List<LendingObject>> { using ->
             using?.apply {
-                viewModelAdapter?.objects = using
+                viewModelAdapter?.objects = using.toMutableList()
             }
         })
     }
@@ -108,7 +108,7 @@ class UsingMasterFragment: Fragment() {
 
         viewModelAdapter = LendobjectAdapter()
 
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
+        binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = viewModelAdapter
         }

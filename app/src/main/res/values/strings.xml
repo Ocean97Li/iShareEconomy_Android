@@ -41,6 +41,9 @@
     <string name="service_type_image_content_desc">A Service</string>
     <string name="transport_type_image_content_desc">A Mode of transportation</string>
     <string name="add_lending_object_button">Share new</string>
+    <string name="remove_lending_object_button">Enable delete</string>
+    <string name="remove_instruction">Swipe left to delete</string>
+
 
     <!-- Strings related to AddLendingScreen -->
     <string name="choose_title_text">Sharing a new item</string>
