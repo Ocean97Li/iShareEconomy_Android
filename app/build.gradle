@@ -97,4 +97,7 @@ dependencies {
 
     // WorkManager
     implementation "android.arch.work:work-runtime-ktx:$version_work"
+
+    // Swipe decorator
+    implementation "it.xabaras.android:recyclerview-swipedecorator:$version_swipe_decorator"
 }
