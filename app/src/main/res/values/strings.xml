@@ -20,7 +20,10 @@
     <!-- Strings related to Common Use -->
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
-    <string name="sluiten_van_app">Are You sure you want to quit the app?</string>
+    <string name="close_app">Are You sure you want to quit the app?</string>
+    <string name="tool">Tool</string>
+    <string name="service">Service</string>
+    <string name="transport">Transportation</string>
 
     <!-- Strings related to Login -->
     <string name="hint_username">Username</string>
@@ -34,8 +37,22 @@
     <string name="sign_up_link_text">No account yet? Click here to </string>
 
     <!-- Strings related to LendingScreen -->
-    <string name="object_type_image_content_desc">An object</string>
+    <string name="object_type_image_content_desc">An Tool</string>
     <string name="service_type_image_content_desc">A Service</string>
-    <string name="transport_type_image_content_desc">A mode of transportation</string>
+    <string name="transport_type_image_content_desc">A Mode of transportation</string>
+    <string name="add_lending_object_button">Share new</string>
+
+    <!-- Strings related to AddLendingScreen -->
+    <string name="choose_title_text">Sharing a new item</string>
+    <string name="choose_type_text">That is of type:</string>
+    <string name="choose_name_text">With the name:</string>
+    <string name="choose_name_hint">Enter a name</string>
+    <string name="choose_description_text">And the description:</string>
+    <string name="choose_description_hint">Enter a description</string>
+    <string name="tool_button_content_desc">The button for type tool</string>
+    <string name="service_button_content_desc">The button for type service</string>
+    <string name="transport_button_content_desc">The button for type transport</string>
+    <string name="add_button">Share</string>
+    <string name="add_button_long">Start sharing now</string>
 
 </resources>

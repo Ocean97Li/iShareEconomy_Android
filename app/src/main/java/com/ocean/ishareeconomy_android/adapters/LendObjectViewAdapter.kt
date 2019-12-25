@@ -31,7 +31,6 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
         set(value) {
             field = value
             // For an extra challenge, update this to use the paging library.
-
             // Notify any registered observers that the data set has changed. This will cause every
             // element in our RecyclerView to be invalidated.
             notifyDataSetChanged()
@@ -65,7 +64,6 @@ class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
             val vm = LendObjectViewModel(obj,getObjectUsageColor(obj))
             it.`object` = vm
             it.lendobjectType.setImageResource(vm.type())
-//            it.callback = callback
         }
     }
 
