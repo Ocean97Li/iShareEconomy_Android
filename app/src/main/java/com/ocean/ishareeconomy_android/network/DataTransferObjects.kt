@@ -33,8 +33,8 @@ fun List<User>.asDatabaseModel(): Array<DatabaseUser> {
     return map {
         DatabaseUser (
                 user_id = it.id,
-                firstname = it.firstname,
-                lastname = it.lastname,
+                firstname = it.firstName,
+                lastname = it.lastName,
                 username = it.username,
                 address = it.address,
                 rating = it.rating,

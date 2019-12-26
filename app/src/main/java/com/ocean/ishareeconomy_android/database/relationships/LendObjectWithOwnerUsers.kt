@@ -6,8 +6,6 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.models.*
-import org.threeten.bp.LocalDate
-import java.sql.Date
 
 data class LendObjectWithObjectUsers(
     @Embedded
@@ -29,7 +27,7 @@ fun List<LendObjectWithObjectUsers>.asDomainModel(): List<LendingObject> {
             type = it.lendobject.type,
             owner = ObjectOwner(it.lendobject.object_owner_id, it.lendobject.object_owner_name),
             user = user,
-            waitingList = it.users.asDomainModel().filter { objcuser -> objcuser.objectuserid != user?.objectuserid }
+            waitingList = it.users.asDomainModel().filter { objcuser -> objcuser.objectUserId != user?.objectUserId }
         )
     }
 }

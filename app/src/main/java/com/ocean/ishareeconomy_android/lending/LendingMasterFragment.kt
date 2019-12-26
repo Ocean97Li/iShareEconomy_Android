@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -43,7 +42,7 @@ class LendingMasterFragment: Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         ViewModelProviders.of(this,
-            LendingViewModel.Factory(activity.application, loginResponseObject._id, token))
+            LendingViewModel.Factory(activity.application, loginResponseObject.id, token))
             .get(LendingViewModel::class.java)
     }
 
@@ -96,9 +95,10 @@ class LendingMasterFragment: Fragment() {
                  */
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val position = viewHolder.adapterPosition
-                    val deleteObject = viewModelAdapter!!.objects.removeAt(position)
+                    viewModel.removeObject(viewModelAdapter!!.objects[position])
+                    viewModelAdapter!!.objects.removeAt(position)
                     viewModelAdapter!!.notifyItemRemoved(position)
-                    viewModel.removeObject(deleteObject)
+
                 }
 
                 /**
@@ -233,7 +233,7 @@ class LendingMasterFragment: Fragment() {
             R.id.add_lending_object_button -> {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frame_layout,  (activity as LendingActivity)!!.addFragment)
+                    .replace(R.id.frame_layout,  (activity as LendingActivity).addFragment)
                     .commit()
             }
 

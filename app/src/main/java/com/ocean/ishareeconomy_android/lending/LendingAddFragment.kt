@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,6 +28,10 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
      *  navigates back to the lending objects overview: [LendingMasterFragment]
      */
     override fun navigateBackToMaster() {
+        // Close soft keyboard
+        val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view!!.windowToken,0)
+        // Navigate back
         (activity as LendingActivity).navigateToMaster()
     }
 
@@ -129,7 +133,7 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
         binding.setLifecycleOwner(viewLifecycleOwner)
 
         val viewModel= ViewModelProviders.of(this,
-            AddLendingViewModel.Factory(activity!!.application, loginResponseObject._id, token))
+            AddLendingViewModel.Factory(activity!!.application, loginResponseObject.id, token))
             .get(AddLendingViewModel::class.java)
         viewModel.colorSetter = this
         viewModel.navigateBack = this

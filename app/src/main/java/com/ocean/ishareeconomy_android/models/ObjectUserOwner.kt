@@ -21,19 +21,18 @@ open class ObjectOwner(
  * Part of *models*.
  *
  * User object that is used to login and then fetch the correct user object
- *  @property id the id of the object owner
- *  @property name the owner's full name
- *  @property fromDate the start of the lending period
- *  @property toDate the end of the lending period
+ *  @property id the [String] id of the object owner
+ *  @property name the owner's full name [String]
+ *  @property from the starting [Date] of the lending period
+ *  @property to the end [Date] of the lending period
  */
 class ObjectUser(
     @Ignore
-    var objectuserid: Int = 0,
+    var objectUserId: Int = 0,
     id: String,
     name: String,
     @SerializedName("fromdate")
     val from: Date,
     @SerializedName("todate")
     val to: Date,
-    var parenObjectId: String = "") : ObjectOwner(id, name) {
-}
+    var parenObjectId: String = "") : ObjectOwner(id, name)

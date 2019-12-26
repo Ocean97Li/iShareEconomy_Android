@@ -7,4 +7,4 @@ package com.ocean.ishareeconomy_android.models
  * @property username holds the JWT token of the user
  * @property password holds the id of the user
  */
-class LoginObject(val username: String, val password: String)
+class LoginObject(val username: String, private val password: String)

@@ -1,5 +1,7 @@
 package com.ocean.ishareeconomy_android.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Part of *models*.
  *
@@ -8,4 +10,8 @@ package com.ocean.ishareeconomy_android.models
  */
 class LoginResponse(val token: String)
 
-class LoginResponseObject(val _id: String, val username: String)
+class LoginResponseObject(
+    @SerializedName("_id")
+    val id: String,
+    val username: String
+)

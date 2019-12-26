@@ -21,8 +21,8 @@ fun List<UserWithLendobjects>.asDomainModel(): List<User> {
         User(
             id = it.user.user_id,
             username = it.user.username,
-            firstname = it.user.firstname,
-            lastname = it.user.lastname,
+            firstName = it.user.firstname,
+            lastName = it.user.lastname,
             address = it.user.address,
             rating = it.user.rating,
             distance = it.user.distance,

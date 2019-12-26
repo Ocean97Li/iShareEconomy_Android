@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.iShareDataBase
@@ -65,7 +64,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 name = name,
                 description = description,
                 type = type,
-                owner = ObjectOwner(_loggedInUser!!.id, _loggedInUser!!.fullname),
+                owner = ObjectOwner(_loggedInUser!!.id, _loggedInUser!!.fullName),
                 user = null,
                 waitingList = emptyList()
             )
@@ -85,9 +84,9 @@ class UserRepository private constructor(params: RepositoryParams) {
     suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.lending.deleteLendObject(userId, objectId, auth).await()
-            if (response.isSuccessful) {
+            if (response.isSuccessful || response.body() is LendingObject ) {
                 response.body()?.let {
-                    database.objects
+                    database.objects.deleteObjectById(it.id)
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {
@@ -95,6 +94,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 }
             }
         }
+        this.refreshUsers(userId,auth)
     }
 
     suspend fun refreshUsers(id: String, auth: String) {
@@ -108,7 +108,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 _loggedInUser = users.find { user -> user.id == id }!!
 
                 // Get all LendObjects
-                val lendObjects = users.flatMap { user -> user.lending }!!
+                val lendObjects = users.flatMap { user -> user.lending }
 
                 // Get all Waiting ObjectUsers
                 val objectUsersWaiting = lendObjects.flatMap { lendObject ->
@@ -133,7 +133,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
 
                 GlobalScope.launch(Dispatchers.Main) {
-                    succes.value = _loggedInUser!!.fullname
+                    succes.value = _loggedInUser!!.fullName
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {

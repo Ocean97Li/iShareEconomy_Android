@@ -23,14 +23,11 @@ class LendingObject constructor(
     val owner: ObjectOwner,
     var user: ObjectUser?,
     @SerializedName("waitinglist")
-    var waitingList: List<ObjectUser>
+    var waitingList: List<ObjectUser> = emptyList()
 ) {
     val lendObjectType: LendObjectType
 
     init {
-        if (waitingList == null) {
-            waitingList = emptyList()
-        }
         lendObjectType = LendObjectType.fromString(type)
     }
 

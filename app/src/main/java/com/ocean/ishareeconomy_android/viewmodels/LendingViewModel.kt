@@ -28,7 +28,7 @@ class LendingViewModel(application: Application, val id: String, val auth: Strin
      *
      * Cancelling this job will cancel all coroutines started by this ViewModel.
      */
-    private val viewModelJob = SupervisorJob()
+    private var viewModelJob = SupervisorJob()
 
     /**
      * This is the main scope for all coroutines launched by MainViewModel.
@@ -36,21 +36,29 @@ class LendingViewModel(application: Application, val id: String, val auth: Strin
      * Since we pass viewModelJob, you can cancel all coroutines launched by uiScope by calling
      * viewModelJob.cancel()
      */
-    private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val dataBase = getDatabase(application)
     private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
 
     val lending = repository.lending
 
     init {
-        viewModelScope.launch {
-            repository.refreshUsers(id, auth)
-        }
+        refreshUsers()
     }
 
     fun removeObject(lendObject: LendingObject) {
+        if (viewModelJob.isCancelled) {
+            viewModelJob = SupervisorJob()
+            viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+        }
         viewModelScope.launch {
             repository.removeLendObject(id, lendObject.id, auth)
+        }
+    }
+
+    fun refreshUsers() {
+        viewModelScope.launch {
+            repository.refreshUsers(id, auth)
         }
     }
 

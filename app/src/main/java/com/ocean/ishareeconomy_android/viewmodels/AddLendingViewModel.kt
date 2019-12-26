@@ -12,10 +12,7 @@ import com.ocean.ishareeconomy_android.lending.OnShareListener
 import com.ocean.ishareeconomy_android.lending.SelectedColor
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class AddLendingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application)  {
 
@@ -96,8 +93,10 @@ class AddLendingViewModel(application: Application, val id: String, val auth: St
         viewModelScope.launch {
             if(share.get()) {
                 repository.addLendObject(id, auth, name!!, description!!, type!!)
+                GlobalScope.launch(Dispatchers.Main) {
+                    navigateBack!!.navigateBackToMaster()
+                }
             }
-            navigateBack!!.navigateBackToMaster()
         }
     }
 

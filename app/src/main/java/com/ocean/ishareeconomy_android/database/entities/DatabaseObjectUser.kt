@@ -1,7 +1,6 @@
 package com.ocean.ishareeconomy_android.database.entities
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.ocean.ishareeconomy_android.models.ObjectUser
 import java.sql.Date
@@ -20,7 +19,7 @@ data class DatabaseObjectUser constructor(
 fun List<DatabaseObjectUser>.asDomainModel(): List<ObjectUser> {
     return map {
         ObjectUser(
-            objectuserid = it.object_user_id,
+            objectUserId = it.object_user_id,
             id = it.user_id,
             name = it.user_name,
             from = it.from_date,
@@ -31,7 +30,7 @@ fun List<DatabaseObjectUser>.asDomainModel(): List<ObjectUser> {
 
 fun DatabaseObjectUser.asDomainModel(): ObjectUser {
     return ObjectUser(
-            objectuserid = this.object_user_id,
+            objectUserId = this.object_user_id,
             id = this.user_id,
             name = this.user_name,
             from = this.from_date,

@@ -20,8 +20,8 @@ fun List<DatabaseUser>.asDomainModel(): List<User> {
     return map {
         User(
             id = it.user_id,
-            firstname = it.firstname,
-            lastname = it.lastname,
+            firstName = it.firstname,
+            lastName = it.lastname,
             username = it.username,
             address = it.address,
             rating = it.rating,
