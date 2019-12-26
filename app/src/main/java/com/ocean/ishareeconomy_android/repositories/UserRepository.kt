@@ -64,7 +64,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 name = name,
                 description = description,
                 type = type,
-                owner = ObjectOwner(_loggedInUser!!.id, _loggedInUser!!.fullname),
+                owner = ObjectOwner(_loggedInUser!!.id, _loggedInUser!!.fullName),
                 user = null,
                 waitingList = emptyList()
             )
@@ -133,7 +133,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
 
                 GlobalScope.launch(Dispatchers.Main) {
-                    succes.value = _loggedInUser!!.fullname
+                    succes.value = _loggedInUser!!.fullName
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {

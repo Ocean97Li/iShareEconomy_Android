@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
  *
  * User object that is used to login and then fetch the correct user object
  * @property id the id of the user
- * @property firstname the user's firstname
- * @property lastname the user's lastname
+ * @property firstName the user's firstname
+ * @property lastName the user's lastname
  * @property username the user's username, used to login
  * @property address the user's full address: streetnumber, streetname, city, postalcode, country
  * @property rating the user's rating
@@ -17,15 +17,17 @@ import com.google.gson.annotations.SerializedName
 class User(
     @SerializedName("_id")
     val id: String,
-    val firstname: String,
-    val lastname: String,
+    @SerializedName("firstname")
+    val firstName: String,
+    @SerializedName("lastname")
+    val lastName: String,
     val username: String,
     val address: String,
     val rating: Int,
     val distance: Double,
     var lending: List<LendingObject>) {
 
-    val fullname: String
-        get() = "$firstname $lastname"
+    val fullName: String
+        get() = "${firstName.capitalize()} ${lastName.capitalize()}"
 
 }

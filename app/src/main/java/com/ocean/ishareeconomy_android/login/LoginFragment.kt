@@ -150,7 +150,7 @@ class LoginFragment : Fragment() {
                     val index = users.indexOfFirst { user -> user.id == user!!.id }!!
                     val loggedInUser = users.get(index)
                     // Display toast
-                    Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullname}!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullName}!", Toast.LENGTH_LONG).show()
                     // goto the HomeActivity
                     val intent = Intent(activity, LendingActivity::class.java)
                     startActivity(intent)

@@ -28,6 +28,7 @@ class LendingObject constructor(
     val lendObjectType: LendObjectType
 
     init {
+        // Can sometimes forced to be null through Gson conversion
         if (waitingList == null) {
             waitingList = emptyList()
         }
