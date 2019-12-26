@@ -140,7 +140,7 @@ class LoginFragment : Fragment() {
 
         // Fetch the actual Users
 
-        val call2 = Network.users.getUsers(user._id, requestToken)
+        val call2 = Network.users.getUsers(user.id, requestToken)
         call2.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful) {

@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android.using
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,6 @@ import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
-import com.ocean.ishareeconomy_android.viewmodels.LendingViewModel
 import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
 class UsingMasterFragment: Fragment() {
@@ -34,7 +32,7 @@ class UsingMasterFragment: Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         ViewModelProviders.of(this,
-            UsingViewModel.Factory(activity.application, loginResponseObject._id, token))
+            UsingViewModel.Factory(activity.application, loginResponseObject.id, token))
             .get(UsingViewModel::class.java)
     }
 

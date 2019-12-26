@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.iShareDataBase
@@ -85,7 +84,7 @@ class UserRepository private constructor(params: RepositoryParams) {
     suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.lending.deleteLendObject(userId, objectId, auth).await()
-            if (response.isSuccessful) {
+            if (response.isSuccessful || response.body() is LendingObject ) {
                 response.body()?.let {
                     database.objects
                 }
@@ -95,6 +94,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 }
             }
         }
+        this.refreshUsers(userId,auth)
     }
 
     suspend fun refreshUsers(id: String, auth: String) {

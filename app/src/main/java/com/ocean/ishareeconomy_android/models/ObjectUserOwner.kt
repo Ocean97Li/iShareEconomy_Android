@@ -28,7 +28,7 @@ open class ObjectOwner(
  */
 class ObjectUser(
     @Ignore
-    var objectuserid: Int = 0,
+    var objectUserId: Int = 0,
     id: String,
     name: String,
     @SerializedName("fromdate")
