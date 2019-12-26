@@ -10,7 +10,7 @@ import com.ocean.ishareeconomy_android.models.*
         childColumns = arrayOf("object_owner_id"),
         onDelete = ForeignKey.CASCADE
     )
-])
+], indices = [Index(value = ["object_owner_id", "object_id"])])
 data class DatabaseLendObject constructor(
     @PrimaryKey
     val object_id: String,

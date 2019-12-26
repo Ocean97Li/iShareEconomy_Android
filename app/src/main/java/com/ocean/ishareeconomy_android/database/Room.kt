@@ -27,7 +27,10 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 
-@Database(entities = [DatabaseUser::class, DatabaseLendObject::class, DatabaseObjectUser::class], version = 1)
+@Database(
+    entities = [DatabaseUser::class, DatabaseLendObject::class, DatabaseObjectUser::class],
+    exportSchema = false,
+    version = 1)
 @TypeConverters(DateConverter::class)
 abstract class iShareDataBase : RoomDatabase() {
     abstract val users: UserDatabaseDao
