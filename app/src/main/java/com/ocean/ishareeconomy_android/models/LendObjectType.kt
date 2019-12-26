@@ -3,7 +3,7 @@ package com.ocean.ishareeconomy_android.models
 enum class LendObjectType {
     Tool("tool"), Service("service"), Transportation("transportation");
 
-    private lateinit  var string: String
+    private var string: String
 
     constructor(value: String) {
         string = value

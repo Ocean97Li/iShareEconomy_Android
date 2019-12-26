@@ -23,15 +23,11 @@ class LendingObject constructor(
     val owner: ObjectOwner,
     var user: ObjectUser?,
     @SerializedName("waitinglist")
-    var waitingList: List<ObjectUser>
+    var waitingList: List<ObjectUser> = emptyList()
 ) {
     val lendObjectType: LendObjectType
 
     init {
-        // Can sometimes forced to be null through Gson conversion
-        if (waitingList == null) {
-            waitingList = emptyList()
-        }
         lendObjectType = LendObjectType.fromString(type)
     }
 

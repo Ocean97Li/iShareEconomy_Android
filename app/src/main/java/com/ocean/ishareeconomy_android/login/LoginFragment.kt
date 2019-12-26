@@ -134,21 +134,21 @@ class LoginFragment : Fragment() {
      */
     private fun fetchUsersAndLogin(token: String) {
         // Decode the token into a user's LoginResponseObject
-        val user = jwtToLoginResponseObject(token) ?: return
+        val userResponse = jwtToLoginResponseObject(token) ?: return
         // Prepare token for the request header
         val requestToken = "Bearer $token"
 
         // Fetch the actual Users
 
-        val call2 = Network.users.getUsers(user.id, requestToken)
+        val call2 = Network.users.getUsers(userResponse.id, requestToken)
         call2.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful) {
                     // Get the users
                     var users = response.body()!!
                     // Get the logged in user
-                    val index = users.indexOfFirst { user -> user.id == user!!.id }!!
-                    val loggedInUser = users.get(index)
+                    val index = users.indexOfFirst { user -> user.id == userResponse.id }
+                    val loggedInUser = users[index]
                     // Display toast
                     Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullName}!", Toast.LENGTH_LONG).show()
                     // goto the HomeActivity
@@ -166,8 +166,8 @@ class LoginFragment : Fragment() {
                 println(call)
                 println(t.message)
                 val toast = Toast.makeText(context, getString(R.string.something_went_wrong_login), Toast.LENGTH_LONG)
-                val v = toast.getView().findViewById(android.R.id.message) as TextView
-                if (v != null) v.gravity = Gravity.CENTER
+                val v = toast.view.findViewById(android.R.id.message) as TextView
+                v.gravity = Gravity.CENTER
                 toast.show()
             }
         })
@@ -222,7 +222,7 @@ class LoginFragment : Fragment() {
                 println(t.message)
                 val toast = Toast.makeText(context, getString(R.string.something_went_wrong_login), Toast.LENGTH_LONG)
                 val v = toast.getView().findViewById(android.R.id.message) as TextView
-                if (v != null) v.gravity = Gravity.CENTER
+                v.gravity = Gravity.CENTER
                 toast.show()
             }
         })

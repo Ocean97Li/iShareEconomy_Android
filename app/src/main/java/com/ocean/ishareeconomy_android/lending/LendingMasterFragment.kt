@@ -233,7 +233,7 @@ class LendingMasterFragment: Fragment() {
             R.id.add_lending_object_button -> {
                 activity!!.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frame_layout,  (activity as LendingActivity)!!.addFragment)
+                    .replace(R.id.frame_layout,  (activity as LendingActivity).addFragment)
                     .commit()
             }
 

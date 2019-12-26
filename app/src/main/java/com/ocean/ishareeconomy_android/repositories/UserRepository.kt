@@ -86,7 +86,7 @@ class UserRepository private constructor(params: RepositoryParams) {
             val response = Network.lending.deleteLendObject(userId, objectId, auth).await()
             if (response.isSuccessful || response.body() is LendingObject ) {
                 response.body()?.let {
-                    database.objects
+                    database.objects.deleteObjectById(it.id)
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {
@@ -108,7 +108,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 _loggedInUser = users.find { user -> user.id == id }!!
 
                 // Get all LendObjects
-                val lendObjects = users.flatMap { user -> user.lending }!!
+                val lendObjects = users.flatMap { user -> user.lending }
 
                 // Get all Waiting ObjectUsers
                 val objectUsersWaiting = lendObjects.flatMap { lendObject ->
