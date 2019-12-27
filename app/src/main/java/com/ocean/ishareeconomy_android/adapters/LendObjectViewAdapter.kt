@@ -17,7 +17,7 @@ import com.ocean.ishareeconomy_android.viewmodels.LendObjectViewModel
 /**
  * RecyclerView Adapter for setting up data binding on the items in the list.
  */
-class LendobjectAdapter() : RecyclerView.Adapter<LendObjectViewHolder>() {
+class LendObjectAdapter : RecyclerView.Adapter<LendObjectViewHolder>() {
 
     /**
      * Store parent context

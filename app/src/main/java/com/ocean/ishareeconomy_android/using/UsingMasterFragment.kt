@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.adapters.LendobjectAdapter
+import com.ocean.ishareeconomy_android.adapters.LendObjectAdapter
 import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
@@ -39,7 +39,7 @@ class UsingMasterFragment: Fragment() {
     /**
      * RecyclerView Adapter for converting a list of LendObject to cards.
      */
-    private var viewModelAdapter: LendobjectAdapter? = null
+    private var viewModelAdapter: LendObjectAdapter? = null
 
     // API related
     private lateinit var token: String
@@ -104,7 +104,7 @@ class UsingMasterFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = LendobjectAdapter()
+        viewModelAdapter = LendObjectAdapter()
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {
             layoutManager = LinearLayoutManager(context)

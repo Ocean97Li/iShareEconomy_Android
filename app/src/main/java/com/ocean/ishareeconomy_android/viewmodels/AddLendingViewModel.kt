@@ -10,11 +10,12 @@ import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.lending.OnShareListener
 import com.ocean.ishareeconomy_android.lending.SelectedColor
+import com.ocean.ishareeconomy_android.models.LendObjectType
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.*
 
-class AddLendingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application)  {
+class AddLendingViewModel(application: Application, val id: String, private val auth: String) : AndroidViewModel(application)  {
 
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -34,23 +35,23 @@ class AddLendingViewModel(application: Application, val id: String, val auth: St
     private val dataBase = getDatabase(application)
     private val repository = UserRepository.getInstance(RepositoryParams( id, dataBase))
 
-    var type: String? = null
+    var type: LendObjectType? = null
         set(value) {
             field = value
-            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && !type.isNullOrEmpty()
+            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && type != null
             share.set(enabled)
         }
 
     var name: String? = null
         set(value) {
             field = value
-            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && !type.isNullOrEmpty()
+            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && type != null
             share.set(enabled)
         }
     var description: String? = null
         set(value) {
             field = value
-            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && !type.isNullOrEmpty()
+            val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && type != null
             share.set(enabled)
         }
 
@@ -65,7 +66,7 @@ class AddLendingViewModel(application: Application, val id: String, val auth: St
     }
 
     /**
-     * Cancel all coroutines when the ViewModel is cleared
+     * Cancel all co-routines when the ViewModel is cleared
      */
     override fun onCleared() {
         super.onCleared()
@@ -75,24 +76,22 @@ class AddLendingViewModel(application: Application, val id: String, val auth: St
     fun onTypeButtonClicked(view: View) {
         when(view.id) {
             R.id.tool_button -> {
-                type = "tool"
-                colorSetter?.setSelected(type!!)
+                type = LendObjectType.Tool
             }
             R.id.service_button -> {
-                type = "service"
-                colorSetter?.setSelected(type!!)
+                type = LendObjectType.Service
             }
             R.id.transportation_button -> {
-                type = "transportation"
-                colorSetter?.setSelected(type!!)
+                type = LendObjectType.Transportation
             }
         }
+        colorSetter?.setSelected(type!!)
     }
 
     fun onShareBtnClick(view: View) {
         viewModelScope.launch {
             if(share.get()) {
-                repository.addLendObject(id, auth, name!!, description!!, type!!)
+                repository.addLendObject(id, auth, name!!, description!!, type!!.toString())
                 GlobalScope.launch(Dispatchers.Main) {
                     navigateBack!!.navigateBackToMaster()
                 }

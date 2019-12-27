@@ -19,32 +19,15 @@ import kotlinx.android.synthetic.main.activity_lending.*
  * Part of *lending*.
  *
  * Activity responsible for displaying the lendobjects currently shared by the user
- * @property lendingFragment Builds the lending overview screen
- *
+ * @property lendingFragment: [LendingMasterFragment] Builds the lending overview screen
+ * @property addFragment: [LendingAddFragment] Builds the add lending object screen
+ * @property onNavigationItemSelectedListener: [BottomNavigationView.OnNavigationItemSelectedListener]
+ * provides the implementation of BottomNavigation
  */
 class LendingActivity : AppCompatActivity() {
 
-    val lendingFragment =  LendingMasterFragment()
-    val addFragment = LendingAddFragment()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lending)
-        nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.frame_layout, lendingFragment)
-                    .commit()
-        }
-
-        window.enterTransition = null
-        window.exitTransition = null
-
-        nav_view.menu.getItem(0).isChecked = true
-    }
-
+    private val lendingFragment =  LendingMasterFragment()
+    private val addFragment = LendingAddFragment()
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_lending -> {
@@ -67,6 +50,36 @@ class LendingActivity : AppCompatActivity() {
         false
     }
 
+    /**
+     * Method that navigates to the lending objects overview fragment
+     *
+     * @param savedInstanceState: [Bundle?]
+     *
+     * @return [Unit]
+     **/
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_lending)
+        nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.frame_layout, lendingFragment)
+                    .commit()
+        }
+
+        window.enterTransition = null
+        window.exitTransition = null
+
+        nav_view.menu.getItem(0).isChecked = true
+    }
+
+    /**
+     * Method that navigates to the lending objects overview fragment
+     *
+     * @return [Unit]
+     **/
     fun navigateToMaster() {
         supportFragmentManager
             .beginTransaction()
@@ -74,13 +87,15 @@ class LendingActivity : AppCompatActivity() {
             .commit()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        /* Checks whether a hardware keyboard is available */
-        if (newConfig.keyboardHidden == Configuration.KEYBOARDHIDDEN_NO) {
-            nav_view.visibility = View.GONE
-        } else  {
-            nav_view.visibility = View.VISIBLE
-        }
+    /**
+     * Method that navigates to the add lending objects screen fragment
+     *
+     * @return [Unit]
+     **/
+    fun navigateToAdd() {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout, addFragment)
+            .commit()
     }
 }

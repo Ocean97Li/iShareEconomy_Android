@@ -59,7 +59,7 @@ class UserRepository private constructor(params: RepositoryParams) {
 
     suspend fun addLendObject(id: String, auth: String, name: String, description: String, type: String) {
         withContext(Dispatchers.IO) {
-            val lendindObject = LendingObject(
+            val lendingObject = LendingObject(
                 id = "",
                 name = name,
                 description = description,
@@ -68,7 +68,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 user = null,
                 waitingList = emptyList()
             )
-            val response = Network.lending.postLendObject(id, auth, lendindObject).await()
+            val response = Network.lending.postLendObject(id, auth, lendingObject).await()
             if (response.isSuccessful) {
                response.body()?.let {
                    database.objects.insertAllLendObjects(it.asDatabaseModel())

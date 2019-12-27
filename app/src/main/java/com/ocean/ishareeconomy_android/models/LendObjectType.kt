@@ -1,5 +1,11 @@
 package com.ocean.ishareeconomy_android.models
 
+/**
+ * Part of *models*.
+ *
+ * LendObject is an object, serive or transportation mode that one user lends out and that other users can use
+ * @property string the raw [String] value of the type
+ */
 enum class LendObjectType {
     Tool("tool"), Service("service"), Transportation("transportation");
 

@@ -6,7 +6,8 @@ import java.util.*
 
 /**
  * Help method that takes a string token and turns it into a login response object, if valid
- * @return LoginResponseObject?
+ *
+ * @return [LoginResponseObject?]
  */
 fun jwtToLoginResponseObject(token: String): LoginResponseObject? {
     val jwt = JWT(token)
