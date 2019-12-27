@@ -27,26 +27,32 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 
+/**
+ * Part of *database*.
+ *
+ * Main [RoomDatabase] database singleton access point for the app,
+ * provides local SQL storage
+ */
 @Database(
     entities = [DatabaseUser::class, DatabaseLendObject::class, DatabaseObjectUser::class],
     exportSchema = false,
     version = 1)
 @TypeConverters(DateConverter::class)
-abstract class iShareDataBase : RoomDatabase() {
+abstract class IShareDataBase : RoomDatabase() {
     abstract val users: UserDatabaseDao
     abstract val objects: LendObjectDatabaseDao
     abstract  val objectUsers: ObjectUserDatabaseDao
 }
 
 // singleton
-private lateinit var INSTANCE: iShareDataBase
+private lateinit var INSTANCE: IShareDataBase
 
-fun getDatabase(context: Context): iShareDataBase {
-    synchronized(iShareDataBase::class.java) {
+fun getDatabase(context: Context): IShareDataBase {
+    synchronized(IShareDataBase::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
-                iShareDataBase::class.java,
+                IShareDataBase::class.java,
                     "database").build()
         }
     }

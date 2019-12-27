@@ -51,7 +51,7 @@ class LendingActivity : AppCompatActivity() {
     }
 
     /**
-     * Method that navigates to the lending objects overview fragment
+     * Method that is called when the activity is created
      *
      * @param savedInstanceState: [Bundle?]
      *

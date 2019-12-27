@@ -6,7 +6,17 @@ import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.models.LendObjectType
 import com.ocean.ishareeconomy_android.models.LendingObject
 
-
+/**
+ * Part of *viewmodels*.
+ *
+ * The viewmodel that is used to display individual items of type [LendingObject], it's a simple
+ * abstraction that holds the [LendingObject] and the icon background color [ColorDrawable],
+ * the latter is determined by the viewAdapter. Also responsible for determining the object's icon
+ *
+ * @property data: [LendingObject] the object
+ * @property color: [ColorDrawable] the object's icon background color, indicating the usage
+ *
+ */
 class LendObjectViewModel(
     private val data: LendingObject, val color: ColorDrawable
 ) {
@@ -14,11 +24,16 @@ class LendObjectViewModel(
     val description = data.description
     val numberOfUsers = Integer.toString(data.waitingList.size + if (data.user != null) 1 else 0)
 
+    /**
+     * Returns the icon that correspond to the [LendObjectType] of [data]
+     *
+     * @return An R.drawable.id [Int]
+     */
     fun type() : Int {
-        when(data.lendObjectType) {
-            LendObjectType.Tool -> return R.drawable.ic_lendobject_tool_solid
-            LendObjectType.Service -> return R.drawable.ic_lendobject_service_solid
-            LendObjectType.Transportation -> return R.drawable.ic_lendobject_transportation_solid
+        return when(data.lendObjectType) {
+            LendObjectType.Tool -> R.drawable.ic_lendobject_tool_solid
+            LendObjectType.Service -> R.drawable.ic_lendobject_service_solid
+            LendObjectType.Transportation -> R.drawable.ic_lendobject_transportation_solid
         }
     }
 }

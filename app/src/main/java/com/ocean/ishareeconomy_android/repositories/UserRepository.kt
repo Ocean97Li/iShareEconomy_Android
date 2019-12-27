@@ -4,30 +4,62 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
-import com.ocean.ishareeconomy_android.database.iShareDataBase
+import com.ocean.ishareeconomy_android.database.IShareDataBase
 import com.ocean.ishareeconomy_android.database.relationships.asDomainModel
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.network.Network
-import com.ocean.ishareeconomy_android.network.asDatabaseModel
-import com.ocean.ishareeconomy_android.network.asDatabaseModels
+import com.ocean.ishareeconomy_android.utils.asDatabaseModel
+import com.ocean.ishareeconomy_android.utils.asDatabaseModels
 import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RepositoryParams(val loggedInUserId: String, val database: iShareDataBase)
+/**
+ * Part of *login*.
+ *
+ * Parameter bundle for [UserRepository] Singleton
+ *  @property loggedInUserId the logged in user's id, needed for almost all API calls
+ *  @property database main database object, needed to store data locally
+ */
+class RepositoryParams(val loggedInUserId: String, val database: IShareDataBase)
 
+/**
+ * Part of *login*.
+ *
+ * Repository responsible for managing all the domain related network requests.
+ * [UserRepository] is the only domain related repository because
+ * the [User] object is the central access point of the domain
+ *
+ * @property loggedInUserId: [String] the logged in user's id, needed for almost all API calls
+ * @property database: [IShareDataBase] main database object, needed to store data locally
+ * @property success: [MutableLiveData<String>] observable where login success message is pushed
+ * @property error: [MutableLiveData<String>] observable where error message is pushed
+ * @property _loggedInUser the logged in [User]
+ *
+ * @property loggedInUser from the database
+ * @property users all the users from the database
+ * @property lending the list [LendingObject] the logged in user is sharing
+ * @property using the list [LendingObject] the logged in user is using
+ *
+ * @constructor creates the [UserRepository] instance, private because of the Singleton pattern
+ * @param params is [RepositoryParams] object because generic [ReusableRepositorySingleton] class
+ * only supports one parameter
+ */
 class UserRepository private constructor(params: RepositoryParams) {
 
     private val loggedInUserId: String = params.loggedInUserId
-    private val  database: iShareDataBase = params.database
+    private val  database: IShareDataBase = params.database
 
+    /**
+     * [ReusableRepositorySingleton] enables Singleton Pattern
+     */
     companion object : ReusableRepositorySingleton<UserRepository, RepositoryParams>(::UserRepository)
 
-    private val succes = MutableLiveData<String>()
+    private val success = MutableLiveData<String>()
     private val error = MutableLiveData<String>()
     private var _loggedInUser: User? = null
 
@@ -57,6 +89,10 @@ class UserRepository private constructor(params: RepositoryParams) {
         it.asDomainModel()
     }
 
+    /**
+     * Method that makes a network call to POST a new [LendingObject] to the user's lending list
+     * and on success stores it in the DB
+     */
     suspend fun addLendObject(id: String, auth: String, name: String, description: String, type: String) {
         withContext(Dispatchers.IO) {
             val lendingObject = LendingObject(
@@ -68,7 +104,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 user = null,
                 waitingList = emptyList()
             )
-            val response = Network.lending.postLendObject(id, auth, lendingObject).await()
+            val response = Network.lending.postLendObjectAsync(id, auth, lendingObject).await()
             if (response.isSuccessful) {
                response.body()?.let {
                    database.objects.insertAllLendObjects(it.asDatabaseModel())
@@ -81,9 +117,13 @@ class UserRepository private constructor(params: RepositoryParams) {
         }
     }
 
+    /**
+     * Method that makes a network call to DELETE an existing [LendingObject] from the user's lending list
+     * and on success stores remove it from the DB
+     */
     suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
         withContext(Dispatchers.IO) {
-            val response = Network.lending.deleteLendObject(userId, objectId, auth).await()
+            val response = Network.lending.deleteLendObjectAsync(userId, objectId, auth).await()
             if (response.isSuccessful || response.body() is LendingObject ) {
                 response.body()?.let {
                     database.objects.deleteObjectById(it.id)
@@ -97,6 +137,10 @@ class UserRepository private constructor(params: RepositoryParams) {
         this.refreshUsers(userId,auth)
     }
 
+    /**
+     * Method that makes a network GET call to fetch the total list of [User], starting with the logged in,
+     * [User], ordered by [User.distance] and store it in the DB
+     */
     suspend fun refreshUsers(id: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.users.getUsersAsync(id, auth).await()
@@ -133,7 +177,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
 
                 GlobalScope.launch(Dispatchers.Main) {
-                    succes.value = _loggedInUser!!.fullName
+                    success.value = _loggedInUser!!.fullName
                 }
             } else {
                 GlobalScope.launch(Dispatchers.Main) {

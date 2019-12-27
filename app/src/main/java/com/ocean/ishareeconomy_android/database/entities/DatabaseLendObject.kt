@@ -3,6 +3,11 @@ package com.ocean.ishareeconomy_android.database.entities
 import androidx.room.*
 import com.ocean.ishareeconomy_android.models.*
 
+/**
+ * Part of *database.entities*.
+ *
+ * Defines how objects of type [LendingObject] and [ObjectOwner] are stored in the DB
+ */
 @Entity(tableName = "lendobjects", foreignKeys = [
     ForeignKey(
         entity = DatabaseUser::class,

@@ -3,6 +3,7 @@ package com.ocean.ishareeconomy_android.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.ocean.ishareeconomy_android.database.getDatabase
+import com.ocean.ishareeconomy_android.database.IShareDataBase
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
@@ -12,31 +13,34 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 /**
+ * Part of *viewmodels*.
+ *
  * LendingViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
  * allows data to survive configuration changes such as screen rotations. In addition, background
  * work such as fetching network results can continue through configuration changes and deliver
- * results after the new Fragment or Activity is available.
+ * results after the new Fragment or Activity is available. It's also responsible for the removal of objects
  *
- * @param application The application that this viewmodel is attached to, it's safe to hold a
+ *  * Inherits from [AndroidViewModel] so that it remains unaffected by rotations
+ *  @property id: [String] the logged in user's id
+ *  @property auth: [String] the logged in user's authentication JWT token
+ *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
+ *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
+ *  @property dataBase: [IShareDataBase]
+ *  @property repository: a [UserRepository] Singleton
+ *  @property lending: the list of [LendingObject] that the user is sharing
+ *
+ *  @constructor AddLendingViewModel
+ *  @param id: [String]
+ *  @param auth: [String]
+ *  @param application The application that this viewmodel is attached to, it's safe to hold a
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
 class LendingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application) {
 
-    /**
-     * This is the job for all coroutines started by this ViewModel.
-     *
-     * Cancelling this job will cancel all coroutines started by this ViewModel.
-     */
     private var viewModelJob = SupervisorJob()
-
-    /**
-     * This is the main scope for all coroutines launched by MainViewModel.
-     *
-     * Since we pass viewModelJob, you can cancel all coroutines launched by uiScope by calling
-     * viewModelJob.cancel()
-     */
     private var viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
     private val dataBase = getDatabase(application)
     private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
 

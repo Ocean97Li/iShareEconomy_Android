@@ -1,5 +1,6 @@
 package com.ocean.ishareeconomy_android.models
 
+import android.annotation.SuppressLint
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -13,7 +14,7 @@ import com.google.gson.annotations.SerializedName
  * @property address the user's full address [String]: street number, street name, city, postal code, country
  * @property rating the user's rating [Int]
  * @property distance the user's distance [Double] from the logged in user
- *  @property fullName the user's full name [String] composed of first and last names capitalized
+ * @property fullName the user's full name [String] composed of first and last names capitalized
  */
 class User(
     @SerializedName("_id")
@@ -29,6 +30,7 @@ class User(
     var lending: List<LendingObject>) {
 
     val fullName: String
+        @SuppressLint("DefaultLocale")
         get() = "${firstName.capitalize()} ${lastName.capitalize()}"
 
 }

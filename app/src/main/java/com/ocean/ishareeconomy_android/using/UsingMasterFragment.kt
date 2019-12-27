@@ -18,15 +18,27 @@ import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
+import com.ocean.ishareeconomy_android.viewmodels.LendingViewModel
 import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
+/**
+ * Part of *lending*.
+ *
+ * Activity responsible for displaying the list of [LendingObject] currently shared by the user
+ * @property token the jwt [String] used to make authenticated api calls
+ * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
+ * @property sharedPreferences the [SharedPreferences] used to fetch stored values
+ * @property spEditor the [SharedPreferences.Editor] used to store values
+ * @property viewModelAdapter RecyclerView Adapter for converting a list of [LendingObject] to cards.
+ * @property viewModel the [LendingViewModel] according to the MVVM-pattern, handles domain logic.
+ *
+ * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
+ * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
+ * do in this Fragment.
+ *
+ */
 class UsingMasterFragment: Fragment() {
 
-    /**
-     * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
-     * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
-     * do in this Fragment.
-     */
     private val viewModel: UsingViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
@@ -35,10 +47,6 @@ class UsingMasterFragment: Fragment() {
             UsingViewModel.Factory(activity.application, loginResponseObject.id, token))
             .get(UsingViewModel::class.java)
     }
-
-    /**
-     * RecyclerView Adapter for converting a list of LendObject to cards.
-     */
     private var viewModelAdapter: LendObjectAdapter? = null
 
     // API related

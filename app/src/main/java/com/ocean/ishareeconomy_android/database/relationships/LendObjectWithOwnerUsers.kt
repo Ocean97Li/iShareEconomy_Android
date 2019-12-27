@@ -7,6 +7,12 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser
 import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.models.*
 
+/**
+ * Part of *database.relationships*.
+ *
+ * Defines the relationship between [DatabaseLendObject] and [DatabaseObjectUser]
+ * Only used to fetch, not to store
+ */
 data class LendObjectWithObjectUsers(
     @Embedded
     val lendobject: DatabaseLendObject,

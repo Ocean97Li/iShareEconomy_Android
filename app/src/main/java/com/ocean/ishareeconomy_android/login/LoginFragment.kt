@@ -29,11 +29,16 @@ import retrofit2.Response
 /**
  * Part of *login*.
  *
- * Fragment dat inputs voor username en passwoord ondersteund, met een login knop;
- * @property usernameInput De textinput die gebruikt wordt voor de username
- * @property passwordInput De textinput die gebruik wordt voor het wachtwoord
- * @property usernameInputLayout De input layout voor username error messages
- * @property passwordInputLayout De input layout voor password error message
+ * Fragment that supports inputs for username and password and login button
+ *
+ * @property usernameInput the [EditText] that is used for the username
+ * @property passwordInput the [EditText] that is used for the password
+ *
+ * @property usernameInputLayout the [usernameInputLayout] for username error messages
+ * @property passwordInputLayout the [passwordInputLayout] for password error messages
+ *
+ * @property sharedPreferences the [SharedPreferences] used to fetch stored values
+ * @property spEditor the [SharedPreferences.Editor] used to store values
  */
 class LoginFragment : Fragment() {
 
@@ -50,6 +55,11 @@ class LoginFragment : Fragment() {
     lateinit var passwordInputLayout: TextInputLayout
 
 
+    /**
+     * Method called when the fragment is created
+     *
+     * @return [Unit]
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
@@ -63,6 +73,11 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /**
+     * Method called when the view is created
+     *
+     * @return [Unit]
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
