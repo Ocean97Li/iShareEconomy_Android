@@ -4,6 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.ocean.ishareeconomy_android.models.User
 
+/**
+ * Part of *database.entities*.
+ *
+ * Defines how objects of type [User] are stored in the DB
+ */
 @Entity(tableName = "users")
 data class DatabaseUser constructor(
     @PrimaryKey

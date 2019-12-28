@@ -29,11 +29,16 @@ import retrofit2.Response
 /**
  * Part of *login*.
  *
- * Fragment dat inputs voor username en passwoord ondersteund, met een login knop;
- * @property usernameInput De textinput die gebruikt wordt voor de username
- * @property passwordInput De textinput die gebruik wordt voor het wachtwoord
- * @property usernameInputLayout De input layout voor username error messages
- * @property passwordInputLayout De input layout voor password error message
+ * Fragment that supports inputs for username and password and login button
+ *
+ * @property usernameInput the [EditText] that is used for the username
+ * @property passwordInput the [EditText] that is used for the password
+ *
+ * @property usernameInputLayout the [usernameInputLayout] for username error messages
+ * @property passwordInputLayout the [passwordInputLayout] for password error messages
+ *
+ * @property sharedPreferences the [SharedPreferences] used to fetch stored values
+ * @property spEditor the [SharedPreferences.Editor] used to store values
  */
 class LoginFragment : Fragment() {
 
@@ -50,6 +55,11 @@ class LoginFragment : Fragment() {
     lateinit var passwordInputLayout: TextInputLayout
 
 
+    /**
+     * Method called when the fragment is created
+     *
+     * @return [Unit]
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
@@ -63,6 +73,11 @@ class LoginFragment : Fragment() {
         }
     }
 
+    /**
+     * Method called when the view is created
+     *
+     * @return [Unit]
+     */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
@@ -101,7 +116,8 @@ class LoginFragment : Fragment() {
 
     /**
      * Help method that checks if the username input is filled in
-     * @return Boolean
+     *
+     * @return [Boolean]
      */
     private fun validUsername(): Boolean {
         return usernameInput.text != null && usernameInput.text.isNotBlank()
@@ -109,7 +125,8 @@ class LoginFragment : Fragment() {
 
     /**
      * Help method that checks if the password input is filled in
-     * @return Boolean
+     *
+     * @return [Boolean]
      */
     private fun validPassword(): Boolean {
         return passwordInput.text != null && passwordInput.text.trim().length >= 8
@@ -118,6 +135,7 @@ class LoginFragment : Fragment() {
     /**
      * Help method that fills the login inputs with the stored username and password from the sharedPreferences
      *
+     *  @return [Unit]
      */
     private fun readSharedPreferences() {
         val gebruikersnaam = sharedPreferences.getString(getString(R.string.login_username), "")
@@ -129,8 +147,12 @@ class LoginFragment : Fragment() {
     }
 
     /**
-     * Method that takes a auth token and does a fetch of the users, including the logged in user
+     * Method that takes a auth token and does a fetch of the all [User] objects, including the logged in [User]
      * if successful the user is logged in and taken to the next activity
+     *
+     * @param token the [String] that is returned and stored in the [SharedPreferences] when logging in.
+     *
+     * @return [Unit]
      */
     private fun fetchUsersAndLogin(token: String) {
         // Decode the token into a user's LoginResponseObject
@@ -139,7 +161,6 @@ class LoginFragment : Fragment() {
         val requestToken = "Bearer $token"
 
         // Fetch the actual Users
-
         val call2 = Network.users.getUsers(userResponse.id, requestToken)
         call2.enqueue(object : Callback<List<User>> {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
@@ -180,6 +201,8 @@ class LoginFragment : Fragment() {
      * when the id of the user is found, this id is used to fetch the user objects,
      * including the logged in user
      *
+     * @return [Unit]
+     *
      */
     private fun attemptLogin() {
         // reset error messages
@@ -193,8 +216,6 @@ class LoginFragment : Fragment() {
         val user = LoginObject(username, password)
 
         val call = LoginAPI.repository.login(user)
-
-
 
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {

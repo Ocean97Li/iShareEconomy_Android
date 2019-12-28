@@ -8,6 +8,11 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
+/**
+ * Part of *network.services*.
+ *
+ * Interface that defines all the API-request related to [User]
+ */
 interface UserService {
 
     @GET("users/{id}/users")

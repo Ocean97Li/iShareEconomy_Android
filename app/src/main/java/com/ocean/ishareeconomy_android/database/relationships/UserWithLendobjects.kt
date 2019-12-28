@@ -2,10 +2,17 @@ package com.ocean.ishareeconomy_android.database.relationships
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import androidx.room.RoomDatabase
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 import com.ocean.ishareeconomy_android.models.User
 
-data class UserWithLendobjects(
+/**
+ * Part of *database.relationships*.
+ *
+ * Defines the relationship between [DatabaseUser] and [LendObjectWithObjectUsers]
+ * Only used to fetch, not to store
+ */
+data class UserWithLendObjects(
     @Embedded
     val user: DatabaseUser,
     @Relation(
@@ -16,7 +23,7 @@ data class UserWithLendobjects(
 
 )
 
-fun List<UserWithLendobjects>.asDomainModel(): List<User> {
+fun List<UserWithLendObjects>.asDomainModel(): List<User> {
     return map {
         User(
             id = it.user.user_id,

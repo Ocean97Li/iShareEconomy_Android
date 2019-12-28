@@ -13,19 +13,37 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.adapters.LendobjectAdapter
 import com.ocean.ishareeconomy_android.databinding.FragmentAddLendingBinding
+import com.ocean.ishareeconomy_android.models.LendObjectType
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel
 import kotlinx.android.synthetic.main.fragment_add_lending.*
 
+/**
+ * Part of *lending*.
+ *
+ * Activity responsible for displaying adding items to the list of shared objects
+ *
+ * @property token the jwt [String] used to make authenticated api calls
+ * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
+ * @property sharedPreferences the [SharedPreferences] used to fetch stored values
+ * @property spEditor the [SharedPreferences.Editor] used to store values
+ */
 class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
+
+    // API related
+    private lateinit var token: String
+    private lateinit var loginResponseObject: LoginResponseObject
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var spEditor: SharedPreferences.Editor
 
     /**
      * Implementation of interface [OnShareListener]
      *  Gets the [LendingActivity] and
      *  navigates back to the lending objects overview: [LendingMasterFragment]
+     *
+     *  @return [Unit]
      */
     override fun navigateBackToMaster() {
         // Close soft keyboard
@@ -36,51 +54,59 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     }
 
     /**
-     * Method to set the buttons
+     * Method to set the buttons to the right color:
+     * grey by default, colorAccent when selected
+     *
+     * @param type
+     *
+     * @return [Unit]
      */
-    override fun setSelected(type: String) {
+    override fun setSelected(type: LendObjectType) {
         val grey = ContextCompat.getColor(context!!, R.color.colorGrey)
         val blue = ContextCompat.getColor(context!!, R.color.colorAccent)
 
-        transportation_button.setBackgroundColor(grey)
-        val tool_shape = GradientDrawable()
-        val service_shape = GradientDrawable()
-        val transport_shape = GradientDrawable()
+        val toolShape = GradientDrawable()
+        val serviceShape = GradientDrawable()
+        val transportShape = GradientDrawable()
 
-        tool_shape.setColor(grey)
-        service_shape.setColor(grey)
-        transport_shape.setColor(grey)
+        toolShape.setColor(grey)
+        serviceShape.setColor(grey)
+        transportShape.setColor(grey)
 
-        tool_shape.cornerRadius = 26f
-        service_shape.cornerRadius = 26f
-        transport_shape.cornerRadius = 26f
+        toolShape.cornerRadius = 26f
+        serviceShape.cornerRadius = 26f
+        transportShape.cornerRadius = 26f
 
-        tool_button.background = tool_shape
-        service_button.background = service_shape
-        transportation_button.background = transport_shape
+        tool_button.background = toolShape
+        service_button.background = serviceShape
+        transportation_button.background = transportShape
 
         when(type) {
-            "tool" -> tool_shape.setColor(blue)
-            "service" -> service_shape.setColor(blue)
-            "transportation" -> transport_shape.setColor(blue)
+            LendObjectType.Tool -> toolShape.setColor(blue)
+            LendObjectType.Service -> serviceShape.setColor(blue)
+            LendObjectType.Transportation -> transportShape.setColor(blue)
         }
     }
 
     /**
-     * RecyclerView Adapter for converting a list of LendObject to cards.
+     * Called when fragments is created
+     *
+     * @param savedInstanceState: [Bundle?]
+     *
+     * @return [Unit]
      */
-    private var viewModelAdapter: LendobjectAdapter? = null
-
-    // API related
-    private lateinit var token: String
-    private lateinit var loginResponseObject: LoginResponseObject
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    /**
+     * Called when fragments view is initiated
+     *
+     * @param view: [View]
+     * @param savedInstanceState: [Bundle?]
+     *
+     * @return [Unit]
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -90,14 +116,13 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
      * fragment's view hierarchy instantiated.  It can be used to do final
      * initialization once these pieces are in place, such as retrieving
      * views or restoring state.
+     *
+     * @param savedInstanceState: [Bundle?]
+     *
+     * @return [Unit]
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        viewModel.lending.observe(viewLifecycleOwner, Observer<List<LendingObject>> { lending ->
-//            lending?.apply {
-//                viewModelAdapter?.objects = lending
-//            }
-//        })
     }
 
     /**

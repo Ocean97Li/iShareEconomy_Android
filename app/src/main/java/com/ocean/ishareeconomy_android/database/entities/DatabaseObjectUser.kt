@@ -5,6 +5,11 @@ import androidx.room.PrimaryKey
 import com.ocean.ishareeconomy_android.models.ObjectUser
 import java.sql.Date
 
+/**
+ * Part of *database.entities*.
+ *
+ * Defines how objects of type [ObjectUser] are stored in the DB
+ */
 @Entity(tableName = "object_users")
 data class DatabaseObjectUser constructor(
     @PrimaryKey(autoGenerate = true)

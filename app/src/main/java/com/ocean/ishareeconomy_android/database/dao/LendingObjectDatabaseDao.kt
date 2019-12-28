@@ -4,8 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject
 import com.ocean.ishareeconomy_android.database.relationships.LendObjectWithObjectUsers
-import retrofit2.http.DELETE
+import com.ocean.ishareeconomy_android.models.LendingObject
 
+/**
+ * Part of *database.dao*.
+ *
+ * Defines the actions, concerning the local storage of objects of type [LendingObject] in the DB
+ */
 @Dao
 interface LendObjectDatabaseDao {
 

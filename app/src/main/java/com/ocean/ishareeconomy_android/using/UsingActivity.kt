@@ -13,12 +13,37 @@ import com.ocean.ishareeconomy_android.lending.LendingActivity
  *
  * Activity responsible for showing the lendobjects currently used by the user
  * @property usingFragment builds the using overview screen
- *
+ * @property onNavigationItemSelectedListener: [BottomNavigationView.OnNavigationItemSelectedListener]
+ * provides the implementation of BottomNavigation
  */
 class UsingActivity : AppCompatActivity() {
 
-    var usingFragment =  UsingMasterFragment()
+    private var usingFragment =  UsingMasterFragment()
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_lending -> {
+                val intent = Intent(this, LendingActivity::class.java)
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
+                this.finish()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_using -> {
+//                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_requests -> {
+//                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
+    /**
+     * Called when the activity is created
+     *
+     * @param savedInstanceState: [Bundle?]
+     *
+     * @return [Unit]
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_using)
@@ -36,23 +61,5 @@ class UsingActivity : AppCompatActivity() {
         window.exitTransition = null
 
         navView.menu.getItem(1).isChecked = true
-    }
-
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_lending -> {
-                val intent = Intent(this, LendingActivity::class.java)
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-                this.finish()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_using -> {
-//                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_requests -> {
-//                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
     }
 }

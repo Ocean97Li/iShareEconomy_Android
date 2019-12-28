@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
  * @param application The application that this viewmodel is attached to, it's safe to hold a
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
+ *
  */
 class UsingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application) {
 
