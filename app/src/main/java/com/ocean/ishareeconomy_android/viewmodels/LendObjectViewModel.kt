@@ -17,12 +17,12 @@ import com.ocean.ishareeconomy_android.models.LendingObject
  * @property color: [ColorDrawable] the object's icon background color, indicating the usage
  *
  */
-class LendObjectViewModel(
+open class LendObjectViewModel(
     private val data: LendingObject, val color: ColorDrawable
 ) {
     val name = data.name
     val description = data.description
-    val numberOfUsers = Integer.toString(data.waitingList.size + if (data.user != null) 1 else 0)
+    val numberOfUsers = (data.waitingList.size + if (data.user != null) 1 else 0).toString()
 
     /**
      * Returns the icon that correspond to the [LendObjectType] of [data]

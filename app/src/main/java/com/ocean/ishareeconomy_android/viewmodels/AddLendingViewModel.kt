@@ -57,7 +57,6 @@ class AddLendingViewModel(application: Application, val id: String, private val 
             val enabled = !name.isNullOrEmpty() && !description.isNullOrEmpty() && type != null
             share.set(enabled)
         }
-
     var name: String? = null
         set(value) {
             field = value

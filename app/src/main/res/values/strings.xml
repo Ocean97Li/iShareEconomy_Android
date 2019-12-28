@@ -57,5 +57,9 @@
     <string name="transport_button_content_desc">The button for type transport</string>
     <string name="add_button">Share</string>
     <string name="add_button_long">Start sharing now</string>
+    <string name="tools_full_name">Full name</string>
+    <string name="user_icon_content_desc">A user icon</string>
+    <string name="info_icon_content_desc">An info icon</string>
+    <string name="tools_distance_default">0.0 km</string>
 
 </resources>

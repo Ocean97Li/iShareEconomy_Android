@@ -1,10 +1,10 @@
 package com.ocean.ishareeconomy_android.adapters
 
+import LendObjectViewHolder
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +35,7 @@ class LendObjectAdapter : RecyclerView.Adapter<LendObjectViewHolder>() {
         }
 
     /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to represent
      * an item.
      *
      * @return [Unit]
@@ -67,7 +67,7 @@ class LendObjectAdapter : RecyclerView.Adapter<LendObjectViewHolder>() {
             val obj = objects[position]
             val vm = LendObjectViewModel(obj,getObjectUsageColor(obj))
             it.`object` = vm
-            it.lendobjectType.setImageResource(vm.type())
+            it.lendObjectType.setImageResource(vm.type())
         }
     }
 
@@ -85,19 +85,5 @@ class LendObjectAdapter : RecyclerView.Adapter<LendObjectViewHolder>() {
         } else {
             ColorDrawable(ContextCompat.getColor(context!!, R.color.customGreen))
         }
-    }
-
-}
-
-/**
- * Part of *adapters*.
- * s
- * ViewHolder for LendObject items. All work is done by data binding.
- */
-class LendObjectViewHolder(val viewDataBinding: ListItemLendobjectBinding) :
-    RecyclerView.ViewHolder(viewDataBinding.root) {
-    companion object {
-        @LayoutRes
-        val LAYOUT = R.layout.list_item_lendobject
     }
 }

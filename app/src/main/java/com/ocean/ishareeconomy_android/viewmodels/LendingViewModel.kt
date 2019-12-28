@@ -60,7 +60,7 @@ class LendingViewModel(application: Application, val id: String, val auth: Strin
         }
     }
 
-    fun refreshUsers() {
+    private fun refreshUsers() {
         viewModelScope.launch {
             repository.refreshUsers(id, auth)
         }

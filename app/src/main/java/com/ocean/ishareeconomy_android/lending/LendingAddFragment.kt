@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_add_lending.*
 /**
  * Part of *lending*.
  *
- * Activity responsible for displaying adding items to the list of shared objects
+ * Fragment responsible for displaying adding items to the list of shared objects
  *
  * @property token the jwt [String] used to make authenticated api calls
  * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
@@ -155,7 +155,7 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
             container,
             false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val viewModel= ViewModelProviders.of(this,
             AddLendingViewModel.Factory(activity!!.application, loginResponseObject.id, token))
