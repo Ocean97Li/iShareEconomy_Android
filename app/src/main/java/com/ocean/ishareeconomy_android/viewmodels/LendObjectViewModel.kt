@@ -1,7 +1,9 @@
 package com.ocean.ishareeconomy_android.viewmodels
 
+import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.models.LendObjectType
 import com.ocean.ishareeconomy_android.models.LendingObject
@@ -17,9 +19,8 @@ import com.ocean.ishareeconomy_android.models.LendingObject
  * @property color: [ColorDrawable] the object's icon background color, indicating the usage
  *
  */
-open class LendObjectViewModel(
-    private val data: LendingObject, val color: ColorDrawable
-) {
+open class LendObjectViewModel (private val data: LendingObject, val context: Context) {
+
     val name = data.name
     val description = data.description
     val numberOfUsers = (data.waitingList.size + if (data.user != null) 1 else 0).toString()
@@ -35,5 +36,25 @@ open class LendObjectViewModel(
             LendObjectType.Service -> R.drawable.ic_lendobject_service_solid
             LendObjectType.Transportation -> R.drawable.ic_lendobject_transportation_solid
         }
+    }
+
+    /**
+     * Method that returns a background color for the lendobject's type icon,
+     * depending on it's state:
+     *
+     * Green for available, Yellow if there is a current user.
+     *
+     * @return a [ColorDrawable] color.
+     */
+    fun color(): ColorDrawable {
+        return if (data.user != null) {
+            ColorDrawable(ContextCompat.getColor(context, R.color.customYellow))
+        } else {
+            ColorDrawable(ContextCompat.getColor(context, R.color.customGreen))
+        }
+    }
+
+    fun getLendObject(): LendingObject {
+        return data
     }
 }

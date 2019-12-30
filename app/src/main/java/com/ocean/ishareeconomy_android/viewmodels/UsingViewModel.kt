@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  * or fragment lifecycle events.
  *
  */
-class UsingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application) {
+class UsingViewModel(application: Application, val id: String, private val auth: String) : AndroidViewModel(application) {
 
     /**
      * This is the job for all coroutines started by this ViewModel.

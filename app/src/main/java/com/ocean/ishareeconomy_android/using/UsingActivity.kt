@@ -53,7 +53,7 @@ class UsingActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.frame_layout, usingFragment)
+                    .add(R.id.frame_layout_using, usingFragment)
                     .commit()
         }
 

@@ -31,7 +31,7 @@
     <string name="login_button">Login</string>
     <string name="error_username">Username can\'t be empty</string>
     <string name="error_password">Password can\'t be empty</string>
-    <string name="succesfull_login">Succesfully logged in</string>
+    <string name="successful_login">Successfully logged in</string>
     <string name="welcome">Welcome</string>
     <string name="wrong_login_credentials">Incorrect username or password</string>
     <string name="sign_up_link_text">No account yet? Click here to </string>
@@ -42,8 +42,7 @@
     <string name="transport_type_image_content_desc">A Mode of transportation</string>
     <string name="add_lending_object_button">Share new</string>
     <string name="remove_lending_object_button">Enable delete</string>
-    <string name="remove_instruction">Swipe left to delete</string>
-
+    <string name="remove_instruction">Swipe right to delete</string>
 
     <!-- Strings related to AddLendingScreen -->
     <string name="choose_title_text">Sharing a new item</string>
@@ -58,8 +57,11 @@
     <string name="add_button">Share</string>
     <string name="add_button_long">Start sharing now</string>
     <string name="tools_full_name">Full name</string>
+    <string name="no_current_user">No Current User</string>
+    <string name="from_date_to_date">From date to date</string>
     <string name="user_icon_content_desc">A user icon</string>
     <string name="info_icon_content_desc">An info icon</string>
     <string name="tools_distance_default">0.0 km</string>
+    <string name="object_icon_desc">The object type icon</string>
 
 </resources>

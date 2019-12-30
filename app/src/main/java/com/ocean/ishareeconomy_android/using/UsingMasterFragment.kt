@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendObjectAdapter
 import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
+import com.ocean.ishareeconomy_android.lending.LendObjectClick
+import com.ocean.ishareeconomy_android.lending.LendingActivity
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
@@ -112,7 +114,10 @@ class UsingMasterFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = LendObjectAdapter()
+        viewModelAdapter = LendObjectAdapter( LendObjectClick{
+            val packageManager = context?.packageManager ?: return@LendObjectClick
+            (activity as LendingActivity).onDetailClick(it)
+        })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {
             layoutManager = LinearLayoutManager(context)

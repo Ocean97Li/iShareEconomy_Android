@@ -5,6 +5,8 @@ import androidx.lifecycle.*
 import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.database.IShareDataBase
 import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.models.ObjectOwner
+import com.ocean.ishareeconomy_android.models.ObjectUser
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -33,58 +35,25 @@ import kotlinx.coroutines.launch
  *  @param id: [String]
  *  @param auth: [String]
  *  @param application The application that this viewmodel is attached to, it's safe to hold a
- * reference to applications across rotation since Application is never recreated during actiivty
- * or fragment lifecycle events.
+ *  reference to applications across rotation since Application is never recreated during actiivty
+ *  or fragment lifecycle events.
  */
-class LendingViewModel(application: Application, val id: String, private val auth: String) : AndroidViewModel(application) {
+class LendingDetailViewModel {
 
     private var viewModelJob = SupervisorJob()
     private var viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val dataBase = getDatabase(application)
-    private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
+    val lendingObject = MutableLiveData<LendingObject>()
 
-    val lending = repository.lending
+    lateinit var owner: ObjectOwner
+    var user: ObjectUser? = null
+    var waitingList: List<ObjectUser> = emptyList()
 
     init {
-        refreshUsers()
-    }
-
-    fun removeObject(lendObject: LendingObject) {
-        if (viewModelJob.isCancelled) {
-            viewModelJob = SupervisorJob()
-            viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-        }
-        viewModelScope.launch {
-            repository.removeLendObject(id, lendObject.id, auth)
-        }
-    }
-
-    fun refreshUsers() {
-        viewModelScope.launch {
-            repository.refreshUsers(id, auth)
-        }
-    }
-
-    /**
-     * Cancel all coroutines when the ViewModel is cleared
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
-    /**
-     * Factory for constructing [LendingViewModel] with parameter
-     */
-    class Factory(val app: Application, val id: String, private val auth: String) : ViewModelProvider.Factory {
-        @Throws(IllegalArgumentException::class)
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(LendingViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return LendingViewModel(app, id, auth) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
+        lendingObject.observeForever {
+            owner = it.owner
+            user = it.user
+            waitingList = it.waitingList
         }
     }
 }

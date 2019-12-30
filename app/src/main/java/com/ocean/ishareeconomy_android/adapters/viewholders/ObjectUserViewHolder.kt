@@ -1,15 +1,15 @@
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.databinding.ListItemOwnerBinding
-import com.ocean.ishareeconomy_android.models.ObjectOwner
+import com.ocean.ishareeconomy_android.databinding.ListItemUserBinding
+import com.ocean.ishareeconomy_android.models.ObjectUser
 
 /**
- * Part of *adapters.viewholders*.
+ * Part of *viewholders*.
  *
- * ViewHolder for [ObjectOwner] items. All work is done by data binding.
+ * ViewHolder for [ObjectUser] items. All work is done by data binding.
  */
-class ObjectUserViewHolder(val viewDataBinding: ListItemOwnerBinding) :
+class ObjectUserViewHolder(val viewDataBinding: ListItemUserBinding) :
     RecyclerView.ViewHolder(viewDataBinding.root) {
     companion object {
         @LayoutRes

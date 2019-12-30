@@ -4,17 +4,15 @@ import LendObjectViewHolder
 import ObjectOwnerViewHolder
 import ObjectUserViewHolder
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.databinding.ListItemLendobjectBinding
+import com.ocean.ishareeconomy_android.databinding.ListItemOwnerBinding
+import com.ocean.ishareeconomy_android.databinding.ListItemUserBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
-import com.ocean.ishareeconomy_android.viewmodels.LendObjectDetailViewModel
-import com.ocean.ishareeconomy_android.viewmodels.LendObjectViewModel
+import com.ocean.ishareeconomy_android.viewmodels.*
 
 /**
  * Part of *adapters*.
@@ -24,10 +22,14 @@ import com.ocean.ishareeconomy_android.viewmodels.LendObjectViewModel
  * @property context: [Context]? Store parent context, needed to fetch colors
  * @property lendObject: [LendingObject] The object that our Adapter will show the details of
  */
-class LendObjectDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context: Context? = null
     var lendObject: LendingObject? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /**
      * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to represent
@@ -47,24 +49,23 @@ class LendObjectDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 LendObjectViewHolder(withDataBinding)
             }
             2 -> {
-                val withDataBinding: ListItemLendobjectBinding = DataBindingUtil.inflate(
+                val withDataBinding: ListItemOwnerBinding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
-                    LendObjectViewHolder.LAYOUT,
+                    ObjectOwnerViewHolder.LAYOUT,
                     parent,
                     false)
-                LendObjectViewHolder(withDataBinding)
+                ObjectOwnerViewHolder(withDataBinding)
             }
             3 -> {
-                val withDataBinding: ListItemLendobjectBinding = DataBindingUtil.inflate(
+                val withDataBinding: ListItemUserBinding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
-                    LendObjectViewHolder.LAYOUT,
+                    ObjectUserViewHolder.LAYOUT,
                     parent,
                     false)
-                LendObjectViewHolder(withDataBinding)
+                ObjectUserViewHolder(withDataBinding)
             }
             else -> throw IllegalArgumentException("No such viewType!")
         }
-
     }
 
     /**
@@ -87,11 +88,8 @@ class LendObjectDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
      * @return [Int]
      */
     override fun getItemCount(): Int {
-        var count = 2
+        var count = 3
         if (lendObject != null) {
-            if (lendObject!!.user != null) {
-                count++
-            }
             if (lendObject!!.waitingList.isNotEmpty()) {
                 count += lendObject!!.waitingList.size
             }
@@ -103,57 +101,46 @@ class LendObjectDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method should
-     * update the contents of the [ViewHolder.itemView] to reflect the item at the given
+     * update the contents of the [RecyclerView.ViewHolder] to reflect the item at the given
      * position.
+     *
+     * @return [Unit]
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        var waitingListIndexAdjust  = 3
+
         when(position) {
             0 -> {
                 (holder as LendObjectViewHolder).viewDataBinding.also {
                     val obj = lendObject!!
-                    val vm = LendObjectViewModel(obj,getObjectUsageColor(obj))
+                    val vm = LendObjectViewModel(obj, context!!)
                     it.`object` = vm
-                    it.lendObjectType.setImageResource(vm.type())
                 }
             }
             1 -> {
                 (holder as ObjectOwnerViewHolder).viewDataBinding.also {
-                    val obj = lendObject!!
-                    val vm = LendObjectDetailViewModel(obj,getObjectUsageColor(obj))
-                    it.`object` = vm
+                    val owner = lendObject!!.owner
+                    val vm = OwnerObjectViewModel(owner)
+                    it.owner = vm
                 }
             }
             2 -> {
-                (holder as ObjectOwnerViewHolder).viewDataBinding.also {
-                    val obj = lendObject!!
-                    val vm = LendObjectDetailViewModel(obj,getObjectUsageColor(obj))
-                    it.`object` = vm
+                (holder as ObjectUserViewHolder).viewDataBinding.also {
+                    if (lendObject!!.user != null) {
+                        val user = lendObject!!.user
+                        val vm = UserObjectViewModel(user!!)
+                        it.user = vm
+                    }
                 }
             }
             else -> {
                 (holder as ObjectUserViewHolder).viewDataBinding.also {
-                    val obj = lendObject!!
-                    val vm = LendObjectDetailViewModel(obj,getObjectUsageColor(obj))
-                    it.`object` = vm
+                    val user = lendObject!!.waitingList[position - waitingListIndexAdjust]
+                    val vm = UserObjectViewModel(user)
+                    it.user = vm
                 }
             }
         }
 
-    }
-
-    /**
-     * Helper method that returns a background color for the lendobject's type icon,
-     * depending on it's state:
-     *
-     * Green for available, Yellow if there is a current user.
-     *
-     * @return a [ColorDrawable] color.
-     */
-    private fun getObjectUsageColor(lendObject: LendingObject): ColorDrawable {
-        return if (lendObject.user != null) {
-            ColorDrawable(ContextCompat.getColor(context!!, R.color.customYellow))
-        } else {
-            ColorDrawable(ContextCompat.getColor(context!!, R.color.customGreen))
-        }
     }
 }

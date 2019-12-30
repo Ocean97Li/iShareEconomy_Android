@@ -5,7 +5,7 @@ import com.ocean.ishareeconomy_android.databinding.ListItemLendobjectBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 
 /**
- * Part of *adapters.viewholders*.
+ * Part of *viewholders*.
  *
  * ViewHolder for [LendingObject] items. All work is done by data binding.
  */

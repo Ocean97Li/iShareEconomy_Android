@@ -7,14 +7,14 @@
     <data>
 
         <variable
-                name="object"
-                type="com.ocean.ishareeconomy_android.viewmodels.LendObjectDetailViewModel" />
+                name="user"
+                type="com.ocean.ishareeconomy_android.viewmodels.UserObjectViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.CardView">
+            style="@style/AppTheme.MaterialCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     app:srcCompat="@drawable/ic_user_circle_solid" />
 
             <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/lend_object_main_body"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="@dimen/half_margin"
@@ -53,19 +53,31 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{object.owner}"
+                        android:text="@{user != null ? user.name : @string/no_current_user}"
                         android:textSize="@dimen/title_text_size"
                         android:textStyle="bold"
                         app:autoSizeMinTextSize="@dimen/title_text_size"
                         tools:text="@string/tools_full_name" />
 
                 <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/from_to_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:gravity="center"
-                        android:text="@string/tools_distance_default" />
+                        android:visibility="@{user != null ? 0 : 8}"
+                        android:text="@{user.froToDate}"
+                        tools:text="@string/from_date_to_date" />
+
+                <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="center"
+                        android:visibility="@{user != null ? 0: 8}"
+                        android:text="@{user.distance}"
+                        tools:text="@string/tools_distance_default" />
 
             </LinearLayout>
 
@@ -73,11 +85,13 @@
                     android:id="@+id/info_icon"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
+                    android:layout_marginEnd="@dimen/margin"
                     android:contentDescription="@string/info_icon_content_desc"
+                    android:src="@{user != null ? @drawable/ic_info_solid_24dp : @drawable/ic_info_disabled_24dp}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_info_solid_24dp" />
+                    tools:src="@drawable/ic_info_solid_24dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

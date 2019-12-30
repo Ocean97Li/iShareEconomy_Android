@@ -5,7 +5,7 @@ import com.ocean.ishareeconomy_android.databinding.ListItemOwnerBinding
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 
 /**
- * Part of *adapters.viewholders*.
+ * Part of *viewholders*.
  *
  * ViewHolder for [ObjectOwner] items. All work is done by data binding.
  */
