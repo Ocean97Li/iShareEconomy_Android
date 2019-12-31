@@ -63,9 +63,9 @@ class LendingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lending)
-        nav_view.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        nav_view_lending.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        if (master_detail != null) {
+        if (master_detail_lending != null) {
             masterDetail = true
         }
 
@@ -76,7 +76,7 @@ class LendingActivity : AppCompatActivity() {
         window.enterTransition = null
         window.exitTransition = null
 
-        nav_view.menu.getItem(0).isChecked = true
+        nav_view_lending.menu.getItem(0).isChecked = true
     }
 
     /**
@@ -111,9 +111,7 @@ class LendingActivity : AppCompatActivity() {
             } else {
                 transaction.add(R.id.frame_layout_container_lending, lendingMasterFragment)
             }
-
         }
-        lendingMasterFragment
 
         transaction.commit()
     }
@@ -132,7 +130,7 @@ class LendingActivity : AppCompatActivity() {
      *
      * @return [Unit]
      **/
-    fun navigateToDetail() {
+    private fun navigateToDetail() {
         if (!masterDetail) {
             supportFragmentManager
                 .beginTransaction()

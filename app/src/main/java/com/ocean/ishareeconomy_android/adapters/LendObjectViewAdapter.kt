@@ -65,7 +65,6 @@ class LendObjectAdapter(val callback: LendObjectClick) : RecyclerView.Adapter<Le
             val vm = LendObjectViewModel(obj, context!!)
             it.`object` = vm
             it.callback = this.callback
-
         }
     }
 }

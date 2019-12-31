@@ -110,13 +110,13 @@ class UsingMasterFragment: Fragment() {
             container,
             false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
 
         viewModelAdapter = LendObjectAdapter( LendObjectClick{
             val packageManager = context?.packageManager ?: return@LendObjectClick
-            (activity as LendingActivity).onDetailClick(it)
+            (activity as UsingActivity).onDetailClick(it)
         })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {

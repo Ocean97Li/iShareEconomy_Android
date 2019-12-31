@@ -303,7 +303,7 @@ class LendingMasterFragment: Fragment() {
                         Snackbar.LENGTH_LONG)
                     val params =
                         snackbar.view.layoutParams as FrameLayout.LayoutParams
-                    params.bottomMargin = activity!!.nav_view!!.height
+                    params.bottomMargin = activity!!.nav_view_lending!!.height
                     snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
                     snackbar.view.layoutParams = params
                     snackbar.show()

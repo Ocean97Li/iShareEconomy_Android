@@ -76,7 +76,7 @@
                         android:layout_weight="0"
                         android:gravity="center"
                         android:visibility="@{user != null ? 0: 8}"
-                        android:text="@{user.distance}"
+                        android:text="@{user.distanceString}"
                         tools:text="@string/tools_distance_default" />
 
             </LinearLayout>

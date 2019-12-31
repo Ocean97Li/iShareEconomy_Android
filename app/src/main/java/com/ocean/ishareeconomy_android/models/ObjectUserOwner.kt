@@ -35,7 +35,5 @@ class ObjectUser(
     val from: Date,
     @SerializedName("todate")
     val to: Date,
-    var parenObjectId: String = "",
-    @Ignore
-    val distance: Double = 0.0
+    var parenObjectId: String = ""
     ) : ObjectOwner(id, name)

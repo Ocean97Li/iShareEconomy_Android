@@ -3,32 +3,33 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/activity_lending"
+        android:id="@+id/using_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".lending.LendingActivity">
+        tools:context=".using.UsingActivity">
 
     <LinearLayout
-            android:id="@+id/master_detail_lending"
+            android:id="@+id/master_detail_using"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:showDividers="middle"
-            app:layout_constraintBottom_toTopOf="@+id/nav_view_lending"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view_using"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
-                android:id="@+id/frame_layout_master_lending"
+                android:id="@+id/frame_layout_master_using"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" >
+
         </FrameLayout>
 
         <View
-                android:id="@+id/divider_lending"
+                android:id="@+id/divider_using"
                 android:layout_width="@dimen/half_margin"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
@@ -36,7 +37,7 @@
                 tools:visibility="visible" />
 
         <FrameLayout
-                android:id="@+id/frame_layout_details_lending"
+                android:id="@+id/frame_layout_details_using"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -47,14 +48,15 @@
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/nav_view_lending"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/windowBackground"
-                app:itemIconSize="@dimen/tabbed_icon_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:menu="@menu/bottom_nav_menu" />
+            android:id="@+id/nav_view_using"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
