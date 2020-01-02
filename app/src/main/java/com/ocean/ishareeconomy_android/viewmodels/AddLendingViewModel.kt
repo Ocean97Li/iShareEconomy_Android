@@ -29,7 +29,7 @@ import kotlinx.coroutines.*
  *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
  *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
  *  @property dataBase: [IShareDataBase]
- *  @property repository: a [UserRepository] Singleton manages all the [User]
+ *  @property repository: a [UserRepository] Singleton that manages all the users
  *  @property type: [LendObjectType] the new object's type
  *  @property name: [String] the new object's name
  *  @property description: [String] the new object's description
@@ -132,7 +132,7 @@ class AddLendingViewModel(application: Application, val id: String, private val 
     /**
      * Factory for constructing AddLendingViewModel with parameters
      */
-    class Factory(val app: Application, val id: String, val auth: String) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val id: String, private val auth: String) : ViewModelProvider.Factory {
         @Throws(IllegalArgumentException::class)
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AddLendingViewModel::class.java)) {

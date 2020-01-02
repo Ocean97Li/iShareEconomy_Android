@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android
 
 import com.ocean.ishareeconomy_android.models.LendObjectType
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException

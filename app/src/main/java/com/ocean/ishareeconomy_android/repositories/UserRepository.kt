@@ -3,16 +3,16 @@ package com.ocean.ishareeconomy_android.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.IShareDataBase
+import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.relationships.asDomainModel
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.network.Network
+import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import com.ocean.ishareeconomy_android.utils.asDatabaseModel
 import com.ocean.ishareeconomy_android.utils.asDatabaseModels
-import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -63,7 +63,7 @@ class UserRepository private constructor(params: RepositoryParams) {
     private val error = MutableLiveData<String>()
     private var _loggedInUser: User? = null
 
-    val loggedInUser: LiveData<User> = Transformations.map(database.users.getAllUsers()) {
+    private val loggedInUser: LiveData<User> = Transformations.map(database.users.getAllUsers()) {
         it.asDomainModel().map {
                 user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
@@ -189,11 +189,11 @@ class UserRepository private constructor(params: RepositoryParams) {
                 }
 
                 // Get all Current ObjectUsers
-                val objectUsersCurrent = lendObjects.map { lendObject ->
+                val objectUsersCurrent = lendObjects.mapNotNull { lendObject ->
                     lendObject.user?.parenObjectId = lendObject.id
                     lendObject.user?.distance = _loggedInUser!!.distance
                     lendObject.user
-                }.filterNotNull()
+                }
 
                 // Set DB
                 database.users.insertAllUsers(*users.asDatabaseModel())

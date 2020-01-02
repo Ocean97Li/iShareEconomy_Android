@@ -1,20 +1,27 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Huhu">
     <words>
+      <w>beyls</w>
       <w>coroutine</w>
       <w>coroutines</w>
       <w>databinding</w>
       <w>firstname</w>
+      <w>fromdate</w>
+      <w>ishare</w>
       <w>ishareeconomy</w>
       <w>lastname</w>
       <w>lendobject</w>
       <w>lendobjects</w>
+      <w>moshi</w>
+      <w>mvvm</w>
       <w>objcuser</w>
       <w>sampledata</w>
       <w>snackbar</w>
+      <w>todate</w>
       <w>viewholders</w>
       <w>viewmodel</w>
       <w>viewmodels</w>
+      <w>waitinglist</w>
     </words>
   </dictionary>
 </component>

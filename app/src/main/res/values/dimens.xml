@@ -1,12 +1,10 @@
 <resources>
     <dimen name="padding">8dp</dimen>
     <dimen name="double_padding">16dp</dimen>
-    <dimen name="triple_padding">32dp</dimen>
 
     <dimen name="half_margin">8dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="double_margin">32dp</dimen>
-    <dimen name="triple_margin">48dp</dimen>
     <dimen name="icon_size">64dp</dimen>
 
     <dimen name="title_text_size">20sp</dimen>
@@ -14,7 +12,5 @@
     <dimen name="tabbed_icon_size">24dp</dimen>
     
     <dimen name="card_elevation_low">5dp</dimen>
-    <dimen name="card_elevation_med">10dp</dimen>
-    <dimen name="card_elevation_high">15dp</dimen>
 
 </resources>

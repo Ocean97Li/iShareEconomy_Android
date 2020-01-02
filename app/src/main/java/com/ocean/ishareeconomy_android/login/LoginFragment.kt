@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.ocean.ishareeconomy_android.R
@@ -48,12 +47,12 @@ class LoginFragment : Fragment() {
     private lateinit var spEditor: SharedPreferences.Editor
 
     // actual text inputs
-    lateinit var usernameInput: EditText
-    lateinit var passwordInput: EditText
+    private lateinit var usernameInput: EditText
+    private lateinit var passwordInput: EditText
 
     // input layouts for the text inputs
-    lateinit var usernameInputLayout: TextInputLayout
-    lateinit var passwordInputLayout: TextInputLayout
+    private lateinit var usernameInputLayout: TextInputLayout
+    private lateinit var passwordInputLayout: TextInputLayout
 
 
     /**
@@ -139,12 +138,12 @@ class LoginFragment : Fragment() {
      *  @return [Unit]
      */
     private fun readSharedPreferences() {
-        val gebruikersnaam = sharedPreferences.getString(getString(R.string.login_username), "")
-        val wachtwoord = sharedPreferences.getString(getString(R.string.login_password), "")
+        val username = sharedPreferences.getString(getString(R.string.login_username), "")
+        val password = sharedPreferences.getString(getString(R.string.login_password), "")
 
         // set the input with the username and password that was read from the sharedPreferences
-        usernameInput.setText(gebruikersnaam)
-        passwordInput.setText(wachtwoord)
+        usernameInput.setText(username)
+        passwordInput.setText(password)
     }
 
     /**

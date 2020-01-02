@@ -2,14 +2,9 @@ package com.ocean.ishareeconomy_android.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ocean.ishareeconomy_android.database.getDatabase
-import com.ocean.ishareeconomy_android.models.LendingObject
-import com.ocean.ishareeconomy_android.models.ObjectOwner
-import com.ocean.ishareeconomy_android.models.ObjectUser
-import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -27,14 +22,6 @@ import kotlinx.coroutines.SupervisorJob
  *  * Inherits from [AndroidViewModel] so that it remains unaffected by rotations
  *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
  *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
- *
- *  @property lendingObject: [LendingObject] the object from which the details are displayed
- *  @property owner: [LendingObject.user] a [ObjectOwner] object, representing the creator [User].
- *  Automatically updated when a new [LendingObject] is passed.
- *  @property user: [LendingObject.user] is either null or a [ObjectUser] object, representing a usage.
- *  Automatically updated when a new [LendingObject] is passed.
- *  @property waitingList: [List]<[ObjectUser]>, represents all the [User]s that are waiting to use the object.
- *  Automatically updated when a new [LendingObject] is passed.
  *
  *  @constructor Creates a [LendingDetailViewModel]
  *  @param application: [Application] the activity's application, used to make the parent [AndroidViewModel] lifecycle aware

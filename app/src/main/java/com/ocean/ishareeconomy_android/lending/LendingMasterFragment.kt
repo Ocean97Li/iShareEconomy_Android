@@ -91,7 +91,7 @@ class LendingMasterFragment: Fragment() {
     }
 
     /**
-     * Helper method that sets up the onSwipe lisetener for the delete [LendingObject] functionality
+     * Helper method that sets up the onSwipe listener for the delete [LendingObject] functionality
      *
      * @return [Unit]
      */
@@ -112,7 +112,7 @@ class LendingMasterFragment: Fragment() {
 
                 /**
                  * Defines the action to take when an item is swiped,
-                 * Only one type of swipe is allowed, so it's alsways to the right
+                 * Only one type of swipe is allowed, so it's always to the right
                  * notifies [viewModelAdapter] of type [LendObjectAdapter] to update and animate the deletion
                  * notifies [viewModel] of type [LendingViewModel] to call the repository
                  *

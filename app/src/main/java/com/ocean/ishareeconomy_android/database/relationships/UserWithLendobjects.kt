@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android.database.relationships
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import androidx.room.RoomDatabase
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 import com.ocean.ishareeconomy_android.models.User
 

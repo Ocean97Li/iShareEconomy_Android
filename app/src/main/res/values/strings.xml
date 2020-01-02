@@ -5,11 +5,7 @@
     <string name="title_using">Using</string>
     <string name="title_requests">Requests</string>
 
-    <string name="login_text">Login</string>
-
     <!-- API calls and related-->
-    <string name="BASE_URL_API" translatable="false">https://ishare-economy-backend.herokuapp.com/API</string>
-    <string name="login_login_response" translatable="false">com.ishareEconomy_android.login.loginResponse</string>
     <string name="login_username" translatable="false">com.ishareEconomy_android.login.username</string>
     <string name="login_password" translatable="false">com.ishareEconomy_android.login.password</string>
     <string name="something_went_wrong_login">Something went wrong, please ensure you are connected to the internet</string>
@@ -18,9 +14,6 @@
     <string name="sp_user_token" translatable="false">com.ishareEconomy_android.login.token</string>
 
     <!-- Strings related to Common Use -->
-    <string name="close">Close</string>
-    <string name="cancel">Cancel</string>
-    <string name="close_app">Are You sure you want to quit the app?</string>
     <string name="tool">Tool</string>
     <string name="service">Service</string>
     <string name="transport">Transportation</string>
@@ -31,15 +24,10 @@
     <string name="login_button">Login</string>
     <string name="error_username">Username can\'t be empty</string>
     <string name="error_password">Password can\'t be empty</string>
-    <string name="successful_login">Successfully logged in</string>
     <string name="welcome">Welcome</string>
     <string name="wrong_login_credentials">Incorrect username or password</string>
-    <string name="sign_up_link_text">No account yet? Click here to </string>
 
     <!-- Strings related to LendingScreen -->
-    <string name="object_type_image_content_desc">An Tool</string>
-    <string name="service_type_image_content_desc">A Service</string>
-    <string name="transport_type_image_content_desc">A Mode of transportation</string>
     <string name="add_lending_object_button">Share new</string>
     <string name="remove_lending_object_button">Enable delete</string>
     <string name="remove_instruction">Swipe right to delete</string>
@@ -55,7 +43,6 @@
     <string name="service_button_content_desc">The button for type service</string>
     <string name="transport_button_content_desc">The button for type transport</string>
     <string name="add_button">Share</string>
-    <string name="add_button_long">Start sharing now</string>
     <string name="tools_full_name">Full name</string>
     <string name="no_current_user">No Current User</string>
     <string name="from_date_to_date">From date to date</string>

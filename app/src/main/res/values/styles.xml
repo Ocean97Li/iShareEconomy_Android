@@ -27,19 +27,8 @@
         <item name="android:textSize">18sp</item>
         <item name="android:padding">@dimen/double_padding</item>
     </style>
-    <style name="AppTheme.RoundedCornerImageButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">@drawable/ic_rounded_button</item>
-    </style>
 
     <!-- Object Input fields theme-->
-    <style name="AppTheme.MaterialEditText" parent="Widget.AppCompat.EditText">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ems">10</item>
-        <item name="android:maxLength">25</item>
-        <item name="android:hint">@string/choose_description_hint</item>
-        <item name="android:padding">@dimen/double_padding</item>
-    </style>
 
     <!-- RecyclerView Cards -->
     <style name="AppTheme.MaterialCard" parent="Widget.MaterialComponents.CardView">

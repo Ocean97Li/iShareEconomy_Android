@@ -35,4 +35,4 @@ class ObjectUser(
     val to: Date,
     var parenObjectId: String = "",
     var distance: Double = 0.0
-    ) : ObjectOwner(id, name)
+) : ObjectOwner(id, name)

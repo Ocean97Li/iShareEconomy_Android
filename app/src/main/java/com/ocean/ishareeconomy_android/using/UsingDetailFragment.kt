@@ -19,7 +19,6 @@ import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel
-import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
 /**
  * Part of *using*.

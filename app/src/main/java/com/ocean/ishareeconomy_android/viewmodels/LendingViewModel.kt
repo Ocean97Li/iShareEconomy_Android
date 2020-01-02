@@ -35,7 +35,7 @@ import kotlinx.coroutines.launch
  *  @param id: [String]
  *  @param auth: [String]
  *  @param application The application that this viewmodel is attached to, it's safe to hold a
- * reference to applications across rotation since Application is never recreated during actiivty
+ * reference to applications across rotation since Application is never recreated during activity
  * or fragment lifecycle events.
  */
 class LendingViewModel(application: Application, val id: String, private val auth: String) :

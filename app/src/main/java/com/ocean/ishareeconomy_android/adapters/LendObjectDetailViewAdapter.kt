@@ -1,8 +1,8 @@
 package com.ocean.ishareeconomy_android.adapters
 
-import LendObjectViewHolder
-import ObjectOwnerViewHolder
-import ObjectUserViewHolder
+import com.ocean.ishareeconomy_android.adapters.viewholders.LendObjectViewHolder
+import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectOwnerViewHolder
+import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectUserViewHolder
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -54,7 +54,7 @@ class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
-    var waitingList: List<ObjectUser> = emptyList()
+    private var waitingList: List<ObjectUser> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
