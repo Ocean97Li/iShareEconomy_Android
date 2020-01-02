@@ -19,7 +19,7 @@
     >
 
         <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginStart="@dimen/triple_margin"
                 android:layout_marginEnd="@dimen/triple_margin"
