@@ -266,9 +266,10 @@ class LendingMasterFragment: Fragment() {
         binding.viewModel = viewModel
 
         viewModelAdapter = LendObjectAdapter( LendObjectClick{
-            val packageManager = context?.packageManager ?: return@LendObjectClick
+            context?.packageManager ?: return@LendObjectClick
             if ((activity as LendingActivity).masterDetail || !deleting) {
-                (activity as LendingActivity).onDetailClick(it)
+                viewModel.selectObject(it)
+                (activity as LendingActivity).onDetailClick()
             }
         })
 
@@ -313,9 +314,5 @@ class LendingMasterFragment: Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun refresh() {
-        viewModel?.refreshUsers()
     }
 }

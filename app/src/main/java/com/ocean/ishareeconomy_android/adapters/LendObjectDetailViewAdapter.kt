@@ -12,6 +12,8 @@ import com.ocean.ishareeconomy_android.databinding.ListItemLendobjectBinding
 import com.ocean.ishareeconomy_android.databinding.ListItemOwnerBinding
 import com.ocean.ishareeconomy_android.databinding.ListItemUserBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.models.ObjectOwner
+import com.ocean.ishareeconomy_android.models.ObjectUser
 import com.ocean.ishareeconomy_android.viewmodels.*
 
 /**
@@ -26,6 +28,33 @@ class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context: Context? = null
     var lendObject: LendingObject? = null
+        set(value) {
+            field = value
+            owner = when (value?.owner != null) {
+                true -> value!!.owner
+                false -> null
+            }
+            user = when (value?.user != null) {
+                true -> value!!.user
+                false -> null
+            }
+            waitingList = when (!value?.waitingList.isNullOrEmpty()) {
+                true -> value!!.waitingList
+                false -> emptyList()
+            }
+            notifyDataSetChanged()
+        }
+    var owner: ObjectOwner? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+    var user: ObjectUser? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+    var waitingList: List<ObjectUser> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -119,23 +148,19 @@ class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             1 -> {
                 (holder as ObjectOwnerViewHolder).viewDataBinding.also {
-                    val owner = lendObject!!.owner
-                    val vm = OwnerObjectViewModel(owner)
+                    val vm = OwnerObjectViewModel(owner!!)
                     it.owner = vm
                 }
             }
             2 -> {
                 (holder as ObjectUserViewHolder).viewDataBinding.also {
-                    if (lendObject!!.user != null) {
-                        val user = lendObject!!.user
-                        val vm = UserObjectViewModel(user!!)
-                        it.user = vm
-                    }
+                    val vm = UserObjectViewModel(user)
+                    it.user = vm
                 }
             }
             else -> {
                 (holder as ObjectUserViewHolder).viewDataBinding.also {
-                    val user = lendObject!!.waitingList[position - waitingListIndexAdjust]
+                    val user = waitingList[position - waitingListIndexAdjust]
                     val vm = UserObjectViewModel(user)
                     it.user = vm
                 }

@@ -1,11 +1,17 @@
 package com.ocean.ishareeconomy_android.viewmodels
 
+import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.ObjectUser
 import com.ocean.ishareeconomy_android.models.User
+import com.ocean.ishareeconomy_android.repositories.RepositoryParams
+import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -30,25 +36,36 @@ import kotlinx.coroutines.SupervisorJob
  *  @property waitingList: [List]<[ObjectUser]>, represents all the [User]s that are waiting to use the object.
  *  Automatically updated when a new [LendingObject] is passed.
  *
+ *  @constructor Creates a [LendingDetailViewModel]
+ *  @param application: [Application] the activity's application, used to make the parent [AndroidViewModel] lifecycle aware
+ *
  *
 
  */
-class LendingDetailViewModel {
+class LendingDetailViewModel(application: Application, id: String): AndroidViewModel(application) {
+
+    private val dataBase = getDatabase(application)
+    private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
 
     private var viewModelJob = SupervisorJob()
     private var viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    val lendingObject = MutableLiveData<LendingObject>()
+    val lending = repository.lending
+    val using = repository.using
+    val selectedLendObject = repository.selectedLendObject
 
-    lateinit var owner: ObjectOwner
-    var user: ObjectUser? = null
-    var waitingList: List<ObjectUser> = emptyList()
-
-    init {
-        lendingObject.observeForever {
-            owner = it.owner
-            user = it.user
-            waitingList = it.waitingList
+    /**
+     * Factory for constructing LendingDetailViewModel with parameters
+     */
+    class Factory(val app: Application, val id: String) : ViewModelProvider.Factory {
+        @Throws(IllegalArgumentException::class)
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(LendingDetailViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return LendingDetailViewModel(app, id) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
 }
+

@@ -17,7 +17,8 @@ class UserTest {
             username = "foobar",
             rating = 10,
             distance = 0.0,
-            lending = emptyList()
+            lending = emptyList(),
+            using = emptyList()
         )
     }
 
@@ -31,6 +32,7 @@ class UserTest {
         assertEquals(10,user.rating)
         assertEquals(0.0,user.distance, 0.0)
         assertTrue(user.lending.isEmpty())
+        assertTrue(user.using.isEmpty())
     }
 
     @Test

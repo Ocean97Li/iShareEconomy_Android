@@ -5,49 +5,54 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.lending.LendingActivity
-import com.ocean.ishareeconomy_android.lending.LendingDetailFragment
 import com.ocean.ishareeconomy_android.models.LendingObject
-import kotlinx.android.synthetic.main.activity_lending.*
-import kotlinx.android.synthetic.main.activity_lending.nav_view_lending
 import kotlinx.android.synthetic.main.activity_using.*
-import kotlinx.android.synthetic.main.fragment_add_lending.*
 
 /**
  * Part of *using*.
  *
  * Activity responsible for showing the lendobjects currently used by the user
- * @property usingMasterFragment builds the using overview screen
- * @property usingDetailFragment builds the detail view screen
+ * @property usingMasterFragment: [UsingMasterFragment], builds the using overview screen
+ * @property usingDetailFragment: [UsingDetailFragment] builds the detail view screen
  * @property onNavigationItemSelectedListener: [BottomNavigationView.OnNavigationItemSelectedListener]
+ * @property masterDetail: [Boolean], reflects whether the views should be drawn in master detail or not
  * provides the implementation of BottomNavigation
  */
 class UsingActivity : AppCompatActivity() {
 
-    private var usingMasterFragment =  UsingMasterFragment()
-    private var usingDetailFragment =  UsingDetailFragment()
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_lending -> {
-                val intent = Intent(this, LendingActivity::class.java)
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-                this.finish()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_using -> {
-                navigateToMaster()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_requests -> {
+    private var usingMasterFragment = UsingMasterFragment()
+    private var usingDetailFragment = UsingDetailFragment()
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_lending -> {
+                    val intent = Intent(this, LendingActivity::class.java)
+                    startActivity(
+                        intent,
+                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+                    )
+                    this.finish()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_using -> {
+                    navigateToMaster()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_requests -> {
 //                return@OnNavigationItemSelectedListener true
+                }
             }
+            false
         }
-        false
-    }
     // Master Detail View Switch
     var masterDetail = false
+
+    val detail: LiveData<LendingObject> = MutableLiveData()
 
     /**
      * Called when the activity is created
@@ -85,15 +90,16 @@ class UsingActivity : AppCompatActivity() {
     }
 
     /**
-     * Method that navigates to the add lending objects screen fragment
+     * Method that navigates to the detail screen fragment
      *
      * @return [Unit]
      **/
-    fun navigateToDetail() {
+    private fun navigateToDetail() {
+        usingDetailFragment = UsingDetailFragment()
         if (!masterDetail) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(usingMasterFragment.id, usingDetailFragment)
+                .replace(R.id.frame_layout_container_using, usingDetailFragment)
                 .commit()
         }
     }
@@ -135,19 +141,12 @@ class UsingActivity : AppCompatActivity() {
     }
 
     /**
-     * Method that updates the view of [usingDetailFragment] when an object in the [usingDetailFragment]
-     * is clicked:
-     *
-     * Either by updating the [UsingDetailFragment.viewModel] property by posting the selected [LendingObject]
-     * when [masterDetail]=true, or by
-     * Navigating to the [UsingDetailFragment] when [masterDetail]=false
+     * Method that navigates to the detail view when an list object in the [usingDetailFragment]
+     * is clicked. It sets the blank [UsingDetailFragment], which will be updated on initialisation by the repo
      *
      * @return [Unit]
      **/
-    fun onDetailClick(lendObject: LendingObject) {
-        usingDetailFragment.viewModel.lendingObject.postValue(lendObject)
-        if (!masterDetail) {
-            navigateToDetail()
-        }
+    fun onDetailClick() {
+        navigateToDetail()
     }
 }

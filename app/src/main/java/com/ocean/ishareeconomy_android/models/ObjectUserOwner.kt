@@ -1,6 +1,5 @@
 package com.ocean.ishareeconomy_android.models
 
-import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -27,7 +26,6 @@ open class ObjectOwner(
  *  @property to the end [Date] of the lending period
  */
 class ObjectUser(
-    @Ignore
     var objectUserId: Int = 0,
     id: String,
     name: String,
@@ -35,5 +33,6 @@ class ObjectUser(
     val from: Date,
     @SerializedName("todate")
     val to: Date,
-    var parenObjectId: String = ""
+    var parenObjectId: String = "",
+    var distance: Double = 0.0
     ) : ObjectOwner(id, name)

@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.using.UsingActivity
 import kotlinx.android.synthetic.main.activity_lending.*
 import kotlinx.android.synthetic.main.fragment_add_lending.*
@@ -26,32 +25,35 @@ import kotlinx.android.synthetic.main.fragment_add_lending.*
 class LendingActivity : AppCompatActivity() {
 
     // Fragments
-    private val lendingMasterFragment =  LendingMasterFragment()
-    private val lendingDetailFragment = LendingDetailFragment()
+    private val lendingMasterFragment = LendingMasterFragment()
+    private var lendingDetailFragment = LendingDetailFragment()
     private val addFragment = LendingAddFragment()
 
     // Master Detail View Switch
     var masterDetail = false
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        lendingMasterFragment.refresh()
-        when (item.itemId) {
-            R.id.navigation_lending -> {
-                navigateToMaster()
-                return@OnNavigationItemSelectedListener true
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_lending -> {
+                    navigateToMaster()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_using -> {
+                    val intent = Intent(this, UsingActivity::class.java)
+                    startActivity(
+                        intent,
+                        ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
+                    )
+                    this.finish()
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_requests -> {
+                    return@OnNavigationItemSelectedListener true
+                }
             }
-            R.id.navigation_using -> {
-                val intent = Intent(this, UsingActivity::class.java)
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-                this.finish()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_requests -> {
-                return@OnNavigationItemSelectedListener true
-            }
+            false
         }
-        false
-    }
 
     /**
      * Method that is called when the activity is created
@@ -122,15 +124,16 @@ class LendingActivity : AppCompatActivity() {
      * @return [Unit]
      **/
     fun navigateToMaster() {
-        configureMasterDetailView(replace = true)
+        configureMasterDetailView(true)
     }
 
     /**
-     * Method that navigates to the add lending objects screen fragment
+     * Method that navigates to the detail screen fragment
      *
      * @return [Unit]
      **/
     private fun navigateToDetail() {
+        lendingDetailFragment = LendingDetailFragment()
         if (!masterDetail) {
             supportFragmentManager
                 .beginTransaction()
@@ -157,19 +160,12 @@ class LendingActivity : AppCompatActivity() {
     }
 
     /**
-     * Method that updates the view of [lendingDetailFragment] when an object in the [lendingMasterFragment]
-     * is clicked:
-     *
-     * Either by updating the [LendingDetailFragment.viewModel] property by posting the selected [LendingObject]
-     * when [masterDetail]=true, or by
-     * Navigating to the [LendingDetailFragment] when [masterDetail]=false
+     * Method that navigates to the detail view when an list object in the [lendingDetailFragment]
+     * is clicked. It sets the blank [LendingDetailFragment], which will be updated on initialisation by the repo
      *
      * @return [Unit]
      **/
-    fun onDetailClick(lendObject: LendingObject) {
-        lendingDetailFragment.viewModel.lendingObject.postValue(lendObject)
-        if (!masterDetail) {
-            navigateToDetail()
-        }
+    fun onDetailClick() {
+        navigateToDetail()
     }
 }

@@ -1,5 +1,7 @@
 package com.ocean.ishareeconomy_android.using
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,22 +9,41 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendingDetailAdapter
 import com.ocean.ishareeconomy_android.databinding.FragmentLendingDetailBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.models.LoginResponseObject
+import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel
+import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
 /**
  * Part of *using*.
  *
  * Fragment responsible for displaying adding items to the list of shared objects
+ * @property viewModel: [LendingDetailViewModel] the viewModel for displaying the details of a selected [LendingObject]
+ * @property viewModelAdapter: [LendingDetailAdapter] the viewModelAdapter that adapts the data to the [RecyclerView]
  */
 class UsingDetailFragment: Fragment() {
 
-    var viewModel = LendingDetailViewModel()
+    // API related
+    private lateinit var token: String
+    private lateinit var loginResponseObject: LoginResponseObject
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var spEditor: SharedPreferences.Editor
+
+    val viewModel: LendingDetailViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProviders.of(this,
+            LendingDetailViewModel.Factory(activity.application, loginResponseObject.id))
+            .get(LendingDetailViewModel::class.java)
+    }
     private var viewModelAdapter: LendingDetailAdapter? = null
 
     /**
@@ -33,8 +54,18 @@ class UsingDetailFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.lendingObject.observe(viewLifecycleOwner, Observer<LendingObject> { using ->
-            using?.apply {
+        if (savedInstanceState == null) {
+            viewModel.selectedLendObject.postValue(null)
+        }
+        viewModel.using.observe(viewLifecycleOwner, Observer<List<LendingObject>> { using ->
+            if (viewModel.selectedLendObject.value == null && !using.isNullOrEmpty()) {
+                viewModelAdapter?.lendObject = using[0]
+            }
+        })
+        viewModel.selectedLendObject.observe(viewLifecycleOwner, Observer<LendingObject> { using ->
+            if (using == null && !viewModel.using.value.isNullOrEmpty()) {
+                viewModelAdapter?.lendObject = viewModel.using.value!![0]
+            } else {
                 viewModelAdapter?.lendObject = using
             }
         })
@@ -57,6 +88,11 @@ class UsingDetailFragment: Fragment() {
      * @return Return the View for the fragment's UI.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
+        spEditor = sharedPreferences.edit()
+        token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
+        loginResponseObject = jwtToLoginResponseObject(token)!!
 
         val binding: FragmentLendingDetailBinding = DataBindingUtil.inflate(
             inflater,

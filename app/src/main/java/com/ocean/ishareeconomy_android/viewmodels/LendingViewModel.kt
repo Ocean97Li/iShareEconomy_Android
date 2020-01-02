@@ -1,9 +1,11 @@
 package com.ocean.ishareeconomy_android.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.ocean.ishareeconomy_android.database.getDatabase
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.ocean.ishareeconomy_android.database.IShareDataBase
+import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
@@ -36,18 +38,21 @@ import kotlinx.coroutines.launch
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
-class LendingViewModel(application: Application, val id: String, private val auth: String) : AndroidViewModel(application) {
+class LendingViewModel(application: Application, val id: String, private val auth: String) :
+    AndroidViewModel(application) {
 
     private var viewModelJob = SupervisorJob()
     private var viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val dataBase = getDatabase(application)
-    private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
+    private val repository = UserRepository.getInstance(RepositoryParams(id, dataBase))
 
     val lending = repository.lending
 
     init {
-        refreshUsers()
+        viewModelScope.launch {
+            repository.refreshUsers(id, auth)
+        }
     }
 
     fun removeObject(lendObject: LendingObject) {
@@ -60,10 +65,8 @@ class LendingViewModel(application: Application, val id: String, private val aut
         }
     }
 
-    fun refreshUsers() {
-        viewModelScope.launch {
-            repository.refreshUsers(id, auth)
-        }
+    fun selectObject(lendObject: LendingObject?) {
+        repository.selectedLendObject.postValue(lendObject)
     }
 
     /**
@@ -77,7 +80,8 @@ class LendingViewModel(application: Application, val id: String, private val aut
     /**
      * Factory for constructing [LendingViewModel] with parameter
      */
-    class Factory(val app: Application, val id: String, private val auth: String) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val id: String, private val auth: String) :
+        ViewModelProvider.Factory {
         @Throws(IllegalArgumentException::class)
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LendingViewModel::class.java)) {

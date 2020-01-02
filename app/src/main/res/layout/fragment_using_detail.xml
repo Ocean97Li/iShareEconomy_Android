@@ -11,7 +11,7 @@
     </data>
 
     <FrameLayout
-            android:id="@+id/frame_layout_lending_detail"
+            android:id="@+id/frame_layout_using_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite">

@@ -16,7 +16,6 @@ import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendObjectAdapter
 import com.ocean.ishareeconomy_android.databinding.FragmentUsingBinding
 import com.ocean.ishareeconomy_android.lending.LendObjectClick
-import com.ocean.ishareeconomy_android.lending.LendingActivity
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
@@ -39,14 +38,16 @@ import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
  * do in this Fragment.
  *
  */
-class UsingMasterFragment: Fragment() {
+class UsingMasterFragment : Fragment() {
 
     private val viewModel: UsingViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this,
-            UsingViewModel.Factory(activity.application, loginResponseObject.id, token))
+        ViewModelProviders.of(
+            this,
+            UsingViewModel.Factory(activity.application, loginResponseObject.id, token)
+        )
             .get(UsingViewModel::class.java)
     }
     private var viewModelAdapter: LendObjectAdapter? = null
@@ -57,7 +58,7 @@ class UsingMasterFragment: Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var spEditor: SharedPreferences.Editor
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
@@ -73,6 +74,7 @@ class UsingMasterFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel.selectObject(null)
         viewModel.using.observe(viewLifecycleOwner, Observer<List<LendingObject>> { using ->
             using?.apply {
                 viewModelAdapter?.objects = using.toMutableList()
@@ -96,7 +98,11 @@ class UsingMasterFragment: Fragment() {
      *
      * @return Return the View for the fragment's UI.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
         spEditor = sharedPreferences.edit()
@@ -108,15 +114,17 @@ class UsingMasterFragment: Fragment() {
             inflater,
             R.layout.fragment_using,
             container,
-            false)
+            false
+        )
         // Set the lifecycleOwner so DataBinding can observe LiveData
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = LendObjectAdapter( LendObjectClick{
-            val packageManager = context?.packageManager ?: return@LendObjectClick
-            (activity as UsingActivity).onDetailClick(it)
+        viewModelAdapter = LendObjectAdapter(LendObjectClick {
+            context?.packageManager ?: return@LendObjectClick
+            viewModel.selectObject(it)
+            (activity as UsingActivity).onDetailClick()
         })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {

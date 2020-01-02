@@ -53,7 +53,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{user != null ? user.name : @string/no_current_user}"
+                        android:text="@{user.name != null ? user.name : @string/no_current_user}"
                         android:textSize="@dimen/title_text_size"
                         android:textStyle="bold"
                         app:autoSizeMinTextSize="@dimen/title_text_size"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:gravity="center"
-                        android:visibility="@{user != null ? 0 : 8}"
+                        android:visibility="@{user.name != null ? 0 : 8}"
                         android:text="@{user.froToDate}"
                         tools:text="@string/from_date_to_date" />
 
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:gravity="center"
-                        android:visibility="@{user != null ? 0: 8}"
+                        android:visibility="@{user.name != null ? 0: 8}"
                         android:text="@{user.distanceString}"
                         tools:text="@string/tools_distance_default" />
 
@@ -87,7 +87,7 @@
                     android:layout_height="42dp"
                     android:layout_marginEnd="@dimen/margin"
                     android:contentDescription="@string/info_icon_content_desc"
-                    android:src="@{user != null ? @drawable/ic_info_solid_24dp : @drawable/ic_info_disabled_24dp}"
+                    android:src="@{user.name != null ? @drawable/ic_info_solid_24dp : @drawable/ic_info_disabled_24dp}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
