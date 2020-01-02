@@ -171,7 +171,7 @@ class UserRepository private constructor(params: RepositoryParams) {
             val response = Network.users.getUsersAsync(id, auth).await()
             if (response.isSuccessful) {
                 // Get the users
-                var users = response.body()!!
+                val users = response.body()!!
 
                 // Get the logged in user
                 _loggedInUser = users.find { user -> user.id == id }!!

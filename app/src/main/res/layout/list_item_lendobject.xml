@@ -78,7 +78,8 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/lend_object_main_body"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/lend_object_main_body">
+                    app:layout_constraintTop_toTopOf="@+id/lend_object_main_body"
+                    tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                         android:id="@+id/info_icon"

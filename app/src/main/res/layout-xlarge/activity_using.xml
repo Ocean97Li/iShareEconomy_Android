@@ -17,7 +17,8 @@
             app:layout_constraintBottom_toTopOf="@+id/nav_view_using"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="InconsistentLayout">
 
         <FrameLayout
                 android:id="@+id/frame_layout_master_using"
@@ -38,7 +39,8 @@
                 android:id="@+id/frame_layout_details_using"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                tools:ignore="InconsistentLayout">
 
 
         </FrameLayout>

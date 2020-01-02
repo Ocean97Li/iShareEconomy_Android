@@ -7,7 +7,7 @@ import com.ocean.ishareeconomy_android.login.LoginActivity
 /**
  * Part of *com.ocean.ishareeconomy_android*.
  *
- * MyApplication is a custom application class
+ * [MyApplication] is a custom application class
  * which main use is that it initializes the [AndroidThreeTen] library
  */
 class MyApplication : Application() {

@@ -33,7 +33,6 @@ class UsingDetailFragment: Fragment() {
     private lateinit var token: String
     private lateinit var loginResponseObject: LoginResponseObject
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
 
     val viewModel: LendingDetailViewModel by lazy {
         val activity = requireNotNull(this.activity) {
@@ -89,7 +88,6 @@ class UsingDetailFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
-        spEditor = sharedPreferences.edit()
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!
 

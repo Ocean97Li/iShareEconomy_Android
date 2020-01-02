@@ -136,7 +136,7 @@ class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
      * @return [Unit]
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        var waitingListIndexAdjust  = 3
+        val waitingListIndexAdjust  = 3
 
         when(position) {
             0 -> {

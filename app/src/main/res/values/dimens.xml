@@ -12,5 +12,6 @@
     <dimen name="tabbed_icon_size">24dp</dimen>
     
     <dimen name="card_elevation_low">5dp</dimen>
+    <dimen name="tripple_margin">64dp</dimen>
 
 </resources>

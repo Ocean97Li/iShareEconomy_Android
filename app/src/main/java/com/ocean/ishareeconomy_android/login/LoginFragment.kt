@@ -1,5 +1,6 @@
 package com.ocean.ishareeconomy_android.login
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -60,14 +61,15 @@ class LoginFragment : Fragment() {
      *
      * @return [Unit]
      */
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
         spEditor = sharedPreferences.edit()
 
         // Automatically login when non-expired token is present
-        var token = sharedPreferences.getString(getString(R.string.sp_user_token), "")
-        if ( token != null && !token.isEmpty()) {
+        val token = sharedPreferences.getString(getString(R.string.sp_user_token), "")
+        if ( token != null && token.isNotEmpty()) {
             // Fetch the users and login
             fetchUsersAndLogin(token)
         }
@@ -166,7 +168,7 @@ class LoginFragment : Fragment() {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 if (response.isSuccessful) {
                     // Get the users
-                    var users = response.body()!!
+                    val users = response.body()!!
                     // Get the logged in user
                     val index = users.indexOfFirst { user -> user.id == userResponse.id }
                     val loggedInUser = users[index]
@@ -223,7 +225,7 @@ class LoginFragment : Fragment() {
                 if (response.isSuccessful) {
 
                     // Store the login Token in SharedPreferences
-                    var token = response.body()?.token
+                    val token = response.body()?.token
                     if (token != null) {
                         spEditor.putString(getString(R.string.sp_user_token), token.toString())
                         spEditor.putString(getString(R.string.login_username), username)

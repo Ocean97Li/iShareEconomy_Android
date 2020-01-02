@@ -80,7 +80,7 @@ class UsingActivity : AppCompatActivity() {
      *
      * @return [Unit]
      **/
-    fun navigateToMaster() {
+    private fun navigateToMaster() {
         configureMasterDetailView(replace = true)
     }
 
