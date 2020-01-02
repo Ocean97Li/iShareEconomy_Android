@@ -50,5 +50,7 @@
     <string name="info_icon_content_desc">An info icon</string>
     <string name="tools_distance_default">0.0 km</string>
     <string name="object_icon_desc">The object type icon</string>
+    <string name="tools_object_name">Object name</string>
+    <string name="tools_object_desc">Object description</string>
 
 </resources>

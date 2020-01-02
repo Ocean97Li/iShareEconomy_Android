@@ -21,8 +21,8 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:layout_marginStart="@dimen/tripple_margin"
-                android:layout_marginEnd="@dimen/tripple_margin"
+                android:layout_marginStart="@dimen/triple_margin"
+                android:layout_marginEnd="@dimen/triple_margin"
                 android:layout_marginBottom="@dimen/margin"
                 android:contentDescription="@string/user_icon_content_desc"
                 android:padding="@dimen/double_padding"
