@@ -47,7 +47,7 @@ class UsingActivity : AppCompatActivity() {
             false
         }
     // Master Detail View Switch
-    private var masterDetail = false
+    var masterDetail = false
 
     /**
      * Called when the activity is created

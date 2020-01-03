@@ -77,38 +77,18 @@ class UserRepository private constructor(params: RepositoryParams) {
             user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
             user.using = database.objects.usingObjectsForUserById(user.id).asDomainModel()
-            user.lending.map { lendObject ->
-                if (lendObject.user != null  && _loggedInUser != null) {
-                    lendObject.user!!.distance = _loggedInUser!!.distance
-                }
-            }
-            user.using.map { lendObject ->
-                if (lendObject.user != null  && _loggedInUser != null) {
-                    lendObject.user!!.distance = _loggedInUser!!.distance
-                }
-            }
             user
         }
     }
 
     val lending: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getLendingObjectsFromUserById(loggedInUserId)) {
-        it.asDomainModel().map { lendObject ->
-            if (lendObject.user != null && _loggedInUser != null) {
-                lendObject.user!!.distance = _loggedInUser!!.distance
-            }
-            lendObject
-        }
+        it.asDomainModel()
     }
 
     val using: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getObjectsCurrentlyUsedByUser(loggedInUserId)) {
-        it.asDomainModel().map { lendObject ->
-            if (lendObject.user != null && _loggedInUser != null) {
-                lendObject.user!!.distance = _loggedInUser!!.distance
-            }
-            lendObject
-        }
+        it.asDomainModel()
     }
 
     val selectedLendObject: MutableLiveData<LendingObject> = MutableLiveData()
@@ -191,7 +171,6 @@ class UserRepository private constructor(params: RepositoryParams) {
                 // Get all Current ObjectUsers
                 val objectUsersCurrent = lendObjects.mapNotNull { lendObject ->
                     lendObject.user?.parenObjectId = lendObject.id
-                    lendObject.user?.distance = _loggedInUser!!.distance
                     lendObject.user
                 }
 

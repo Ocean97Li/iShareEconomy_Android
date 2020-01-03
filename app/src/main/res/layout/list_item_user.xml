@@ -40,6 +40,7 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="@dimen/half_margin"
                     android:layout_marginEnd="@dimen/half_margin"
+                    android:layout_marginBottom="@dimen/half_margin"
                     android:gravity="fill"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/lend_object_type"
@@ -75,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:gravity="center"
-                        android:visibility="@{user.name != null ? 0: 8}"
+                        android:visibility="@{user.distance != null ? 0: 8}"
                         android:text="@{user.distanceString}"
                         tools:text="@string/tools_distance_default" />
 

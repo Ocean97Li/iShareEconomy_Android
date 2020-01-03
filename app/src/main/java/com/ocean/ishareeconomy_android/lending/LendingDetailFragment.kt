@@ -51,7 +51,7 @@ class LendingDetailFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && (activity as LendingActivity).masterDetail) {
             viewModel.selectedLendObject.postValue(null)
         }
         viewModel.lending.observe(viewLifecycleOwner, Observer<List<LendingObject>> { lending ->
