@@ -55,7 +55,7 @@ class UserRepository private constructor(params: RepositoryParams) {
     private val  database: IShareDataBase = params.database
 
     /**
-     * [ReusableRepositorySingleton] enables Singleton Pattern
+     * [ReusableRepositorySingleton] enables Singleton Pattern with params
      */
     companion object : ReusableRepositorySingleton<UserRepository, RepositoryParams>(::UserRepository)
 
@@ -67,6 +67,7 @@ class UserRepository private constructor(params: RepositoryParams) {
         it.asDomainModel().map {
                 user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
+            _loggedInUser = user
             user
         }.find { user -> user.id == loggedInUserId }
     }
@@ -75,19 +76,43 @@ class UserRepository private constructor(params: RepositoryParams) {
         it.asDomainModel().map {
             user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
+            user.using = database.objects.usingObjectsForUserById(user.id).asDomainModel()
+            user.lending.map { lendObject ->
+                if (lendObject.user != null  && _loggedInUser != null) {
+                    lendObject.user!!.distance = _loggedInUser!!.distance
+                }
+            }
+            user.using.map { lendObject ->
+                if (lendObject.user != null  && _loggedInUser != null) {
+                    lendObject.user!!.distance = _loggedInUser!!.distance
+                }
+            }
             user
         }
     }
 
     val lending: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getLendingObjectsFromUserById(loggedInUserId)) {
-        it.asDomainModel()
+        it.asDomainModel().map { lendObject ->
+            if (lendObject.user != null && _loggedInUser != null) {
+                lendObject.user!!.distance = _loggedInUser!!.distance
+            }
+            lendObject
+        }
     }
 
     val using: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getObjectsCurrentlyUsedByUser(loggedInUserId)) {
-        it.asDomainModel()
+        it.asDomainModel().map { lendObject ->
+            if (lendObject.user != null && _loggedInUser != null) {
+                lendObject.user!!.distance = _loggedInUser!!.distance
+            }
+            lendObject
+        }
     }
+
+    val selectedLendObject: MutableLiveData<LendingObject> = MutableLiveData()
+
 
     /**
      * Method that makes a network call to POST a new [LendingObject] to the user's lending list
@@ -166,6 +191,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 // Get all Current ObjectUsers
                 val objectUsersCurrent = lendObjects.map { lendObject ->
                     lendObject.user?.parenObjectId = lendObject.id
+                    lendObject.user?.distance = _loggedInUser!!.distance
                     lendObject.user
                 }.filterNotNull()
 

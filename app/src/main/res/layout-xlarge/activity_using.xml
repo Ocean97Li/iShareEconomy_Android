@@ -8,14 +8,44 @@
         android:layout_height="match_parent"
         tools:context=".using.UsingActivity">
 
-    <FrameLayout
-            android:id="@+id/frame_layout_container_using"
+    <LinearLayout
+            android:id="@+id/master_detail_using"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:showDividers="middle"
             app:layout_constraintBottom_toTopOf="@+id/nav_view_using"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+                android:id="@+id/frame_layout_master_using"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+        </FrameLayout>
+
+        <View
+                android:id="@+id/divider_using"
+                android:layout_width="@dimen/half_margin"
+                android:layout_height="match_parent"
+                android:background="@color/divider"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+        <FrameLayout
+                android:id="@+id/frame_layout_details_using"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+        </FrameLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view_using"

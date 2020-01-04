@@ -164,7 +164,7 @@ class LendingMasterFragment: Fragment() {
                         .addBackgroundColor(
                             ContextCompat.getColor(
                                 context!!,
-                                R.color.customRed
+                                R.color.colorDelete
                             )
                         )
                         .addActionIcon(R.drawable.ic_delete_white_24dp)
@@ -265,7 +265,13 @@ class LendingMasterFragment: Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = LendObjectAdapter()
+        viewModelAdapter = LendObjectAdapter( LendObjectClick{
+            context?.packageManager ?: return@LendObjectClick
+            if ((activity as LendingActivity).masterDetail || !deleting) {
+                viewModel.selectObject(it)
+                (activity as LendingActivity).onDetailClick()
+            }
+        })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_lending).apply {
             layoutManager = LinearLayoutManager(context)
@@ -297,10 +303,10 @@ class LendingMasterFragment: Fragment() {
                         getText(R.string.remove_instruction).toString(),
                         Snackbar.LENGTH_LONG)
                     val params =
-                        snackbar.getView().getLayoutParams() as FrameLayout.LayoutParams
-                    params.bottomMargin = activity!!.nav_view!!.height
-                    snackbar.getView().setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
-                    snackbar.getView().setLayoutParams(params)
+                        snackbar.view.layoutParams as FrameLayout.LayoutParams
+                    params.bottomMargin = activity!!.nav_view_lending!!.height
+                    snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
+                    snackbar.view.layoutParams = params
                     snackbar.show()
                 } else {
                     item.setIcon(R.drawable.ic_delete_grey_24dp)
@@ -309,5 +315,4 @@ class LendingMasterFragment: Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

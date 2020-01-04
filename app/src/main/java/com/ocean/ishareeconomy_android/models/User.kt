@@ -27,7 +27,9 @@ class User(
     val address: String,
     val rating: Int,
     val distance: Double,
-    var lending: List<LendingObject>) {
+    var lending: List<LendingObject>,
+    var using: List<LendingObject>
+    ) {
 
     val fullName: String
         @SuppressLint("DefaultLocale")

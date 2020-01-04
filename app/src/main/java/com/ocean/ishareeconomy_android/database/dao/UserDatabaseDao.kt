@@ -17,4 +17,7 @@ interface UserDatabaseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllUsers(vararg users: DatabaseUser)
+
+    @Query("SELECT distance from users where user_id = :id")
+    fun getDistanceFromLoggedInUser(id: String): Int
 }

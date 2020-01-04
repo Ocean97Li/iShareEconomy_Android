@@ -32,6 +32,15 @@ interface LendObjectDatabaseDao {
     fun getObjectsCurrentlyUsedByUser(id: String): LiveData<List<LendObjectWithObjectUsers>>
 
     @Transaction
+    @Query(
+        """
+            SELECT OBU.object_id, object_owner_id, object_owner_name, name, description, type 
+            from lendobjects LO left join object_users OBU on LO.object_id = OBU.object_id  
+            where OBU.current and OBU.user_id = :id"""
+    )
+    fun usingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
+
+    @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllLendObjects(vararg objects: DatabaseLendObject)
 

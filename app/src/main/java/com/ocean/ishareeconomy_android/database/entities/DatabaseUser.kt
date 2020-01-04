@@ -31,7 +31,8 @@ fun List<DatabaseUser>.asDomainModel(): List<User> {
             address = it.address,
             rating = it.rating,
             distance = it.distance,
-            lending = emptyList() // LendObjects need to fetched
+            lending = emptyList(),
+            using = emptyList()
         )
     }
 }

@@ -2,6 +2,7 @@
   <dictionary name="Huhu">
     <words>
       <w>coroutine</w>
+      <w>coroutines</w>
       <w>databinding</w>
       <w>firstname</w>
       <w>ishareeconomy</w>
@@ -9,6 +10,9 @@
       <w>lendobject</w>
       <w>lendobjects</w>
       <w>objcuser</w>
+      <w>sampledata</w>
+      <w>snackbar</w>
+      <w>viewholders</w>
       <w>viewmodel</w>
       <w>viewmodels</w>
     </words>

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.ocean.ishareeconomy_android.R
@@ -171,7 +172,8 @@ class LoginFragment : Fragment() {
                     val index = users.indexOfFirst { user -> user.id == userResponse.id }
                     val loggedInUser = users[index]
                     // Display toast
-                    Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullName}!", Toast.LENGTH_LONG).show()
+                    val toast = Toast.makeText(context, "${getString(R.string.welcome)} ${loggedInUser.fullName}!", Toast.LENGTH_LONG)
+                    toast.show()
                     // goto the HomeActivity
                     val intent = Intent(activity, LendingActivity::class.java)
                     startActivity(intent)
@@ -242,7 +244,7 @@ class LoginFragment : Fragment() {
                 println(call)
                 println(t.message)
                 val toast = Toast.makeText(context, getString(R.string.something_went_wrong_login), Toast.LENGTH_LONG)
-                val v = toast.getView().findViewById(android.R.id.message) as TextView
+                val v = toast.view.findViewById(android.R.id.message) as TextView
                 v.gravity = Gravity.CENTER
                 toast.show()
             }

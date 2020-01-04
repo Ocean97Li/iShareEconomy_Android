@@ -2,22 +2,22 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.ocean.ishareeconomy_android.lending.LendingMasterFragment">
-
+        tools:context="com.ocean.ishareeconomy_android.lending.LendingDetailFragment">
     <data>
+
         <variable
                 name="viewModel"
-                type="com.ocean.ishareeconomy_android.viewmodels.LendingViewModel" />
+                type="com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel" />
     </data>
 
     <FrameLayout
-            android:id="@+id/frame_layout_lending"
+            android:id="@+id/frame_layout_lending_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorGrey">
+            android:background="@color/colorWhite">
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_lending"
+                android:id="@+id/recycler_view_lending_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/list_item_lendobject" />

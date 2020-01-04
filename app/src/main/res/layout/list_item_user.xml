@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="user"
+                type="com.ocean.ishareeconomy_android.viewmodels.UserObjectViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/lend_object_type"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/user_icon_content_desc"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_user_circle_solid" />
+
+            <LinearLayout
+                    android:id="@+id/lend_object_main_body"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/half_margin"
+                    android:layout_marginEnd="@dimen/half_margin"
+                    android:gravity="fill"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/lend_object_type"
+                    app:layout_constraintEnd_toStartOf="@+id/info_icon"
+                    app:layout_constraintStart_toEndOf="@+id/lend_object_type"
+                    app:layout_constraintTop_toTopOf="@+id/lend_object_type">
+
+                <TextView
+                        android:id="@+id/title_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{user.name != null ? user.name : @string/no_current_user}"
+                        android:textSize="@dimen/title_text_size"
+                        android:textStyle="bold"
+                        app:autoSizeMinTextSize="@dimen/title_text_size"
+                        tools:text="@string/tools_full_name" />
+
+                <TextView
+                        android:id="@+id/from_to_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="center"
+                        android:visibility="@{user.name != null ? 0 : 8}"
+                        android:text="@{user.froToDate}"
+                        tools:text="@string/from_date_to_date" />
+
+                <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="center"
+                        android:visibility="@{user.name != null ? 0: 8}"
+                        android:text="@{user.distanceString}"
+                        tools:text="@string/tools_distance_default" />
+
+            </LinearLayout>
+
+            <ImageView
+                    android:id="@+id/info_icon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:contentDescription="@string/info_icon_content_desc"
+                    android:src="@{user.name != null ? @drawable/ic_info_solid_24dp : @drawable/ic_info_disabled_24dp}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_info_solid_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

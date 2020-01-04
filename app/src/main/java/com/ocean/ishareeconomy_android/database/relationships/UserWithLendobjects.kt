@@ -19,7 +19,13 @@ data class UserWithLendObjects(
         parentColumn = "user_id",
         entityColumn = "object_owner_id"
     )
-    val lending: List<LendObjectWithObjectUsers>
+    val lending: List<LendObjectWithObjectUsers>,
+    @Relation(
+        parentColumn = "user_id",
+        entityColumn = "object_owner_id"
+    )
+    val using: List<LendObjectWithObjectUsers>
+
 
 )
 
@@ -33,7 +39,8 @@ fun List<UserWithLendObjects>.asDomainModel(): List<User> {
             address = it.user.address,
             rating = it.user.rating,
             distance = it.user.distance,
-            lending = it.lending.asDomainModel()
+            lending = it.lending.asDomainModel(),
+            using = emptyList() // Must be set later
         )
     }
 }

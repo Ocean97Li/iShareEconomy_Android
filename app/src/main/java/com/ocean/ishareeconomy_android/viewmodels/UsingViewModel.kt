@@ -3,6 +3,7 @@ package com.ocean.ishareeconomy_android.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.ocean.ishareeconomy_android.database.getDatabase
+import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
 import com.ocean.ishareeconomy_android.repositories.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
  * or fragment lifecycle events.
  *
  */
-class UsingViewModel(application: Application, val id: String, val auth: String) : AndroidViewModel(application) {
+class UsingViewModel(application: Application, val id: String, private val auth: String) : AndroidViewModel(application) {
 
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -37,17 +38,27 @@ class UsingViewModel(application: Application, val id: String, val auth: String)
      * viewModelJob.cancel()
      */
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     private val dataBase = getDatabase(application)
     private val repository = UserRepository.getInstance(RepositoryParams(id,dataBase))
 
     init {
+        viewModelScope.launch {
+            if (using.value.isNullOrEmpty()) {
+                repository.selectedLendObject.postValue(null)
+            } else {
+                repository.selectedLendObject.postValue(using.value!![0])
+            }
+        }
         viewModelScope.launch {
             repository.refreshUsers(id, auth)
         }
     }
 
     val using = repository.using
+
+    fun selectObject(lendObject: LendingObject?) {
+        repository.selectedLendObject.postValue(lendObject)
+    }
 
     /**
      * Cancel all coroutines when the ViewModel is cleared
