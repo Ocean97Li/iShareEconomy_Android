@@ -23,8 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/triple_margin"
                 android:layout_marginEnd="@dimen/triple_margin"
-                android:src="@drawable/ic_user_circle_lines_fa"
                 android:contentDescription="@string/user_icon_content_desc"
+                android:src="@drawable/ic_user_circle_lines_fa"
                 tools:src="@drawable/ic_user_circle_lines_fa" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,11 +47,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:inputType="textWebPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:text="@string/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_btn"/>
+                android:id="@+id/login_btn"
+                style="@style/AppTheme.BigMaterialButton"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
