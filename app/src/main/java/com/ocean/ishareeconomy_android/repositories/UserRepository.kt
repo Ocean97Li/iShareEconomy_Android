@@ -34,13 +34,6 @@ class RepositoryParams(val loggedInUserId: String, val database: IShareDataBase)
  * [UserRepository] is the only domain related repository because
  * the [User] object is the central access point of the domain
  *
- * @property loggedInUserId: [String] the logged in user's id, needed for almost all API calls
- * @property database: [IShareDataBase] main database object, needed to store data locally
- * @property success: [MutableLiveData<String>] observable where login success message is pushed
- * @property error: [MutableLiveData<String>] observable where error message is pushed
- * @property _loggedInUser the logged in [User]
- *
- * @property loggedInUser from the database
  * @property users all the users from the database
  * @property lending the list [LendingObject] the logged in user is sharing
  * @property using the list [LendingObject] the logged in user is using
@@ -97,6 +90,14 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network call to POST a new [LendingObject] to the user's lending list
      * and on success stores it in the DB
+     *
+     * @param id: [String] the logged in user id
+     * @param auth: [String] the logged in user's auth token
+     * @param name: [String] the name of the [LendingObject] that is to be created
+     * @param description: [String] the description of the [LendingObject] that is to be created
+     * @param type: [String] the type of the [LendingObject] that is to be created
+     *
+     * @return [Unit]
      */
     suspend fun addLendObject(id: String, auth: String, name: String, description: String, type: String) {
         withContext(Dispatchers.IO) {
@@ -125,6 +126,12 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network call to DELETE an existing [LendingObject] from the user's lending list
      * and on success stores remove it from the DB
+     *
+     * @param userId: [String] the logged in user id
+     * @param objectId: [String] the id of the [LendingObject] that is to be deleted
+     * @param auth: [String] the logged in user's auth token
+     *
+     * @return [Unit]
      */
     suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
         withContext(Dispatchers.IO) {
@@ -145,6 +152,11 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network GET call to fetch the total list of [User], starting with the logged in,
      * [User], ordered by [User.distance] and store it in the DB
+     *
+     * @param id: [String] the logged in user id
+     * @param auth: [String] the logged in user's auth token
+     *
+     * @return [Unit]
      */
     suspend fun refreshUsers(id: String, auth: String) {
         withContext(Dispatchers.IO) {

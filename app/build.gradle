@@ -39,19 +39,23 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
 
     // Material
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation "com.google.android.material:material:$version_material"
 
     // JSON
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation "com.google.code.gson:gson:$version_gson"
+    implementation "com.squareup.retrofit2:converter-gson:$version_gson_conv"
 
     //JWT
-    implementation 'com.auth0.android:jwtdecode:1.4.0'
+    implementation "com.auth0.android:jwtdecode:$version_jwtdecode"
 
     // Testing
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "androidx.test.ext:junit:$version_junit"
+    testImplementation "androidx.test:core:$version_test_core"
+    androidTestImplementation "androidx.test:rules:$version_test_rules"
+    androidTestImplementation "androidx.test.ext:junit:$version_junit"
+    androidTestImplementation "androidx.test:runner:$version_test_runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso"
+
 
     // Support libraries
     implementation "androidx.appcompat:appcompat:$version_appcompat"
@@ -74,15 +78,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
-    // Moshi for parsing the JSON format
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-
     // Time library for dealing with time
     implementation "com.jakewharton.threetenabp:threetenabp:$version_time"
-
-    // Legacy support
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
 
     // ViewModel and LiveData (arch components)
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"

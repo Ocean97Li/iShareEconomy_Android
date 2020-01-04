@@ -7,7 +7,7 @@ import org.junit.Test
 import org.junit.rules.ExpectedException
 
 
-class LendObjectType {
+class LendObjectTypeTest {
 
     private val tool = "tool"
     private val service = "service"

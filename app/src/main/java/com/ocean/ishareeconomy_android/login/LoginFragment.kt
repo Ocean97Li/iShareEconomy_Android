@@ -38,8 +38,6 @@ import retrofit2.Response
  * @property usernameInputLayout the [usernameInputLayout] for username error messages
  * @property passwordInputLayout the [passwordInputLayout] for password error messages
  *
- * @property sharedPreferences the [SharedPreferences] used to fetch stored values
- * @property spEditor the [SharedPreferences.Editor] used to store values
  */
 class LoginFragment : Fragment() {
 
@@ -48,12 +46,12 @@ class LoginFragment : Fragment() {
     private lateinit var spEditor: SharedPreferences.Editor
 
     // actual text inputs
-    private lateinit var usernameInput: EditText
-    private lateinit var passwordInput: EditText
+    lateinit var usernameInput: EditText
+    lateinit var passwordInput: EditText
 
     // input layouts for the text inputs
-    private lateinit var usernameInputLayout: TextInputLayout
-    private lateinit var passwordInputLayout: TextInputLayout
+    lateinit var usernameInputLayout: TextInputLayout
+    lateinit var passwordInputLayout: TextInputLayout
 
 
     /**
@@ -131,7 +129,7 @@ class LoginFragment : Fragment() {
      * @return [Boolean]
      */
     private fun validPassword(): Boolean {
-        return passwordInput.text != null && passwordInput.text.trim().length >= 8
+        return passwordInput.text != null && passwordInput.text.isNotBlank()
     }
 
     /**
@@ -140,8 +138,8 @@ class LoginFragment : Fragment() {
      *  @return [Unit]
      */
     private fun readSharedPreferences() {
-        val username = sharedPreferences.getString(getString(R.string.login_username), "")
-        val password = sharedPreferences.getString(getString(R.string.login_password), "")
+        val username = sharedPreferences.getString(getString(R.string.sp_login_username), "")
+        val password = sharedPreferences.getString(getString(R.string.sp_login_password), "")
 
         // set the input with the username and password that was read from the sharedPreferences
         usernameInput.setText(username)
@@ -228,8 +226,8 @@ class LoginFragment : Fragment() {
                     val token = response.body()?.token
                     if (token != null) {
                         spEditor.putString(getString(R.string.sp_user_token), token.toString())
-                        spEditor.putString(getString(R.string.login_username), username)
-                        spEditor.putString(getString(R.string.login_password), password)
+                        spEditor.putString(getString(R.string.sp_login_username), username)
+                        spEditor.putString(getString(R.string.sp_login_password), password)
                         spEditor.apply()
 
                         fetchUsersAndLogin(token)

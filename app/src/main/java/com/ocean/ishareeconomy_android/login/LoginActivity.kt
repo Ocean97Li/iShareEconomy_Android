@@ -12,7 +12,7 @@ import com.ocean.ishareeconomy_android.R
  *
  */
 class LoginActivity : AppCompatActivity() {
-    private val loginFragment = LoginFragment()
+    val loginFragment = LoginFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

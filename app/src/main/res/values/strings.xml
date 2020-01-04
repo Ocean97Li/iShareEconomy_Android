@@ -6,8 +6,8 @@
     <string name="title_requests">Requests</string>
 
     <!-- API calls and related-->
-    <string name="login_username" translatable="false">com.ishareEconomy_android.login.username</string>
-    <string name="login_password" translatable="false">com.ishareEconomy_android.login.password</string>
+    <string name="sp_login_username" translatable="false">com.ishareEconomy_android.login.username</string>
+    <string name="sp_login_password" translatable="false">com.ishareEconomy_android.login.password</string>
     <string name="something_went_wrong_login">Something went wrong, please ensure you are connected to the internet</string>
 
     <!-- Id's for Shared Preference values -->
