@@ -12,6 +12,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.junit.After
 import org.junit.Test
 
 class LoginActivitySuccessfulLoginTest: LoginActivityTest() {
@@ -31,7 +32,7 @@ class LoginActivitySuccessfulLoginTest: LoginActivityTest() {
                 isDisplayed()
             )
         )
-        textInputEditText.perform(replaceText("ocean"), closeSoftKeyboard())
+        textInputEditText.perform(replaceText("bobby"), closeSoftKeyboard())
 
         val textInputEditText2 = onView(
             allOf(
@@ -46,7 +47,7 @@ class LoginActivitySuccessfulLoginTest: LoginActivityTest() {
                 isDisplayed()
             )
         )
-        textInputEditText2.perform(replaceText("seizethemeans"), closeSoftKeyboard())
+        textInputEditText2.perform(replaceText("mypasswordisbad"), closeSoftKeyboard())
 
         val materialButton = onView(
             allOf(
@@ -80,5 +81,10 @@ class LoginActivitySuccessfulLoginTest: LoginActivityTest() {
                         && view == parent.getChildAt(position)
             }
         }
+    }
+
+    @After
+    fun cleanUp() {
+
     }
 }

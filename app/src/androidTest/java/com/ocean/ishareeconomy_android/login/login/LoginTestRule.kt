@@ -56,10 +56,11 @@ class LoginTestRule : TestRule {
         val sharedPrefs: SharedPreferences = context.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
         val usernameKey = context.getString(R.string.sp_login_username)
         val passwordKey = context.getString(R.string.sp_login_password)
+        val tokenKey = context.getString(R.string.sp_user_token)
         if (restoreUsername != null && restorePassword != null && restoreToken != null) {
             sharedPrefs.edit().putString(usernameKey, restoreUsername).apply()
             sharedPrefs.edit().putString(passwordKey, restorePassword).apply()
-            sharedPrefs.edit().putString(passwordKey, restoreToken).apply()
+            sharedPrefs.edit().putString(tokenKey, restoreToken).apply()
         }
     }
 }
