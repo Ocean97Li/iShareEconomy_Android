@@ -19,7 +19,6 @@ import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
 import com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel
-import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
 
 /**
  * Part of *using*.
@@ -28,20 +27,21 @@ import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
  * @property viewModel: [LendingDetailViewModel] the viewModel for displaying the details of a selected [LendingObject]
  * @property viewModelAdapter: [LendingDetailAdapter] the viewModelAdapter that adapts the data to the [RecyclerView]
  */
-class UsingDetailFragment: Fragment() {
+class UsingDetailFragment : Fragment() {
 
     // API related
     private lateinit var token: String
     private lateinit var loginResponseObject: LoginResponseObject
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
 
     val viewModel: LendingDetailViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this,
-            LendingDetailViewModel.Factory(activity.application, loginResponseObject.id))
+        ViewModelProviders.of(
+            this,
+            LendingDetailViewModel.Factory(activity.application, loginResponseObject.id)
+        )
             .get(LendingDetailViewModel::class.java)
     }
     private var viewModelAdapter: LendingDetailAdapter? = null
@@ -54,7 +54,7 @@ class UsingDetailFragment: Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && (activity as UsingActivity).masterDetail) {
             viewModel.selectedLendObject.postValue(null)
         }
         viewModel.using.observe(viewLifecycleOwner, Observer<List<LendingObject>> { using ->
@@ -87,10 +87,13 @@ class UsingDetailFragment: Fragment() {
      *
      * @return Return the View for the fragment's UI.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
-        spEditor = sharedPreferences.edit()
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!
 
@@ -98,7 +101,8 @@ class UsingDetailFragment: Fragment() {
             inflater,
             R.layout.fragment_lending_detail,
             container,
-            false)
+            false
+        )
         // Set the lifecycleOwner so DataBinding can observe LiveData
         binding.lifecycleOwner = viewLifecycleOwner
 

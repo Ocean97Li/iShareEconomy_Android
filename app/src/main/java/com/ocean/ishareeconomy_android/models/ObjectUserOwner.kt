@@ -20,10 +20,12 @@ open class ObjectOwner(
  * Part of *models*.
  *
  * User object that is used to login and then fetch the correct user object
- *  @property id the [String] id of the object owner
- *  @property name the owner's full name [String]
- *  @property from the starting [Date] of the lending period
- *  @property to the end [Date] of the lending period
+ *  @property objectUserId: [Int] the generated unique identifier for a [ObjectUser]
+ *  @property id: [String] the id of the object owner
+ *  @property name: [String] the owner's full name
+ *  @property from: [Date] the starting date of the lending period
+ *  @property to: [Date] the end date of the lending period
+ *  @property parenObjectId: [String] refers to the parent [LendingObject], so that it may be fetched
  */
 class ObjectUser(
     var objectUserId: Int = 0,
@@ -33,6 +35,5 @@ class ObjectUser(
     val from: Date,
     @SerializedName("todate")
     val to: Date,
-    var parenObjectId: String = "",
-    var distance: Double = 0.0
-    ) : ObjectOwner(id, name)
+    var parenObjectId: String = ""
+) : ObjectOwner(id, name)

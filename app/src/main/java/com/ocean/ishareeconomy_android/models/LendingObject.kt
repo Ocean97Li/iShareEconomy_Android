@@ -36,6 +36,6 @@ class LendingObject(
     var user: ObjectUser?,
     @SerializedName("waitinglist")
     var waitingList: List<ObjectUser> = emptyList()
-): Serializable {
+) : Serializable {
     val lendObjectType = LendObjectType.fromString(type)
 }

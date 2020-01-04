@@ -5,12 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.lending.LendingActivity
-import com.ocean.ishareeconomy_android.models.LendingObject
 import kotlinx.android.synthetic.main.activity_using.*
 
 /**
@@ -52,8 +49,6 @@ class UsingActivity : AppCompatActivity() {
     // Master Detail View Switch
     var masterDetail = false
 
-    val detail: LiveData<LendingObject> = MutableLiveData()
-
     /**
      * Called when the activity is created
      *
@@ -85,7 +80,7 @@ class UsingActivity : AppCompatActivity() {
      *
      * @return [Unit]
      **/
-    fun navigateToMaster() {
+    private fun navigateToMaster() {
         configureMasterDetailView(replace = true)
     }
 

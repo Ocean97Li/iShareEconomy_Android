@@ -19,6 +19,6 @@ object DateConverter {
     @TypeConverter
     @JvmStatic
     fun fromDate(date: Date): Long {
-        return date.getTime()
+        return date.time
     }
 }

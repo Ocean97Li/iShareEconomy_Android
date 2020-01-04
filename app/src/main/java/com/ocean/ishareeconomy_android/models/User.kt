@@ -29,7 +29,7 @@ class User(
     val distance: Double,
     var lending: List<LendingObject>,
     var using: List<LendingObject>
-    ) {
+) {
 
     val fullName: String
         @SuppressLint("DefaultLocale")

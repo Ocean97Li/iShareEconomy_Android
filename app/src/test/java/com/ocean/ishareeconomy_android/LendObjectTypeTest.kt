@@ -2,13 +2,12 @@ package com.ocean.ishareeconomy_android
 
 import com.ocean.ishareeconomy_android.models.LendObjectType
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 
 
-class LendObjectType {
+class LendObjectTypeTest {
 
     private val tool = "tool"
     private val service = "service"

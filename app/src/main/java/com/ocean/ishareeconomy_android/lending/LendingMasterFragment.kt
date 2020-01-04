@@ -33,7 +33,6 @@ import kotlinx.android.synthetic.main.fragment_lending.*
  * @property token the jwt [String] used to make authenticated api calls
  * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
  * @property sharedPreferences the [SharedPreferences] used to fetch stored values
- * @property spEditor the [SharedPreferences.Editor] used to store values
  *
  * @property deleting the [SharedPreferences.Editor] used to store values
  * @property viewModelAdapter RecyclerView Adapter for converting a list of [LendingObject] to cards.
@@ -62,18 +61,6 @@ class LendingMasterFragment: Fragment() {
     private lateinit var token: String
     private lateinit var loginResponseObject: LoginResponseObject
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
-
-    /**
-     * Called when fragments is created
-     *
-     * @param savedInstanceState: [Bundle?]
-     *
-     * @return [Unit]
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     /**
      * Called when fragments view is initiated
@@ -91,7 +78,7 @@ class LendingMasterFragment: Fragment() {
     }
 
     /**
-     * Helper method that sets up the onSwipe lisetener for the delete [LendingObject] functionality
+     * Helper method that sets up the onSwipe listener for the delete [LendingObject] functionality
      *
      * @return [Unit]
      */
@@ -112,7 +99,7 @@ class LendingMasterFragment: Fragment() {
 
                 /**
                  * Defines the action to take when an item is swiped,
-                 * Only one type of swipe is allowed, so it's alsways to the right
+                 * Only one type of swipe is allowed, so it's always to the right
                  * notifies [viewModelAdapter] of type [LendObjectAdapter] to update and animate the deletion
                  * notifies [viewModel] of type [LendingViewModel] to call the repository
                  *
@@ -224,8 +211,8 @@ class LendingMasterFragment: Fragment() {
      *
      * @return [Unit]
      */
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.lending_top_nav_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.lending_top_nav_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -248,7 +235,6 @@ class LendingMasterFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
-        spEditor = sharedPreferences.edit()
 
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!

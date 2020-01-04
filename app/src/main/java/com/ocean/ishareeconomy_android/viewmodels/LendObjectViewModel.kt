@@ -2,7 +2,6 @@ package com.ocean.ishareeconomy_android.viewmodels
 
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.models.LendObjectType

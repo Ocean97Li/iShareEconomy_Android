@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        tools:context=".login.LoginFragment"
         android:orientation="vertical"
->
+        tools:context=".login.LoginFragment">
+
     <LinearLayout
-            android:orientation="vertical"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-    >
+            app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/imageView"/>
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/user_icon_content_desc"
+                android:src="@drawable/ic_user_circle_lines_fa"
+                tools:src="@drawable/ic_user_circle_lines_fa" />
+
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_username">
+
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username_input"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:inputType="text"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password">
+
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_input"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:inputType="textWebPassword"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-                android:text="@string/login_button"
+                android:id="@+id/login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_btn"/>
+                android:text="@string/login_button" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

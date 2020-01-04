@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_add_lending.*
  * @property token the jwt [String] used to make authenticated api calls
  * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
  * @property sharedPreferences the [SharedPreferences] used to fetch stored values
- * @property spEditor the [SharedPreferences.Editor] used to store values
  */
 class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
 
@@ -36,7 +35,6 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     private lateinit var token: String
     private lateinit var loginResponseObject: LoginResponseObject
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
 
     /**
      * Implementation of interface [OnShareListener]
@@ -89,43 +87,6 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     }
 
     /**
-     * Called when fragments is created
-     *
-     * @param savedInstanceState: [Bundle?]
-     *
-     * @return [Unit]
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    /**
-     * Called when fragments view is initiated
-     *
-     * @param view: [View]
-     * @param savedInstanceState: [Bundle?]
-     *
-     * @return [Unit]
-     */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    /**
-     * Called when the fragment's activity has been created and this
-     * fragment's view hierarchy instantiated.  It can be used to do final
-     * initialization once these pieces are in place, such as retrieving
-     * views or restoring state.
-     *
-     * @param savedInstanceState: [Bundle?]
-     *
-     * @return [Unit]
-     */
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
-    /**
      * Called to have the fragment instantiate its user interface view.
      *
      * <p>If you return a View from here, you will later be called in
@@ -144,7 +105,6 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
-        spEditor = sharedPreferences.edit()
 
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!

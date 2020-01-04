@@ -166,7 +166,8 @@
                         android:inputType="textPersonName"
                         android:shadowColor="@color/colorPrimary"
                         android:text="@={viewModel.name}"
-                        android:textColorHighlight="@color/colorAccent" />
+                        android:textColorHighlight="@color/colorAccent"
+                        android:importantForAutofill="no" />
 
                 <TextView
                         android:id="@+id/description_text"
@@ -187,7 +188,8 @@
                         android:hint="@string/choose_description_hint"
                         android:inputType="textPersonName"
                         android:text="@={viewModel.description}"
-                        android:textColorHighlight="@color/colorAccent" />
+                        android:textColorHighlight="@color/colorAccent"
+                        android:importantForAutofill="no" />
 
                 <Button
                         android:id="@+id/button2"

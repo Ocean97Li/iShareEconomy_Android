@@ -1,3 +1,5 @@
+package com.ocean.ishareeconomy_android.adapters.viewholders
+
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
@@ -5,7 +7,7 @@ import com.ocean.ishareeconomy_android.databinding.ListItemLendobjectBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 
 /**
- * Part of *viewholders*.
+ * Part of *adapters.viewholders*.
  *
  * ViewHolder for [LendingObject] items. All work is done by data binding.
  */

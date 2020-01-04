@@ -3,7 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/using_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".using.UsingActivity">
@@ -18,7 +17,8 @@
             app:layout_constraintBottom_toTopOf="@+id/nav_view_using"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="InconsistentLayout">
 
         <FrameLayout
                 android:id="@+id/frame_layout_master_using"
@@ -29,7 +29,6 @@
         </FrameLayout>
 
         <View
-                android:id="@+id/divider_using"
                 android:layout_width="@dimen/half_margin"
                 android:layout_height="match_parent"
                 android:background="@color/divider"
@@ -40,7 +39,8 @@
                 android:id="@+id/frame_layout_details_using"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                tools:ignore="InconsistentLayout">
 
 
         </FrameLayout>

@@ -29,7 +29,6 @@ import com.ocean.ishareeconomy_android.viewmodels.UsingViewModel
  * @property token the jwt [String] used to make authenticated api calls
  * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
  * @property sharedPreferences the [SharedPreferences] used to fetch stored values
- * @property spEditor the [SharedPreferences.Editor] used to store values
  * @property viewModelAdapter RecyclerView Adapter for converting a list of [LendingObject] to cards.
  * @property viewModel the [LendingViewModel] according to the MVVM-pattern, handles domain logic.
  *
@@ -56,15 +55,6 @@ class UsingMasterFragment : Fragment() {
     private lateinit var token: String
     private lateinit var loginResponseObject: LoginResponseObject
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var spEditor: SharedPreferences.Editor
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     /**
      * Called when the fragment's activity has been created and this
@@ -105,7 +95,6 @@ class UsingMasterFragment : Fragment() {
     ): View? {
 
         sharedPreferences = context!!.getSharedPreferences("userdetails", Context.MODE_PRIVATE)
-        spEditor = sharedPreferences.edit()
 
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!

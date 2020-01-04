@@ -3,16 +3,16 @@ package com.ocean.ishareeconomy_android.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.IShareDataBase
+import com.ocean.ishareeconomy_android.database.entities.asDomainModel
 import com.ocean.ishareeconomy_android.database.relationships.asDomainModel
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.network.Network
+import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import com.ocean.ishareeconomy_android.utils.asDatabaseModel
 import com.ocean.ishareeconomy_android.utils.asDatabaseModels
-import com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -34,13 +34,6 @@ class RepositoryParams(val loggedInUserId: String, val database: IShareDataBase)
  * [UserRepository] is the only domain related repository because
  * the [User] object is the central access point of the domain
  *
- * @property loggedInUserId: [String] the logged in user's id, needed for almost all API calls
- * @property database: [IShareDataBase] main database object, needed to store data locally
- * @property success: [MutableLiveData<String>] observable where login success message is pushed
- * @property error: [MutableLiveData<String>] observable where error message is pushed
- * @property _loggedInUser the logged in [User]
- *
- * @property loggedInUser from the database
  * @property users all the users from the database
  * @property lending the list [LendingObject] the logged in user is sharing
  * @property using the list [LendingObject] the logged in user is using
@@ -63,7 +56,7 @@ class UserRepository private constructor(params: RepositoryParams) {
     private val error = MutableLiveData<String>()
     private var _loggedInUser: User? = null
 
-    val loggedInUser: LiveData<User> = Transformations.map(database.users.getAllUsers()) {
+    private val loggedInUser: LiveData<User> = Transformations.map(database.users.getAllUsers()) {
         it.asDomainModel().map {
                 user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
@@ -77,38 +70,18 @@ class UserRepository private constructor(params: RepositoryParams) {
             user ->
             user.lending = database.objects.lendingObjectsForUserById(user.id).asDomainModel()
             user.using = database.objects.usingObjectsForUserById(user.id).asDomainModel()
-            user.lending.map { lendObject ->
-                if (lendObject.user != null  && _loggedInUser != null) {
-                    lendObject.user!!.distance = _loggedInUser!!.distance
-                }
-            }
-            user.using.map { lendObject ->
-                if (lendObject.user != null  && _loggedInUser != null) {
-                    lendObject.user!!.distance = _loggedInUser!!.distance
-                }
-            }
             user
         }
     }
 
     val lending: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getLendingObjectsFromUserById(loggedInUserId)) {
-        it.asDomainModel().map { lendObject ->
-            if (lendObject.user != null && _loggedInUser != null) {
-                lendObject.user!!.distance = _loggedInUser!!.distance
-            }
-            lendObject
-        }
+        it.asDomainModel()
     }
 
     val using: LiveData<List<LendingObject>> =
         Transformations.map(database.objects.getObjectsCurrentlyUsedByUser(loggedInUserId)) {
-        it.asDomainModel().map { lendObject ->
-            if (lendObject.user != null && _loggedInUser != null) {
-                lendObject.user!!.distance = _loggedInUser!!.distance
-            }
-            lendObject
-        }
+        it.asDomainModel()
     }
 
     val selectedLendObject: MutableLiveData<LendingObject> = MutableLiveData()
@@ -117,6 +90,14 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network call to POST a new [LendingObject] to the user's lending list
      * and on success stores it in the DB
+     *
+     * @param id: [String] the logged in user id
+     * @param auth: [String] the logged in user's auth token
+     * @param name: [String] the name of the [LendingObject] that is to be created
+     * @param description: [String] the description of the [LendingObject] that is to be created
+     * @param type: [String] the type of the [LendingObject] that is to be created
+     *
+     * @return [Unit]
      */
     suspend fun addLendObject(id: String, auth: String, name: String, description: String, type: String) {
         withContext(Dispatchers.IO) {
@@ -145,6 +126,12 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network call to DELETE an existing [LendingObject] from the user's lending list
      * and on success stores remove it from the DB
+     *
+     * @param userId: [String] the logged in user id
+     * @param objectId: [String] the id of the [LendingObject] that is to be deleted
+     * @param auth: [String] the logged in user's auth token
+     *
+     * @return [Unit]
      */
     suspend fun removeLendObject(userId: String, objectId: String, auth: String) {
         withContext(Dispatchers.IO) {
@@ -165,13 +152,18 @@ class UserRepository private constructor(params: RepositoryParams) {
     /**
      * Method that makes a network GET call to fetch the total list of [User], starting with the logged in,
      * [User], ordered by [User.distance] and store it in the DB
+     *
+     * @param id: [String] the logged in user id
+     * @param auth: [String] the logged in user's auth token
+     *
+     * @return [Unit]
      */
     suspend fun refreshUsers(id: String, auth: String) {
         withContext(Dispatchers.IO) {
             val response = Network.users.getUsersAsync(id, auth).await()
             if (response.isSuccessful) {
                 // Get the users
-                var users = response.body()!!
+                val users = response.body()!!
 
                 // Get the logged in user
                 _loggedInUser = users.find { user -> user.id == id }!!
@@ -189,11 +181,10 @@ class UserRepository private constructor(params: RepositoryParams) {
                 }
 
                 // Get all Current ObjectUsers
-                val objectUsersCurrent = lendObjects.map { lendObject ->
+                val objectUsersCurrent = lendObjects.mapNotNull { lendObject ->
                     lendObject.user?.parenObjectId = lendObject.id
-                    lendObject.user?.distance = _loggedInUser!!.distance
                     lendObject.user
-                }.filterNotNull()
+                }
 
                 // Set DB
                 database.users.insertAllUsers(*users.asDatabaseModel())

@@ -3,25 +3,14 @@
     <color name="colorPrimary">#005b4f</color>
     <color name="colorPrimaryDark">#00272E</color>
     <color name="colorAccent">#E6049C89</color>
-    <color name="colorAccentLight">#7032D6BF</color>
 
     <color name="colorGreen">#00C853</color>
-    <color name="colorRed">#D50000</color>
     <color name="colorWhite">#fff</color>
 
-    <color name="colorError">#FBC02D</color>
     <color name="colorGrey">#ececec</color>
-    <color name="colorDarkGrey">#3A3F44</color>
-    <color name="cardTitle">#de000000</color>
-    <color name="cardText">#99000000</color>
     <color name="divider">#1E000000</color>
     <color name="colorDelete">#af4448</color>
 
-    <color name="customOrange">#ce6e01</color>
     <color name="customYellow">#f0c401</color>
     <color name="customGreen">#50A850</color>
-    <color name="customBlue">#1E88E5</color>
-    <color name="customPurple">#674a91</color>
-    <color name="customZwart">#001</color>
-    <color name="customRed">#800001</color>
 </resources>

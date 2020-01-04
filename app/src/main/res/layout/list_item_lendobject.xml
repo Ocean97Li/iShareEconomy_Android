@@ -59,14 +59,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{object.name}"
-                        android:textSize="@dimen/title_text_size" />
+                        android:textSize="@dimen/title_text_size"
+                        android:textStyle="bold"
+                        tools:text="@string/tools_object_name" />
 
                 <TextView
                         android:id="@+id/description_text"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:text="@{object.description}"
-                        android:textSize="@dimen/regular_text_size" />
+                        android:textSize="@dimen/regular_text_size"
+                        tools:text="@string/tools_object_desc" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,7 +81,8 @@
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/lend_object_main_body"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/lend_object_main_body">
+                    app:layout_constraintTop_toTopOf="@+id/lend_object_main_body"
+                    tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                         android:id="@+id/info_icon"

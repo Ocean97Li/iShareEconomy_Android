@@ -3,10 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/fragment_lending_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
         tools:context=".login.LoginFragment"
         android:orientation="vertical">
 
@@ -19,10 +17,16 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
     >
+
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/imageView2"
-                android:contentDescription="user image"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/triple_margin"
+                android:layout_marginEnd="@dimen/triple_margin"
+                android:src="@drawable/ic_user_circle_lines_fa"
+                android:contentDescription="@string/user_icon_content_desc"
+                tools:src="@drawable/ic_user_circle_lines_fa" />
+
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_inputLayout"
                 android:layout_width="match_parent"
