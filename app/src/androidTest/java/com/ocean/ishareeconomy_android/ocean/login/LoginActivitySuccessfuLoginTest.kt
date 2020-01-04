@@ -1,24 +1,64 @@
-package com.ocean.ishareeconomy_android.login.login
+package com.ocean.ishareeconomy_android.ocean.login
+
 
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import com.ocean.ishareeconomy_android.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
-import org.hamcrest.core.IsInstanceOf
+import org.junit.After
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class LoginActivityNoUsernamePasswordTest: LoginActivityTest() {
+@LargeTest
+@RunWith(AndroidJUnit4::class)
+class LoginActivitySuccessfulLoginTest {
+
+    @Rule
+    @JvmField
+    var loginTestRule: LoginTestRule = LoginTestRule()
 
     @Test
-    fun loginActivityNoUsernamePasswordTest() {
+    fun loginActivityNoPasswordTest() {
+        val textInputEditText = onView(
+            allOf(
+                withId(R.id.username_input),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.username_inputLayout),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText.perform(replaceText("bobby"), closeSoftKeyboard())
+
+        val textInputEditText2 = onView(
+            allOf(
+                withId(R.id.password_input),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.password_inputLayout),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText2.perform(replaceText("mypasswordisbad"), closeSoftKeyboard())
+
         val materialButton = onView(
             allOf(
                 withId(R.id.login_btn), withText("Login"),
@@ -33,36 +73,6 @@ class LoginActivityNoUsernamePasswordTest: LoginActivityTest() {
             )
         )
         materialButton.perform(click())
-
-        val textView = onView(
-            allOf(
-                withId(R.id.textinput_error), withText("Username can't be empty"),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView.check(matches(withText("Username can't be empty")))
-
-        val textView2 = onView(
-            allOf(
-                withId(R.id.textinput_error), withText("Password can't be empty"),
-                childAtPosition(
-                    childAtPosition(
-                        IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java),
-                        0
-                    ),
-                    0
-                ),
-                isDisplayed()
-            )
-        )
-        textView2.check(matches(withText("Password can't be empty")))
     }
 
     private fun childAtPosition(
@@ -81,5 +91,10 @@ class LoginActivityNoUsernamePasswordTest: LoginActivityTest() {
                         && view == parent.getChildAt(position)
             }
         }
+    }
+
+    @After
+    fun cleanUp() {
+
     }
 }

@@ -1,4 +1,4 @@
-package com.ocean.ishareeconomy_android.login.login
+package com.ocean.ishareeconomy_android.ocean.login
 
 import android.content.Context
 import android.content.SharedPreferences

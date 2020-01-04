@@ -46,12 +46,12 @@ class LoginFragment : Fragment() {
     private lateinit var spEditor: SharedPreferences.Editor
 
     // actual text inputs
-    lateinit var usernameInput: EditText
-    lateinit var passwordInput: EditText
+    private lateinit var usernameInput: EditText
+    private lateinit var passwordInput: EditText
 
     // input layouts for the text inputs
-    lateinit var usernameInputLayout: TextInputLayout
-    lateinit var passwordInputLayout: TextInputLayout
+    private lateinit var usernameInputLayout: TextInputLayout
+    private lateinit var passwordInputLayout: TextInputLayout
 
 
     /**

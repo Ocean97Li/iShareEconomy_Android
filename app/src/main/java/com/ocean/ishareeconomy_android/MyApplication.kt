@@ -9,7 +9,9 @@ import com.ocean.ishareeconomy_android.login.LoginActivity
  *
  * [MyApplication] is a custom application class
  * which main use is that it initializes the [AndroidThreeTen] library
+ * Note: this class is only used once, on application start up, it's declared in the AndroidManifest
  */
+@Suppress("unused")
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
