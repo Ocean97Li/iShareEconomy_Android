@@ -9,7 +9,7 @@ import com.ocean.ishareeconomy_android.models.LendingObject
 /**
  * Part of *database.dao*.
  *
- * Defines the actions, concerning the local storage of objects of type [LendingObject] in the DB
+ * Defines the possible sql actions, concerning the local storage of objects of type [LendingObject] in the DB
  */
 @Dao
 interface LendObjectDatabaseDao {

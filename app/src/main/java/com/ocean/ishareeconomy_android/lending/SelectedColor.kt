@@ -8,6 +8,8 @@ import com.ocean.ishareeconomy_android.models.LendObjectType
  * Interface listener implemented by fragment,
  * and passed to the view model to be called after a button was clicked
  *
+ *
+ *
  **/
 interface SelectedColor {
     fun setSelected(type: LendObjectType)

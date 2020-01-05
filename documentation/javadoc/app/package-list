@@ -1,0 +1,25 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.ocean.ishareeconomy_android.database.entities$asDomainModel(kotlin.collections.List((com.ocean.ishareeconomy_android.database.entities.DatabaseObjectUser)))com.ocean.ishareeconomy_android.database.entities/kotlin.collections.-list/as-domain-model.html
+$dokka.location:com.ocean.ishareeconomy_android.database.entities$asDomainModel(kotlin.collections.List((com.ocean.ishareeconomy_android.database.entities.DatabaseUser)))com.ocean.ishareeconomy_android.database.entities/kotlin.collections.-list/as-domain-model.html
+$dokka.location:com.ocean.ishareeconomy_android.database.relationships$asDomainModel(kotlin.collections.List((com.ocean.ishareeconomy_android.database.relationships.LendObjectWithObjectUsers)))com.ocean.ishareeconomy_android.database.relationships/kotlin.collections.-list/as-domain-model.html
+$dokka.location:com.ocean.ishareeconomy_android.utils$asDatabaseModel(kotlin.collections.List((com.ocean.ishareeconomy_android.models.LendingObject)))com.ocean.ishareeconomy_android.utils/kotlin.collections.-list/as-database-model.html
+$dokka.location:com.ocean.ishareeconomy_android.utils$asDatabaseModel(kotlin.collections.List((com.ocean.ishareeconomy_android.models.User)))com.ocean.ishareeconomy_android.utils/kotlin.collections.-list/as-database-model.html
+$dokka.location:com.ocean.ishareeconomy_android.utils$asDatabaseModels(kotlin.collections.List((com.ocean.ishareeconomy_android.models.ObjectUser)), kotlin.Boolean)com.ocean.ishareeconomy_android.utils/kotlin.collections.-list/as-database-models.html
+com.ocean.ishareeconomy_android
+com.ocean.ishareeconomy_android.adapters
+com.ocean.ishareeconomy_android.adapters.viewholders
+com.ocean.ishareeconomy_android.database
+com.ocean.ishareeconomy_android.database.converters
+com.ocean.ishareeconomy_android.database.dao
+com.ocean.ishareeconomy_android.database.entities
+com.ocean.ishareeconomy_android.database.relationships
+com.ocean.ishareeconomy_android.lending
+com.ocean.ishareeconomy_android.login
+com.ocean.ishareeconomy_android.models
+com.ocean.ishareeconomy_android.network
+com.ocean.ishareeconomy_android.network.services
+com.ocean.ishareeconomy_android.repositories
+com.ocean.ishareeconomy_android.using
+com.ocean.ishareeconomy_android.utils
+com.ocean.ishareeconomy_android.viewmodels

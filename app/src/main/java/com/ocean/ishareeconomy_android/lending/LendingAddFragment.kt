@@ -24,11 +24,13 @@ import kotlinx.android.synthetic.main.fragment_add_lending.*
 /**
  * Part of *lending*.
  *
- * Fragment responsible for displaying adding items to the list of shared objects
+ * The [Fragment] responsible for adding items to the list of shared objects
  *
  * @property token the jwt [String] used to make authenticated api calls
  * @property loginResponseObject the [LoginResponseObject] parsed from [token], identifying the user
  * @property sharedPreferences the [SharedPreferences] used to fetch stored values
+ *
+ * @see [SelectedColor], [OnShareListener]
  */
 class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
 
@@ -38,7 +40,7 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     private lateinit var sharedPreferences: SharedPreferences
 
     /**
-     * Implementation of interface [OnShareListener]
+     *  Implementation of interface [OnShareListener]
      *  Gets the [LendingActivity] and
      *  navigates back to the lending objects overview: [LendingMasterFragment]
      *
@@ -59,9 +61,9 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
 
     /**
      * Method to set the buttons to the right color:
-     * grey by default, colorAccent when selected
+     * [R.color.colorGrey] by default, [R.color.colorAccent] when selected
      *
-     * @param type
+     * @param type the selected [LendObjectType] for which the button should be set to look selected
      *
      * @return [Unit]
      */
@@ -95,8 +97,8 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
     /**
      * Called to have the fragment instantiate its user interface view.
      *
-     * <p>If you return a View from here, you will later be called in
-     * {@link #onDestroyView} when the view is being released.
+     * If you return a View from here, you will later be called in
+     * [onDestroyView] when the view is being released.
      *
      * @param inflater The LayoutInflater object that can be used to inflate
      * any views in the fragment,

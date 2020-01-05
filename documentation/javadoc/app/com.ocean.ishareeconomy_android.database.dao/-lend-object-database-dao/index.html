@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LendObjectDatabaseDao - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.ocean.ishareeconomy_android.database.dao</a>&nbsp;/&nbsp;<a href="./index.html">LendObjectDatabaseDao</a><br/>
+<br/>
+<h1>LendObjectDatabaseDao</h1>
+<code><span class="keyword">interface </span><span class="identifier">LendObjectDatabaseDao</span></code>
+<p>Part of <em>database.dao</em>.</p>
+<p>Defines the actions, concerning the local storage of objects of type <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> in the DB</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="delete-from-objects.html">deleteFromObjects</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deleteFromObjects</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="delete-object-by-id.html">deleteObjectById</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">deleteObjectById</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$deleteObjectById(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-lending-objects-from-user-by-id.html">getLendingObjectsFromUserById</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getLendingObjectsFromUserById</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$getLendingObjectsFromUserById(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.database.relationships/-lend-object-with-object-users/index.html"><span class="identifier">LendObjectWithObjectUsers</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-objects-currently-used-by-user.html">getObjectsCurrentlyUsedByUser</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getObjectsCurrentlyUsedByUser</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$getObjectsCurrentlyUsedByUser(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.database.relationships/-lend-object-with-object-users/index.html"><span class="identifier">LendObjectWithObjectUsers</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="insert-all-lend-objects.html">insertAllLendObjects</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">insertAllLendObjects</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$insertAllLendObjects(kotlin.Array((com.ocean.ishareeconomy_android.database.entities.DatabaseLendObject)))/objects">objects</span><span class="symbol">:</span>&nbsp;<a href="../../com.ocean.ishareeconomy_android.database.entities/-database-lend-object/index.html"><span class="identifier">DatabaseLendObject</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="lending-objects-for-user-by-id.html">lendingObjectsForUserById</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">lendingObjectsForUserById</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$lendingObjectsForUserById(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.database.relationships/-lend-object-with-object-users/index.html"><span class="identifier">LendObjectWithObjectUsers</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="using-objects-for-user-by-id.html">usingObjectsForUserById</a></h4>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">usingObjectsForUserById</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao$usingObjectsForUserById(kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.database.relationships/-lend-object-with-object-users/index.html"><span class="identifier">LendObjectWithObjectUsers</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

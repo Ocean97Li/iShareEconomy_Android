@@ -18,7 +18,10 @@
 package com.ocean.ishareeconomy_android.database
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.ocean.ishareeconomy_android.database.converters.DateConverter
 import com.ocean.ishareeconomy_android.database.dao.LendObjectDatabaseDao
 import com.ocean.ishareeconomy_android.database.dao.ObjectUserDatabaseDao
@@ -32,6 +35,10 @@ import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
  *
  * Main [RoomDatabase] database singleton access point for the app,
  * provides local SQL storage
+ *
+ * @property users the DAO that stores the queries for users
+ * @property objects the DAO that stores object related queries
+ * @property objectUsers the DAO that stores objectUser related queries
  */
 @Database(
     entities = [DatabaseUser::class, DatabaseLendObject::class, DatabaseObjectUser::class],

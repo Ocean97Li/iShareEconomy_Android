@@ -1,7 +1,9 @@
 package com.ocean.ishareeconomy_android.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
@@ -12,6 +14,8 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 /**
+ *
+ *
  * LendingViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
  * allows data to survive configuration changes such as screen rotations. In addition, background
  * work such as fetching network results can continue through configuration changes and deliver
@@ -62,6 +66,8 @@ class UsingViewModel(application: Application, val id: String, private val auth:
 
     /**
      * Cancel all coroutines when the ViewModel is cleared
+     *
+     * @return [Unit]
      */
     override fun onCleared() {
         super.onCleared()
@@ -70,6 +76,8 @@ class UsingViewModel(application: Application, val id: String, private val auth:
 
     /**
      * Factory for constructing DevByteViewModel with parameter
+     *
+     * @return [ViewModelProvider.Factory]
      */
     class Factory(val app: Application, val id: String, private val auth: String) : ViewModelProvider.Factory {
         @Throws(IllegalArgumentException::class)

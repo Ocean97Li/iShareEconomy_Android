@@ -53,6 +53,11 @@ open class LendObjectViewModel (private val data: LendingObject, val context: Co
         }
     }
 
+    /**
+     * Method that returns the underlying data; the [LendingObject] that is used for the view
+     *
+     * @return the [LendingObject] stored in [data]
+     */
     fun getLendObject(): LendingObject {
         return data
     }

@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ReusableRepositorySingleton - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.ocean.ishareeconomy_android.utils</a>&nbsp;/&nbsp;<a href="./index.html">ReusableRepositorySingleton</a><br/>
+<br/>
+<h1>ReusableRepositorySingleton</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ReusableRepositorySingleton</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">, </span><span class="keyword">in</span>&nbsp;<span class="identifier">A</span><span class="symbol">&gt;</span></code>
+<p>Part of <em>utils</em>.</p>
+<p>Enables the safe creation of repositories that take arguments in their
+constructors;</p>
+<p>Usage: set the repo's constructor to private and
+make companion object of <a href="./index.html">ReusableRepositorySingleton</a> to get the singleton instance</p>
+<p>Implementation from: https://medium.com/@BladeCoder/kotlin-singletons-with-argument-194ef06edd9e</p>
+<p><strong>Author</strong><br/>
+Christophe Beyls</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Part of <em>utils</em>.</p>
+<code><span class="identifier">ReusableRepositorySingleton</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton$<init>(kotlin.Function1((com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton.A, com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton.T)))/creator">creator</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">A</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-instance.html">getInstance</a></h4>
+</td>
+<td>
+<p>Provides the safe singleton instance.</p>
+<code><span class="keyword">fun </span><span class="identifier">getInstance</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton$getInstance(com.ocean.ishareeconomy_android.utils.ReusableRepositorySingleton.A)/arg">arg</span><span class="symbol">:</span>&nbsp;<span class="identifier">A</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

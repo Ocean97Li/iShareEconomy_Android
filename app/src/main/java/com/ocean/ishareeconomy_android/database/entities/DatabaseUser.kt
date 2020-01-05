@@ -7,7 +7,14 @@ import com.ocean.ishareeconomy_android.models.User
 /**
  * Part of *database.entities*.
  *
- * Defines how objects of type [User] are stored in the DB
+ * Defines how the domain objects of type [User] are stored in the DB
+ * @property user_id the identifier for the user, matches [User.id]
+ * @property firstname the user's firstname
+ * @property lastIndex the user's lastname
+ * @property username the user's username
+ * @property address the user's full address
+ * @property rating the automatically determined rating the user has
+ * @property distance the distance of this user from the logged in user in km
  */
 @Entity(tableName = "users")
 data class DatabaseUser constructor(

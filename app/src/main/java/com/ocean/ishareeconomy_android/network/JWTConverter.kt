@@ -7,9 +7,9 @@ import java.util.*
 /**
  * Part of *network*.
  *
- * Help method that takes a string token and turns it into a login response object, if valid
+ * Helper method that takes a string token and turns it into a login response object, if valid
  *
- * @return [LoginResponseObject?]
+ * @return [LoginResponseObject]? containing the information from the parsed token
  */
 fun jwtToLoginResponseObject(token: String): LoginResponseObject? {
     val jwt = JWT(token)

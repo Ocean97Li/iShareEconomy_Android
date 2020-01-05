@@ -1,14 +1,17 @@
 package com.ocean.ishareeconomy_android.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 import com.ocean.ishareeconomy_android.models.User
 
 /**
  * Part of *database.dao*.
  *
- * Defines the actions, concerning the local storage of objects of type [User] in the DB
+ * Defines the possible sql actions, concerning the local storage of objects of type [User] in the DB
  */
 @Dao
 interface UserDatabaseDao {

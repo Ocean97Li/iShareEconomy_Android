@@ -17,8 +17,9 @@ import com.ocean.ishareeconomy_android.viewmodels.LendObjectViewModel
  *
  * RecyclerView Adapter for setting up data binding on the items in the list.
  *
- * @property context: [Context?] Store parent context, needed to fetch colors
- * @property objects: [MutableList<LendingObject>] The [LendingObject] items that our Adapter will show
+ * @property context Store parent context, needed to fetch colors
+ * @property objects The [LendingObject] items that our Adapter will show
+ * @property callback the onclick call back that is implemented by the parent fragment
  */
 class LendObjectAdapter(val callback: LendObjectClick) : RecyclerView.Adapter<LendObjectViewHolder>() {
 

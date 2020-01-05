@@ -10,7 +10,7 @@ import com.ocean.ishareeconomy_android.models.ObjectUser
 /**
  * Part of *database.dao*.
  *
- * Defines the actions, concerning the local storage of objects of type [ObjectUser] in the DB
+ * Defines the possible sql actions, concerning the local storage of objects of type [ObjectUser] in the DB
  */
 @Dao
 interface ObjectUserDatabaseDao {

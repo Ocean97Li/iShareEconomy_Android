@@ -1,0 +1,138 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AddLendingViewModel - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.ocean.ishareeconomy_android.viewmodels</a>&nbsp;/&nbsp;<a href="./index.html">AddLendingViewModel</a><br/>
+<br/>
+<h1>AddLendingViewModel</h1>
+<code><span class="keyword">class </span><span class="identifier">AddLendingViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AndroidViewModel</span></code>
+<p>Part of <em>viewmodels</em>.</p>
+<p>The viewmodel that is used for the AddLending Screen, it enables the input of properties for
+the creation of new LendingObject, is aware of changes via two-way databinding
+and allows the creation when all conditions are satisfied.</p>
+<p>Inherits from <a href="#">AndroidViewModel</a> so that it remains unaffected by rotations</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-factory/index.html">Factory</a></h4>
+</td>
+<td>
+<p>Factory for constructing AddLendingViewModel with parameters</p>
+<code><span class="keyword">class </span><span class="identifier">Factory</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Factory</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>AddLendingViewModel</p>
+<code><span class="identifier">AddLendingViewModel</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel$<init>(android.app.Application, kotlin.String, kotlin.String)/application">application</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Application.html"><span class="identifier">Application</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel$<init>(android.app.Application, kotlin.String, kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel$<init>(android.app.Application, kotlin.String, kotlin.String)/auth">auth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="color-setter.html">colorSetter</a></h4>
+</td>
+<td>
+<p>: <a href="../../com.ocean.ishareeconomy_android.lending/-selected-color/index.html">SelectedColor</a> the parent fragment, sets the type button background color</p>
+<code><span class="keyword">var </span><span class="identifier">colorSetter</span><span class="symbol">: </span><a href="../../com.ocean.ishareeconomy_android.lending/-selected-color/index.html"><span class="identifier">SelectedColor</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="description.html">description</a></h4>
+</td>
+<td>
+<p>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> the new object's description</p>
+<code><span class="keyword">var </span><span class="identifier">description</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="id.html">id</a></h4>
+</td>
+<td>
+<p>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> the logged in user's id</p>
+<code><span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a> the new object's name</p>
+<code><span class="keyword">var </span><span class="identifier">name</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="navigate-back.html">navigateBack</a></h4>
+</td>
+<td>
+<p>: <a href="../../com.ocean.ishareeconomy_android.lending/-on-share-listener/index.html">OnShareListener</a> the parent fragment, does the back navigation</p>
+<code><span class="keyword">var </span><span class="identifier">navigateBack</span><span class="symbol">: </span><a href="../../com.ocean.ishareeconomy_android.lending/-on-share-listener/index.html"><span class="identifier">OnShareListener</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="share.html">share</a></h4>
+</td>
+<td>
+<p>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> value continually updated to reflect whether the object can be created, or not</p>
+<code><span class="keyword">var </span><span class="identifier">share</span><span class="symbol">: </span><span class="identifier">ObservableBoolean</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="type.html">type</a></h4>
+</td>
+<td>
+<p>: <a href="../../com.ocean.ishareeconomy_android.models/-lend-object-type/index.html">LendObjectType</a> the new object's type</p>
+<code><span class="keyword">var </span><span class="identifier">type</span><span class="symbol">: </span><a href="../../com.ocean.ishareeconomy_android.models/-lend-object-type/index.html"><span class="identifier">LendObjectType</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="on-cleared.html">onCleared</a></h4>
+</td>
+<td>
+<p>Cancel all co-routines when the ViewModel is cleared</p>
+<code><span class="keyword">fun </span><span class="identifier">onCleared</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-share-btn-click.html">onShareBtnClick</a></h4>
+</td>
+<td>
+<p>Method that's responsible for initiating the back navigation
+if all conditions are met
+it delegates to the parent fragment <a href="navigate-back.html">navigateBack</a>, which is known under the <a href="../../com.ocean.ishareeconomy_android.lending/-on-share-listener/index.html">OnShareListener</a> interface</p>
+<code><span class="keyword">fun </span><span class="identifier">onShareBtnClick</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel$onShareBtnClick(android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-type-button-clicked.html">onTypeButtonClicked</a></h4>
+</td>
+<td>
+<p>Method that's responsible for setting the type
+It also sets buttons color, indicating that it has been selected
+this is delegated to parent fragment <a href="color-setter.html">colorSetter</a>, which is known under the <a href="../../com.ocean.ishareeconomy_android.lending/-selected-color/index.html">SelectedColor</a> interface</p>
+<code><span class="keyword">fun </span><span class="identifier">onTypeButtonClicked</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.viewmodels.AddLendingViewModel$onTypeButtonClicked(android.view.View)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

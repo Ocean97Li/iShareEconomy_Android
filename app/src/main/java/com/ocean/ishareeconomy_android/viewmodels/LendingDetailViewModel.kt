@@ -26,8 +26,6 @@ import kotlinx.coroutines.SupervisorJob
  *  @constructor Creates a [LendingDetailViewModel]
  *  @param application: [Application] the activity's application, used to make the parent [AndroidViewModel] lifecycle aware
  *
- *
-
  */
 class LendingDetailViewModel(application: Application, id: String): AndroidViewModel(application) {
 

@@ -110,11 +110,14 @@ class LendingMasterFragment: Fragment() {
                  * @return [Unit]
                  */
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val position = viewHolder.adapterPosition
-                    viewModel.removeObject(viewModelAdapter!!.objects[position])
-                    viewModelAdapter!!.objects.removeAt(position)
-                    viewModelAdapter!!.notifyItemRemoved(position)
 
+                    val position = viewHolder.adapterPosition
+                    val lendObject = viewModelAdapter!!.objects[position]
+                    if(lendObject.waitingList.isEmpty() && lendObject.user == null) {
+                        viewModel.removeObject(lendObject)
+                        viewModelAdapter!!.objects.removeAt(position)
+                        viewModelAdapter!!.notifyItemRemoved(position)
+                    }
                 }
 
                 /**
@@ -180,7 +183,14 @@ class LendingMasterFragment: Fragment() {
                     viewHolder: RecyclerView.ViewHolder
                 ): Int {
                     if (deleting) {
-                        return super.getSwipeDirs(recyclerView, viewHolder)
+                        val position = viewHolder.adapterPosition
+                        val lendObject = viewModelAdapter!!.objects[position]
+
+                        if (lendObject.waitingList.isEmpty() && lendObject.user == null) {
+                            return super.getSwipeDirs(recyclerView, viewHolder)
+                        } else {
+                            showBackBarWith(R.string.remove_not_possible, R.color.colorDelete)
+                        }
                     }
                     return 0
                 }
@@ -207,8 +217,8 @@ class LendingMasterFragment: Fragment() {
     /**
      * Called to inflate the ToolBarMenu
      *
-     * @param menu: [Menu?]
-     * @param inflater: [MenuInflater?]
+     * @param menu the top navigation menu
+     * @param inflater: the class that inflates the menu
      *
      * @return [Unit]
      */
@@ -220,18 +230,18 @@ class LendingMasterFragment: Fragment() {
     /**
      * Called to have the fragment instantiate its user interface view.
      *
-     * <p>If you return a View from here, you will later be called in
-     * {@link #onDestroyView} when the view is being released.
+     * If you return a View from here, you will later be called in
+     * [onDestroyView] when the view is being released.
      *
      * @param inflater The LayoutInflater object that can be used to inflate
-     * any views in the fragment,
+     * any views in the fragment.
      * @param container If non-null, this is the parent view that the fragment's
      * UI should be attached to.  The fragment should not add the view itself,
      * but this can be used to generate the LayoutParams of the view.
      * @param savedInstanceState If non-null, this fragment is being re-constructed
      * from a previous saved state as given here.
      *
-     * @return Return the View for the fragment's UI.
+     * @return Returns the [View]? for the fragment's UI.
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -277,7 +287,7 @@ class LendingMasterFragment: Fragment() {
     /**
      * Called to inflate the ToolBarMenu
      *
-     * @param item: [MenuItem]
+     * @param item the selected menuItem
      *
      * @return [Unit]
      */
@@ -297,21 +307,35 @@ class LendingMasterFragment: Fragment() {
                 deleting = deleting.not()
                 if (deleting) {
                    item.setIcon(R.drawable.ic_delete_white_24dp)
-                    val snackbar = Snackbar.make(
-                        viewOfLayout.findViewById(R.id.frame_layout_lending),
-                        getText(R.string.remove_instruction).toString(),
-                        Snackbar.LENGTH_LONG)
-                    val params =
-                        snackbar.view.layoutParams as FrameLayout.LayoutParams
-                    params.bottomMargin = activity!!.nav_view_lending!!.height
-                    snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
-                    snackbar.view.layoutParams = params
-                    snackbar.show()
+                    showBackBarWith(R.string.remove_instruction)
                 } else {
                     item.setIcon(R.drawable.ic_delete_grey_24dp)
                 }
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * Helper method that launches a snackbar, with customizable text, color and length
+     *
+     * @param textId refers to the [R.string].textId
+     * @param colorId refers to the [R.color].colorId
+     * @param textId refers to the duration [Int] for which the [Snackbar] will be displayed.
+     *
+     * @return [Unit]
+     */
+    private fun showBackBarWith(textId: Int, colorId: Int = R.color.colorAccent, length: Int = Snackbar.LENGTH_LONG) {
+        val snackbar = Snackbar.make(
+            viewOfLayout.findViewById(R.id.frame_layout_lending),
+            getText(textId).toString(),
+            length
+        )
+        val params =
+            snackbar.view.layoutParams as FrameLayout.LayoutParams
+        params.bottomMargin = activity!!.nav_view_lending!!.height
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, colorId))
+        snackbar.view.layoutParams = params
+        snackbar.show()
     }
 }

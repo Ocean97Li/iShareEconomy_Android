@@ -1,28 +1,33 @@
 package com.ocean.ishareeconomy_android.adapters
 
-import com.ocean.ishareeconomy_android.adapters.viewholders.LendObjectViewHolder
-import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectOwnerViewHolder
-import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectUserViewHolder
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ocean.ishareeconomy_android.adapters.viewholders.LendObjectViewHolder
+import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectOwnerViewHolder
+import com.ocean.ishareeconomy_android.adapters.viewholders.ObjectUserViewHolder
 import com.ocean.ishareeconomy_android.databinding.ListItemLendobjectBinding
 import com.ocean.ishareeconomy_android.databinding.ListItemOwnerBinding
 import com.ocean.ishareeconomy_android.databinding.ListItemUserBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.ObjectOwner
 import com.ocean.ishareeconomy_android.models.ObjectUser
-import com.ocean.ishareeconomy_android.viewmodels.*
+import com.ocean.ishareeconomy_android.viewmodels.LendObjectViewModel
+import com.ocean.ishareeconomy_android.viewmodels.OwnerObjectViewModel
+import com.ocean.ishareeconomy_android.viewmodels.UserObjectViewModel
 
 /**
  * Part of *adapters*.
  *
  * RecyclerView Adapter for setting up data binding on the items in the list.
  *
- * @property context: [Context]? Store parent context, needed to fetch colors
- * @property lendObject: [LendingObject] The object that our Adapter will show the details of
+ * @property context Store parent context, needed to fetch colors
+ * @property lendObject The object that our Adapter will show the details of
+ * @property owner The owner object
+ * @property user The user object
+ * @property waitingList The waitinglist, a list of ObjectUsers
  */
 class LendingDetailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

@@ -31,6 +31,7 @@
     <string name="add_lending_object_button">Share new</string>
     <string name="remove_lending_object_button">Enable delete</string>
     <string name="remove_instruction">Swipe right to delete</string>
+    <string name="remove_not_possible">Can\'t delete used items!</string>
 
     <!-- Strings related to AddLendingScreen -->
     <string name="choose_title_text">Sharing a new item</string>

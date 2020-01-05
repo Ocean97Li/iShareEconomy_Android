@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UserRepository - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.ocean.ishareeconomy_android.repositories</a>&nbsp;/&nbsp;<a href="./index.html">UserRepository</a><br/>
+<br/>
+<h1>UserRepository</h1>
+<code><span class="keyword">class </span><span class="identifier">UserRepository</span></code>
+<p>Part of <em>login</em>.</p>
+<p>Repository responsible for managing all the domain related network requests.
+<a href="./index.html">UserRepository</a> is the only domain related repository because
+the <a href="../../com.ocean.ishareeconomy_android.models/-user/index.html">User</a> object is the central access point of the domain</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-companion.html">Companion</a></h4>
+</td>
+<td>
+<p><a href="../../com.ocean.ishareeconomy_android.utils/-reusable-repository-singleton/index.html">ReusableRepositorySingleton</a> enables Singleton Pattern with params</p>
+<code><span class="keyword">companion</span> <span class="keyword">object </span><span class="identifier">Companion</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../com.ocean.ishareeconomy_android.utils/-reusable-repository-singleton/index.html"><span class="identifier">ReusableRepositorySingleton</span></a><span class="symbol">&lt;</span><a href="./index.html"><span class="identifier">UserRepository</span></a><span class="symbol">,</span>&nbsp;<a href="../-repository-params/index.html"><span class="identifier">RepositoryParams</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="lending.html">lending</a></h4>
+</td>
+<td>
+<p>the list <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> the logged in user is sharing</p>
+<code><span class="keyword">val </span><span class="identifier">lending</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html"><span class="identifier">LendingObject</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="selected-lend-object.html">selectedLendObject</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">selectedLendObject</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html"><span class="identifier">LendingObject</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="users.html">users</a></h4>
+</td>
+<td>
+<p>all the users from the database</p>
+<code><span class="keyword">val </span><span class="identifier">users</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.models/-user/index.html"><span class="identifier">User</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="using.html">using</a></h4>
+</td>
+<td>
+<p>the list <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> the logged in user is using</p>
+<code><span class="keyword">val </span><span class="identifier">using</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html"><span class="identifier">LendingObject</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add-lend-object.html">addLendObject</a></h4>
+</td>
+<td>
+<p>Method that makes a network call to POST a new <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> to the user's lending list
+and on success stores it in the DB</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">addLendObject</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$addLendObject(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$addLendObject(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/auth">auth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$addLendObject(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$addLendObject(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/description">description</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$addLendObject(kotlin.String, kotlin.String, kotlin.String, kotlin.String, kotlin.String)/type">type</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="refresh-users.html">refreshUsers</a></h4>
+</td>
+<td>
+<p>Method that makes a network GET call to fetch the total list of <a href="../../com.ocean.ishareeconomy_android.models/-user/index.html">User</a>, starting with the logged in,
+<a href="../../com.ocean.ishareeconomy_android.models/-user/index.html">User</a>, ordered by <a href="../../com.ocean.ishareeconomy_android.models/-user/distance.html">User.distance</a> and store it in the DB</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">refreshUsers</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$refreshUsers(kotlin.String, kotlin.String)/id">id</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$refreshUsers(kotlin.String, kotlin.String)/auth">auth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="remove-lend-object.html">removeLendObject</a></h4>
+</td>
+<td>
+<p>Method that makes a network call to DELETE an existing <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> from the user's lending list
+and on success stores remove it from the DB</p>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">removeLendObject</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$removeLendObject(kotlin.String, kotlin.String, kotlin.String)/userId">userId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$removeLendObject(kotlin.String, kotlin.String, kotlin.String)/objectId">objectId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.repositories.UserRepository$removeLendObject(kotlin.String, kotlin.String, kotlin.String)/auth">auth</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="reset-data.html">resetData</a></h4>
+</td>
+<td>
+<code><span class="keyword">suspend</span> <span class="keyword">fun </span><span class="identifier">resetData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
