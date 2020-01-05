@@ -19,7 +19,23 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * Part of *viewmodels*.
+ *
+ * The viewmodel that is used to display the lending screen.
+ * It also contains all the domain logic concerning the login.
+ * Being a viewmodel is delegates certain UI-related task back to the parent fragment,
+ * which it knows under as [loginInterface]
+ *
+ * @property username the [String] in the username input field
+ * @property password the [String] in the password input field
+ * @property usernameErrorMessage the error message which needs to be set when [username] remains empty
+ * @property passwordErrorMessage the error message which needs to be set when [password] remains empty
+ * @property loginInterface the parent fragment which handles certain UI-related tasks
+ *
+ * @param application used to instantiate the [AndroidViewModel] which is lifecycle aware and does not reset on rotate
 
+ */
 class LoginViewModel(
     application: Application,
     private val loginInterface: LoginInterface
@@ -42,12 +58,20 @@ class LoginViewModel(
         }
     }
 
+    /**
+     * The method which is called on button click and starts the whole login process
+     */
     fun onLoginButtonClick(view: View) {
-        if (validateLogin()) {
-            attemptLogin()
+        if (view.id == R.id.login_btn) {
+            if (validateLogin()) {
+                attemptLogin()
+            }
         }
     }
 
+    /**
+     * The method which validates the login params and sets the error messages if need be
+     */
     private fun validateLogin(): Boolean {
 
         when {
