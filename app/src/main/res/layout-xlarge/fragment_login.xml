@@ -1,60 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".login.LoginFragment">
+        tools:context="com.ocean.ishareeconomy_android.login.LoginFragment">
 
-    <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <variable
+                name="viewModel"
+                type="com.ocean.ishareeconomy_android.viewmodels.LoginViewModel" />
+    </data>
 
-        <ImageView
-                android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/user_icon_content_desc"
-                android:src="@drawable/ic_user_circle_lines_fa"
-                tools:src="@drawable/ic_user_circle_lines_fa" />
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/username_inputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_username">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username_input"
+            <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:contentDescription="@string/user_icon_content_desc"
+                    android:src="@drawable/ic_user_circle_lines_fa"
+                    tools:src="@drawable/ic_user_circle_lines_fa" />
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_inputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_password">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_input"
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/username_inputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textWebPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="@string/hint_username"
+                    app:errorText="@{viewModel.usernameErrorMessage}">
 
-        <Button
-                android:id="@+id/login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/login_button"
-                style="@style/AppTheme.BigMaterialButton"/>
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/username_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="@={viewModel.username}"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_inputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    app:errorText="@{viewModel.passwordErrorMessage}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textWebPassword"
+                        android:text="@={viewModel.password}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                    android:id="@+id/login_btn"
+                    style="@style/AppTheme.BigMaterialButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/login_button"
+                    android:onClick="@{viewModel::onLoginButtonClick}"
+                    app:backgroundTint="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

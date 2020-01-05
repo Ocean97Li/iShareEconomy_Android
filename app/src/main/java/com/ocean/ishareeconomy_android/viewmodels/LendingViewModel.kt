@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ocean.ishareeconomy_android.database.IShareDataBase
 import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.repositories.RepositoryParams
@@ -17,19 +16,19 @@ import kotlinx.coroutines.launch
 /**
  * Part of *viewmodels*.
  *
- * LendingViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
+ * LendingViewModel is designed to store and manage UI-related data in a lifecycle conscious way. This
  * allows data to survive configuration changes such as screen rotations. In addition, background
  * work such as fetching network results can continue through configuration changes and deliver
  * results after the new Fragment or Activity is available. It's also responsible for the removal of objects
  *
  *  * Inherits from [AndroidViewModel] so that it remains unaffected by rotations
- *  @property id: [String] the logged in user's id
- *  @property auth: [String] the logged in user's authentication JWT token
- *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
- *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
- *  @property dataBase: [IShareDataBase]
- *  @property repository: a [UserRepository] Singleton
- *  @property lending: the list of [LendingObject] that the user is sharing
+ *  @property id the logged in user's id
+ *  @property auth the logged in user's authentication JWT token
+ *  @property viewModelJob job for all co-routines started by this ViewModel, cancel to cancel all
+ *  @property viewModelScope the main scope for all co-routines launched by MainViewModel.
+ *  @property dataBase the local application database, used to construct the [repository]
+ *  @property repository a repository Singleton, used to communicate with the backend
+ *  @property lending the list of [LendingObject] that the user is sharing
  *
  *  @constructor AddLendingViewModel
  *  @param id: [String]

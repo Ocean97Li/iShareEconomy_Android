@@ -23,4 +23,7 @@ interface UserDatabaseDao {
 
     @Query("SELECT distance from users where user_id = :id")
     fun getDistanceFromLoggedInUser(id: String): Int
+
+    @Query("DELETE FROM users")
+    fun deleteFromUsers()
 }

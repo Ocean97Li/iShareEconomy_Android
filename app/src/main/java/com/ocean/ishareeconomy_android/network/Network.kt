@@ -1,7 +1,12 @@
 package com.ocean.ishareeconomy_android.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.ocean.ishareeconomy_android.network.Network.API_BASE_URL
+import com.ocean.ishareeconomy_android.network.Network.lending
+import com.ocean.ishareeconomy_android.network.Network.retrofit
+import com.ocean.ishareeconomy_android.network.Network.users
 import com.ocean.ishareeconomy_android.network.services.LendingService
+import com.ocean.ishareeconomy_android.network.services.LoginService
 import com.ocean.ishareeconomy_android.network.services.UserService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,4 +32,5 @@ object Network {
 
     val users: UserService = retrofit.create(UserService::class.java)
     val lending: LendingService = retrofit.create(LendingService::class.java)
+    val login: LoginService = retrofit.create(LoginService::class.java)
 }

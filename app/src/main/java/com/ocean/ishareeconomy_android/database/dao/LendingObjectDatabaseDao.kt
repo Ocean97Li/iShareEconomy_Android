@@ -47,5 +47,7 @@ interface LendObjectDatabaseDao {
     @Query("DELETE FROM lendobjects WHERE object_id = :id")
     fun deleteObjectById(id: String)
 
+    @Query("DELETE FROM lendobjects")
+    fun deleteFromObjects()
 
 }

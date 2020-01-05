@@ -76,11 +76,11 @@ class LendingActivityAddThenDeleteObjectTest {
         )
         materialButtonLogin.perform(ViewActions.click())
 
-        Thread.sleep(5000)
+        Thread.sleep(1000)
 
         val actionMenuItemView = onView(
             allOf(
-                withId(R.id.add_lending_object_button), withText("Share new"),
+                withId(R.id.add_lending_object_button),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.action_bar),
