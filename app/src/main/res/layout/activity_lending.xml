@@ -14,7 +14,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="InconsistentLayout" />
+            tools:ignore="InconsistentLayout">
+        <fragment
+                android:id="@+id/main_content_lending"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                app:navGraph="@navigation/lending_navigation"
+                app:defaultNavHost="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view_lending"

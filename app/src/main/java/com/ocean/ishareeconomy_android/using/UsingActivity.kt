@@ -90,13 +90,15 @@ class UsingActivity : AppCompatActivity() {
      * @return [Unit]
      **/
     private fun navigateToDetail() {
-        usingDetailFragment = UsingDetailFragment()
         if (!masterDetail) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame_layout_container_using, usingDetailFragment)
-                .commit()
+            return
         }
+
+        usingDetailFragment = UsingDetailFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout_container_using, usingDetailFragment)
+            .commit()
     }
 
     /**
@@ -110,27 +112,21 @@ class UsingActivity : AppCompatActivity() {
      * @return [Unit]
      **/
     private fun configureMasterDetailView(replace: Boolean = false) {
+
+        if (!masterDetail) {
+            return
+        }
+
         val transaction = supportFragmentManager.beginTransaction()
 
-        if (masterDetail) {
-
-            if (replace) {
-                transaction.replace(usingMasterFragment.id, usingMasterFragment)
-                frame_layout_details_using!!.visibility = View.VISIBLE
-            } else {
-                transaction.add(R.id.frame_layout_master_using, usingMasterFragment)
-                transaction.add(R.id.frame_layout_details_using, usingDetailFragment)
-            }
-
+        if (replace) {
+            transaction.replace(usingMasterFragment.id, usingMasterFragment)
+            frame_layout_details_using!!.visibility = View.VISIBLE
         } else {
-
-            if (replace) {
-                transaction.replace(R.id.frame_layout_container_using, usingMasterFragment)
-            } else {
-                transaction.add(R.id.frame_layout_container_using, usingMasterFragment)
-            }
-
+            transaction.add(R.id.frame_layout_master_using, usingMasterFragment)
+            transaction.add(R.id.frame_layout_details_using, usingDetailFragment)
         }
+
 
         transaction.commit()
     }

@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -253,9 +254,15 @@ class LendingMasterFragment: Fragment() {
 
         viewModelAdapter = LendObjectAdapter( LendObjectClick{
             context?.packageManager ?: return@LendObjectClick
-            if ((activity as LendingActivity).masterDetail || !deleting) {
+            val masterDetail = (activity as LendingActivity).masterDetail
+            if (masterDetail || !deleting) {
                 viewModel.selectObject(it)
-                (activity as LendingActivity).onDetailClick()
+                if (masterDetail) {
+                    (activity as LendingActivity).onDetailClick()
+                } else {
+                    val directions = LendingMasterFragmentDirections.actionLendingMasterFragmentToLendingDetailFragment()
+                    findNavController().navigate(directions)
+                }
             }
         })
 
@@ -277,7 +284,13 @@ class LendingMasterFragment: Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.add_lending_object_button -> {
-                (activity!! as LendingActivity).navigateToAdd()
+                val masterDetail = (activity as LendingActivity).masterDetail
+                if (masterDetail) {
+                    (activity as LendingActivity).navigateToAdd()
+                } else {
+                    val directions = LendingMasterFragmentDirections.actionLendingMasterFragmentToLendingAddFragment()
+                    findNavController().navigate(directions)
+                }
             }
 
             R.id.remove_lending_object_button -> {

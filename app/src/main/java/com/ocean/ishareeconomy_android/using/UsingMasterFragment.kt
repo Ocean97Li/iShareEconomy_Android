@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
@@ -112,8 +113,14 @@ class UsingMasterFragment : Fragment() {
 
         viewModelAdapter = LendObjectAdapter(LendObjectClick {
             context?.packageManager ?: return@LendObjectClick
+            val masterDetail = (activity as UsingActivity).masterDetail
             viewModel.selectObject(it)
-            (activity as UsingActivity).onDetailClick()
+            if (masterDetail) {
+                (activity as UsingActivity).onDetailClick()
+            } else {
+                val directions = UsingMasterFragmentDirections.actionUsingMasterFragmentToUsingDetailFragment()
+                findNavController().navigate(directions)
+            }
         })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view_using).apply {

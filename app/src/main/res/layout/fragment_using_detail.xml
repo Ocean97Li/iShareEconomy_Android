@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.ocean.ishareeconomy_android.lending.UsingDetailFragment">
+    <data>
+
+        <variable
+                name="viewModel"
+                type="com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel" />
+    </data>
+
+    <FrameLayout
+            android:id="@+id/frame_layout_using_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_using_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/list_item_lendobject" />
+    </FrameLayout>
+</layout>

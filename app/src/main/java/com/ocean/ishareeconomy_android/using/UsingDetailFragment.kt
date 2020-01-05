@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.adapters.LendingDetailAdapter
-import com.ocean.ishareeconomy_android.databinding.FragmentLendingDetailBinding
+import com.ocean.ishareeconomy_android.databinding.FragmentUsingDetailBinding
 import com.ocean.ishareeconomy_android.models.LendingObject
 import com.ocean.ishareeconomy_android.models.LoginResponseObject
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
@@ -97,9 +97,9 @@ class UsingDetailFragment : Fragment() {
         token = sharedPreferences.getString(getString(R.string.sp_user_token), "")!!
         loginResponseObject = jwtToLoginResponseObject(token)!!
 
-        val binding: FragmentLendingDetailBinding = DataBindingUtil.inflate(
+        val binding: FragmentUsingDetailBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_lending_detail,
+            R.layout.fragment_using_detail,
             container,
             false
         )
@@ -110,7 +110,7 @@ class UsingDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view_lending_detail).apply {
+        binding.root.findViewById<RecyclerView>(R.id.recycler_view_using_detail).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = viewModelAdapter
         }
