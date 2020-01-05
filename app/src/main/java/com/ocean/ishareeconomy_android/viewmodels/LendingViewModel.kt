@@ -49,12 +49,22 @@ class LendingViewModel(application: Application, val id: String, private val aut
 
     val lending = repository.lending
 
+    /**
+     * init starts the process of fetching the list of shared objects
+     */
     init {
         viewModelScope.launch {
             repository.refreshUsers(id, auth)
         }
     }
 
+    /**
+     * Method that starts the process of deleting a [LendingObject]
+     *
+     * @param lendObject the concerning [LendingObject]
+     *
+     * @return [Unit]
+     */
     fun removeObject(lendObject: LendingObject) {
         if (viewModelJob.isCancelled) {
             viewModelJob = SupervisorJob()
@@ -65,12 +75,21 @@ class LendingViewModel(application: Application, val id: String, private val aut
         }
     }
 
+    /**
+     * Method that sets a [LendingObject] as selected
+     *
+     * @param lendObject the concerning [LendingObject]
+     *
+     * @return [Unit]
+     */
     fun selectObject(lendObject: LendingObject?) {
         repository.selectedLendObject.postValue(lendObject)
     }
 
     /**
-     * Cancel all coroutines when the ViewModel is cleared
+     * Method that cancels all coroutines when the ViewModel is cleared
+     *
+     * @return [Unit]
      */
     override fun onCleared() {
         super.onCleared()

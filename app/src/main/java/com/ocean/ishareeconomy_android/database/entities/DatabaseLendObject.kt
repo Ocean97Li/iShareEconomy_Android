@@ -1,12 +1,23 @@
 package com.ocean.ishareeconomy_android.database.entities
 
-import androidx.room.*
-import com.ocean.ishareeconomy_android.models.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import com.ocean.ishareeconomy_android.models.LendingObject
+import com.ocean.ishareeconomy_android.models.ObjectOwner
 
 /**
  * Part of *database.entities*.
  *
- * Defines how objects of type [LendingObject] and [ObjectOwner] are stored in the DB
+ * Defines how domain objects of type [LendingObject] and [ObjectOwner] are stored in the DB
+ * @property object_id The identifier for [DatabaseLendObject], matches [LendingObject.id]
+ * @property object_owner_id matches the id of [LendingObject.owner]
+ * @property object_owner_name matches the name of [LendingObject.owner]
+ * @property name the object's name
+ * @property description the object's description
+ * @property type the object's type in [String]
+ *
  */
 @Entity(tableName = "lendobjects", foreignKeys = [
     ForeignKey(

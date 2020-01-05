@@ -67,7 +67,7 @@
                         android:layout_weight="0"
                         android:gravity="center"
                         android:visibility="@{user.name != null ? 0 : 8}"
-                        android:text="@{user.froToDate}"
+                        android:text="@{user.fromToDate}"
                         tools:text="@string/from_date_to_date" />
 
                 <TextView

@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.database.IShareDataBase
 import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.lending.OnShareListener
 import com.ocean.ishareeconomy_android.lending.SelectedColor
@@ -24,17 +23,17 @@ import kotlinx.coroutines.*
  * and allows the creation when all conditions are satisfied.
  *
  * Inherits from [AndroidViewModel] so that it remains unaffected by rotations
- *  @property id: [String] the logged in user's id
- *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
- *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
- *  @property dataBase: [IShareDataBase]
- *  @property repository: a [UserRepository] Singleton that manages all the users
- *  @property type: [LendObjectType] the new object's type
- *  @property name: [String] the new object's name
- *  @property description: [String] the new object's description
- *  @property share: [Boolean] value continually updated to reflect whether the object can be created, or not
- *  @property colorSetter: [SelectedColor] the parent fragment, sets the type button background color
- *  @property navigateBack: [OnShareListener] the parent fragment, does the back navigation
+ *  @property id the logged in user's id
+ *  @property viewModelJob job for all co-routines started by this ViewModel, cancel to cancel all
+ *  @property viewModelScope the main scope for all co-routines launched by MainViewModel.
+ *  @property dataBase the main access-point fort the DB
+ *  @property repository a [UserRepository] Singleton that manages all the users
+ *  @property type the new object's type
+ *  @property name the new object's name
+ *  @property description the new object's description
+ *  @property share  value continually updated to reflect whether the object can be created, or not
+ *  @property colorSetter the parent fragment under the [SelectedColor] interface, sets the type button background color
+ *  @property navigateBack the parent fragment under the [OnShareListener] interface, does the back navigation
  *
  *  @constructor AddLendingViewModel
  *  @param application: [Application]
@@ -129,7 +128,11 @@ class AddLendingViewModel(application: Application, val id: String, private val 
     }
 
     /**
-     * Factory for constructing AddLendingViewModel with parameters
+     * [Factory] for constructing [AddLendingViewModel] with parameters
+     *
+     * @param app the launching application
+     * @param id the logged in user's id, used to communicate with the repo
+     * @param auth the logged in user's auth token, used to communicate with the repo
      */
     class Factory(val app: Application, val id: String, private val auth: String) : ViewModelProvider.Factory {
         @Throws(IllegalArgumentException::class)

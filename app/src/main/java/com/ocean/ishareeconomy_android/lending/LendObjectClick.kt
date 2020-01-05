@@ -3,10 +3,11 @@ package com.ocean.ishareeconomy_android.lending
 import com.ocean.ishareeconomy_android.models.LendingObject
 
 /**
+ * Part of *lending*.
+ *
  * Click listener for [LendingObject]
  *
- * @property block: ([LendingObject]) -> [Unit])
- * anonymous block of code that takes a [LendingObject] parameter and returns [Unit]
+ * @property block anonymous block of code that takes a [LendingObject] parameter and returns [Unit]
  */
 class LendObjectClick(val block: (LendingObject) -> Unit) {
     /**

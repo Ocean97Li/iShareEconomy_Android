@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>LendObjectAdapter - app</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">app</a>&nbsp;/&nbsp;<a href="../index.html">com.ocean.ishareeconomy_android.adapters</a>&nbsp;/&nbsp;<a href="./index.html">LendObjectAdapter</a><br/>
+<br/>
+<h1>LendObjectAdapter</h1>
+<code><span class="keyword">class </span><span class="identifier">LendObjectAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Adapter</span><span class="symbol">&lt;</span><a href="../-lend-object-view-holder/index.html"><span class="identifier">LendObjectViewHolder</span></a><span class="symbol">&gt;</span></code>
+<p>Part of <em>adapters</em>.</p>
+<p>RecyclerView Adapter for setting up data binding on the items in the list.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Part of <em>adapters</em>.</p>
+<code><span class="identifier">LendObjectAdapter</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.adapters.LendObjectAdapter$<init>(com.ocean.ishareeconomy_android.lending.LendObjectClick)/callback">callback</span><span class="symbol">:</span>&nbsp;<a href="../../com.ocean.ishareeconomy_android.lending/-lend-object-click/index.html"><span class="identifier">LendObjectClick</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="callback.html">callback</a></h4>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">callback</span><span class="symbol">: </span><a href="../../com.ocean.ishareeconomy_android.lending/-lend-object-click/index.html"><span class="identifier">LendObjectClick</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="context.html">context</a></h4>
+</td>
+<td>
+<p>: <a href="#">Context?</a> Store parent context, needed to fetch colors</p>
+<code><span class="keyword">var </span><span class="identifier">context</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="objects.html">objects</a></h4>
+</td>
+<td>
+<p>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html">MutableList</a> The <a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html">LendingObject</a> items that our Adapter will show</p>
+<code><span class="keyword">var </span><span class="identifier">objects</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/index.html"><span class="identifier">MutableList</span></a><span class="symbol">&lt;</span><a href="../../com.ocean.ishareeconomy_android.models/-lending-object/index.html"><span class="identifier">LendingObject</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="get-item-count.html">getItemCount</a></h4>
+</td>
+<td>
+<p>Determines how many items need to be drawn</p>
+<code><span class="keyword">fun </span><span class="identifier">getItemCount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-bind-view-holder.html">onBindViewHolder</a></h4>
+</td>
+<td>
+<p>Called by RecyclerView to display the data at the specified position. This method should
+update the contents of the {@link ViewHolder#itemView} to reflect the item at the given
+position.</p>
+<code><span class="keyword">fun </span><span class="identifier">onBindViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.adapters.LendObjectAdapter$onBindViewHolder(com.ocean.ishareeconomy_android.adapters.LendObjectViewHolder, kotlin.Int)/holder">holder</span><span class="symbol">:</span>&nbsp;<a href="../-lend-object-view-holder/index.html"><span class="identifier">LendObjectViewHolder</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.adapters.LendObjectAdapter$onBindViewHolder(com.ocean.ishareeconomy_android.adapters.LendObjectViewHolder, kotlin.Int)/position">position</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-create-view-holder.html">onCreateViewHolder</a></h4>
+</td>
+<td>
+<p>Called when RecyclerView needs a new <a href="#">RecyclerView.ViewHolder</a> of the given type to represent
+an item.</p>
+<code><span class="keyword">fun </span><span class="identifier">onCreateViewHolder</span><span class="symbol">(</span><span class="identifier" id="com.ocean.ishareeconomy_android.adapters.LendObjectAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/parent">parent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">, </span><span class="identifier" id="com.ocean.ishareeconomy_android.adapters.LendObjectAdapter$onCreateViewHolder(android.view.ViewGroup, kotlin.Int)/viewType">viewType</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-lend-object-view-holder/index.html"><span class="identifier">LendObjectViewHolder</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

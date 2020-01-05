@@ -8,5 +8,8 @@ package com.ocean.ishareeconomy_android.lending
  *
 **/
 interface OnShareListener {
+    /**
+     * Method that navigates to the [LendingMasterFragment]
+     */
     fun navigateBackToMaster()
 }

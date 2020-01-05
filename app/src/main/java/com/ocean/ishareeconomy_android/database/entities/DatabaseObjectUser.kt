@@ -8,7 +8,14 @@ import java.sql.Date
 /**
  * Part of *database.entities*.
  *
- * Defines how objects of type [ObjectUser] are stored in the DB
+ * Defines how the domain objects of type [ObjectUser] are stored in the DB
+ * @property object_user_id the generated identifier for the concerning user object combination
+ * @property object_id the object's id, matching that of a [DatabaseLendObject]
+ * @property user_id the user's id, matching that of a [DatabaseObjectUser]
+ * @property user_name the user's full name
+ * @property from_date the date starting from which the user can use the object
+ * @property to_date the date on which the object needs to be returned
+ * @property current An extra option to distinguish objects that are currently in use from the others
  */
 @Entity(tableName = "object_users")
 data class DatabaseObjectUser constructor(

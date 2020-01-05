@@ -86,7 +86,7 @@ class LendingActivity : AppCompatActivity() {
      * for tablets and larger screen size devices both master and detail are displayed.
      * for smaller screen sizes they are displayed separately.
      *
-     * @param replace: [Boolean], determines whether the fragments should be initialised (by default)
+     * @param replace Determines whether the fragments should be initialised (by default)
      * or replaced ([replace] = true)
      *
      * @return [Unit]

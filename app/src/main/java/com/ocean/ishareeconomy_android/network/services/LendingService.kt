@@ -12,6 +12,15 @@ import retrofit2.http.*
  */
 interface LendingService {
 
+    /**
+     * The method that defines the [POST]-request that creates a [LendingObject]
+     *
+     * @param id the logged in user's id, used as a [Path] parameter
+     * @param auth the logged in user's authorization token, used as a [Header] parameter
+     * @param lendObject the created [LendingObject], used a a [Body] parameter
+     *
+     * @return [Deferred]<[Response]<[LendingObject]>> The async response containing the created lendobject
+     */
     @Headers("Content-type: application/json")
     @POST("users/{id}/lending")
     fun postLendObjectAsync(
@@ -20,6 +29,15 @@ interface LendingService {
         @Body lendObject: LendingObject
     ): Deferred<Response<LendingObject>>
 
+    /**
+     * The method that defines the [DELETE]-request that deletes a [LendingObject]
+     *
+     * @param userId the logged in user's id, used as a [Path] parameter
+     * @param objectId the to be deleted [LendingObject]'s id, used as a [Path] parameter
+     * @param auth the logged in user's authorization token, used as a [Header] parameter
+     *
+     * @return [Deferred]<[Response]<[LendingObject]>> The async response containing the deleted lendobject
+     */
     @Headers("Content-type: application/json")
     @DELETE("users/{user_id}/lending/{object_id}")
     fun deleteLendObjectAsync(

@@ -24,7 +24,7 @@ import java.io.Serializable
  * @param type a representing [String] the [LendObjectType]
  * @param owner refers to the [User] that is the [LendingObject]'s owner
  * @param user refers to [User] that is the [LendingObject]'s current user
- * @param waitingList a [List]<[User]> that is the [LendingObject]'s future users
+ * @param waitingList a [List]<[User]> that represents the [LendingObject]'s future users
  */
 class LendingObject(
     @SerializedName("_id")

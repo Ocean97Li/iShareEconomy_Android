@@ -23,7 +23,7 @@ import com.ocean.ishareeconomy_android.viewmodels.LendingDetailViewModel
 /**
  * Part of *lending*.
  *
- * Fragment responsible for displaying adding items to the list of shared objects
+ * The [Fragment] responsible for displaying the details of a shared [LendingObject]
  */
 class LendingDetailFragment: Fragment() {
 
@@ -48,6 +48,8 @@ class LendingDetailFragment: Fragment() {
      * fragment's view hierarchy instantiated.  It can be used to do final
      * initialization once these pieces are in place, such as retrieving
      * views or restoring state.
+     *
+     * @return [Unit]
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
