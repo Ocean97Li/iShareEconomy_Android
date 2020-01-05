@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/lending_navigation"
+        app:startDestination="@id/lendingMasterFragment">
+    <fragment
+            android:id="@+id/lendingMasterFragment"
+            android:name="com.ocean.ishareeconomy_android.lending.LendingMasterFragment"
+            android:label="fragment_lending"
+            tools:layout="@layout/fragment_lending" >
+        <action
+                android:id="@+id/action_lendingMasterFragment_to_lendingAddFragment"
+                app:destination="@id/lendingAddFragment"
+                app:enterAnim="@anim/anim_slide_up"
+                app:popExitAnim="@anim/anim_slide_down"
+                 />
+        <action
+                android:id="@+id/action_lendingMasterFragment_to_lendingDetailFragment"
+                app:destination="@+id/lendingDetailFragment"
+                app:enterAnim="@anim/anim_slide_in_left"
+                app:exitAnim="@anim/anim_slide_out_left"
+                app:popEnterAnim="@anim/anim_slide_in_right"
+                app:popExitAnim="@anim/anim_slide_out_right"
+                />
+    </fragment>
+    <fragment
+            android:id="@+id/lendingAddFragment"
+            android:name="com.ocean.ishareeconomy_android.lending.LendingAddFragment"
+            android:label="fragment_add_lending"
+            tools:layout="@layout/fragment_add_lending" >
+        <action
+                android:id="@+id/action_lendingAddFragment_to_lendingMasterFragment"
+                app:destination="@id/lendingMasterFragment"
+                app:exitAnim="@anim/anim_slide_down"
+                />
+    </fragment>
+    <fragment
+            android:id="@+id/lendingDetailFragment"
+            android:name="com.ocean.ishareeconomy_android.lending.LendingDetailFragment"
+            android:label="fragment_lending_detail"
+            tools:layout="@layout/fragment_lending_detail" >
+<!--        <argument-->
+<!--                android:name="object_detail_id"-->
+<!--                app:argType="string"/>-->
+    </fragment>
+</navigation>

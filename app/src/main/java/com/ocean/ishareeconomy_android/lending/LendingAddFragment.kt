@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.ocean.ishareeconomy_android.R
 import com.ocean.ishareeconomy_android.databinding.FragmentAddLendingBinding
 import com.ocean.ishareeconomy_android.models.LendObjectType
@@ -48,7 +49,12 @@ class LendingAddFragment: Fragment(), SelectedColor, OnShareListener {
         val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view!!.windowToken,0)
         // Navigate back
-        (activity as LendingActivity).navigateToMaster()
+        if ((activity as LendingActivity).masterDetail) {
+            (activity as LendingActivity).navigateToMaster()
+        } else {
+            val directions = LendingAddFragmentDirections.actionLendingAddFragmentToLendingMasterFragment()
+            findNavController().navigate(directions)
+        }
     }
 
     /**

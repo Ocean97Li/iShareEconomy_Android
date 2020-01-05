@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ocean.ishareeconomy_android.R
-import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.database.IShareDataBase
+import com.ocean.ishareeconomy_android.database.getDatabase
 import com.ocean.ishareeconomy_android.lending.OnShareListener
 import com.ocean.ishareeconomy_android.lending.SelectedColor
 import com.ocean.ishareeconomy_android.models.LendObjectType
@@ -25,7 +25,6 @@ import kotlinx.coroutines.*
  *
  * Inherits from [AndroidViewModel] so that it remains unaffected by rotations
  *  @property id: [String] the logged in user's id
- *  @property auth: [String] the logged in user's authentication JWT token
  *  @property viewModelJob: [SupervisorJob] job for all co-routines started by this ViewModel, cancel to cancel all
  *  @property viewModelScope: [CoroutineScope] the main scope for all co-routines launched by MainViewModel.
  *  @property dataBase: [IShareDataBase]

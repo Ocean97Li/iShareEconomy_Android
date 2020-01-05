@@ -93,26 +93,20 @@ class LendingActivity : AppCompatActivity() {
      **/
     private fun configureMasterDetailView(replace: Boolean = false) {
 
+        if (!masterDetail) {
+            return
+        }
+
         val transaction = supportFragmentManager.beginTransaction()
 
-        if (masterDetail) {
-
-            if (replace) {
-                if (add_lending_container != null) {
-                    transaction.replace(addFragment.id, lendingMasterFragment)
-                    frame_layout_details_lending!!.visibility = View.VISIBLE
-                }
-            } else {
-                transaction.add(R.id.frame_layout_master_lending, lendingMasterFragment)
-                transaction.add(R.id.frame_layout_details_lending, lendingDetailFragment)
+        if (replace) {
+            if (add_lending_container != null) {
+                transaction.replace(addFragment.id, lendingMasterFragment)
+                frame_layout_details_lending!!.visibility = View.VISIBLE
             }
-
         } else {
-            if (replace) {
-                transaction.replace(R.id.frame_layout_container_lending, lendingMasterFragment)
-            } else {
-                transaction.add(R.id.frame_layout_container_lending, lendingMasterFragment)
-            }
+            transaction.add(R.id.frame_layout_master_lending, lendingMasterFragment)
+            transaction.add(R.id.frame_layout_details_lending, lendingDetailFragment)
         }
 
         transaction.commit()
@@ -133,13 +127,11 @@ class LendingActivity : AppCompatActivity() {
      * @return [Unit]
      **/
     private fun navigateToDetail() {
-        lendingDetailFragment = LendingDetailFragment()
         if (!masterDetail) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame_layout_container_lending, lendingDetailFragment)
-                .commit()
+            return
         }
+
+        lendingDetailFragment = LendingDetailFragment()
     }
 
     /**
@@ -148,19 +140,18 @@ class LendingActivity : AppCompatActivity() {
      * @return [Unit]
      **/
     fun navigateToAdd() {
-        val transaction = supportFragmentManager.beginTransaction()
-        if (masterDetail) {
-            frame_layout_details_lending!!.visibility = View.GONE
-            transaction.replace(R.id.frame_layout_master_lending, addFragment)
-        } else {
-            transaction.replace(R.id.frame_layout_container_lending, addFragment)
+        if (!masterDetail) {
+            return
         }
 
-        transaction.commit()
+        frame_layout_details_lending!!.visibility = View.GONE
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout_master_lending, addFragment).commit()
+
     }
 
     /**
-     * Method that navigates to the detail view when an list object in the [lendingDetailFragment]
+     * Method that navigates to the detail view when an list object in the [lendingMasterFragment]
      * is clicked. It sets the blank [LendingDetailFragment], which will be updated on initialisation by the repo
      *
      * @return [Unit]

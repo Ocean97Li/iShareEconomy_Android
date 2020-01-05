@@ -49,7 +49,7 @@ open class LendObjectViewModel (private val data: LendingObject, val context: Co
         return if (data.user != null) {
             ColorDrawable(ContextCompat.getColor(context, R.color.customYellow))
         } else {
-            ColorDrawable(ContextCompat.getColor(context, R.color.customGreen))
+            ColorDrawable(ContextCompat.getColor(context, R.color.colorAccent))
         }
     }
 
