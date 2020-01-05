@@ -1,7 +1,10 @@
 package com.ocean.ishareeconomy_android.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.ocean.ishareeconomy_android.database.entities.DatabaseUser
 import com.ocean.ishareeconomy_android.models.User
 
@@ -20,4 +23,7 @@ interface UserDatabaseDao {
 
     @Query("SELECT distance from users where user_id = :id")
     fun getDistanceFromLoggedInUser(id: String): Int
+
+    @Query("DELETE FROM users")
+    fun deleteFromUsers()
 }

@@ -20,5 +20,5 @@ interface ObjectUserDatabaseDao {
     fun insertAllObjectUsers(vararg objectUsers: DatabaseObjectUser)
 
     @Query("DELETE FROM object_users")
-    fun deleteFromObjectUser()
+    fun deleteFromObjectUsers()
 }

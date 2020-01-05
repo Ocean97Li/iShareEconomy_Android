@@ -189,7 +189,7 @@ class UserRepository private constructor(params: RepositoryParams) {
                 // Set DB
                 database.users.insertAllUsers(*users.asDatabaseModel())
                 database.objects.insertAllLendObjects(*lendObjects.asDatabaseModel())
-                database.objectUsers.deleteFromObjectUser()
+                database.objectUsers.deleteFromObjectUsers()
                 database.objectUsers.insertAllObjectUsers(*objectUsersWaiting.asDatabaseModels())
                 database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
 
@@ -201,6 +201,14 @@ class UserRepository private constructor(params: RepositoryParams) {
                     error.value = response.message()
                 }
             }
+        }
+    }
+
+    suspend fun resetData() {
+        withContext(Dispatchers.IO) {
+            database.users.deleteFromUsers()
+            database.objects.deleteFromObjects()
+            database.objectUsers.deleteFromObjectUsers()
         }
     }
 }
