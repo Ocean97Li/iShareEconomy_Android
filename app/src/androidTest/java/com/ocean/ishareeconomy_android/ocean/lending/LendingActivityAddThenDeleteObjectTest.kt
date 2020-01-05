@@ -76,7 +76,7 @@ class LendingActivityAddThenDeleteObjectTest {
         )
         materialButtonLogin.perform(ViewActions.click())
 
-        Thread.sleep(100)
+        Thread.sleep(5000)
 
         val actionMenuItemView = onView(
             allOf(

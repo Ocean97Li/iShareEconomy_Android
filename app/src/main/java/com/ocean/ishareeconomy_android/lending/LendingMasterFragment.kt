@@ -110,11 +110,14 @@ class LendingMasterFragment: Fragment() {
                  * @return [Unit]
                  */
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val position = viewHolder.adapterPosition
-                    viewModel.removeObject(viewModelAdapter!!.objects[position])
-                    viewModelAdapter!!.objects.removeAt(position)
-                    viewModelAdapter!!.notifyItemRemoved(position)
 
+                    val position = viewHolder.adapterPosition
+                    val lendObject = viewModelAdapter!!.objects[position]
+                    if(lendObject.waitingList.isEmpty() && lendObject.user == null) {
+                        viewModel.removeObject(lendObject)
+                        viewModelAdapter!!.objects.removeAt(position)
+                        viewModelAdapter!!.notifyItemRemoved(position)
+                    }
                 }
 
                 /**
@@ -180,7 +183,14 @@ class LendingMasterFragment: Fragment() {
                     viewHolder: RecyclerView.ViewHolder
                 ): Int {
                     if (deleting) {
-                        return super.getSwipeDirs(recyclerView, viewHolder)
+                        val position = viewHolder.adapterPosition
+                        val lendObject = viewModelAdapter!!.objects[position]
+
+                        if (lendObject.waitingList.isEmpty() && lendObject.user == null) {
+                            return super.getSwipeDirs(recyclerView, viewHolder)
+                        } else {
+                            showBackBarWith(R.string.remove_not_possible, R.color.colorDelete)
+                        }
                     }
                     return 0
                 }
@@ -297,21 +307,33 @@ class LendingMasterFragment: Fragment() {
                 deleting = deleting.not()
                 if (deleting) {
                    item.setIcon(R.drawable.ic_delete_white_24dp)
-                    val snackbar = Snackbar.make(
-                        viewOfLayout.findViewById(R.id.frame_layout_lending),
-                        getText(R.string.remove_instruction).toString(),
-                        Snackbar.LENGTH_LONG)
-                    val params =
-                        snackbar.view.layoutParams as FrameLayout.LayoutParams
-                    params.bottomMargin = activity!!.nav_view_lending!!.height
-                    snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorAccent))
-                    snackbar.view.layoutParams = params
-                    snackbar.show()
+                    showBackBarWith(R.string.remove_instruction)
                 } else {
                     item.setIcon(R.drawable.ic_delete_grey_24dp)
                 }
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * Called to inflate the ToolBarMenu
+     *
+     * @param item: [MenuItem]
+     *
+     * @return [Unit]
+     */
+    private fun showBackBarWith(textId: Int, colorId: Int = R.color.colorAccent, length: Int = Snackbar.LENGTH_LONG) {
+        val snackbar = Snackbar.make(
+            viewOfLayout.findViewById(R.id.frame_layout_lending),
+            getText(textId).toString(),
+            length
+        )
+        val params =
+            snackbar.view.layoutParams as FrameLayout.LayoutParams
+        params.bottomMargin = activity!!.nav_view_lending!!.height
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(context!!, colorId))
+        snackbar.view.layoutParams = params
+        snackbar.show()
     }
 }
