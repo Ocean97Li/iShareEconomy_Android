@@ -187,11 +187,9 @@ class UserRepository private constructor(params: RepositoryParams) {
                 }
 
                 // Set DB
-                database.users.insertAllUsers(*users.asDatabaseModel())
-                database.objects.insertAllLendObjects(*lendObjects.asDatabaseModel())
-                database.objectUsers.deleteFromObjectUsers()
-                database.objectUsers.insertAllObjectUsers(*objectUsersWaiting.asDatabaseModels())
-                database.objectUsers.insertAllObjectUsers(*objectUsersCurrent.asDatabaseModels(true))
+                database.users.putAllUsers(*users.asDatabaseModel())
+                database.objects.putAllLendObjects(*lendObjects.asDatabaseModel())
+                database.objectUsers.putAllObjectUsers(*objectUsersWaiting.asDatabaseModels(), *objectUsersCurrent.asDatabaseModels(true))
 
                 GlobalScope.launch(Dispatchers.Main) {
                     success.value = _loggedInUser!!.fullName
@@ -201,14 +199,6 @@ class UserRepository private constructor(params: RepositoryParams) {
                     error.value = response.message()
                 }
             }
-        }
-    }
-
-    suspend fun resetData() {
-        withContext(Dispatchers.IO) {
-            database.users.deleteFromUsers()
-            database.objects.deleteFromObjects()
-            database.objectUsers.deleteFromObjectUsers()
         }
     }
 }

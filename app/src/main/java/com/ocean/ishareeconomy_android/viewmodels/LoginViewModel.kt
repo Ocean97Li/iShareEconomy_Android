@@ -15,6 +15,9 @@ import com.ocean.ishareeconomy_android.models.LoginResponse
 import com.ocean.ishareeconomy_android.models.User
 import com.ocean.ishareeconomy_android.network.Network
 import com.ocean.ishareeconomy_android.network.jwtToLoginResponseObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +29,8 @@ import retrofit2.Response
  * It also contains all the domain logic concerning the login.
  * Being a viewmodel is delegates certain UI-related task back to the parent fragment,
  * which it knows under as [loginInterface]
- *
+ * @property viewModelJob job for all co-routines started by this ViewModel, cancel to cancel all
+ * @property viewModelScope the main scope for all co-routines launched by MainViewModel.
  * @property username the [String] in the username input field
  * @property password the [String] in the password input field
  * @property usernameErrorMessage the error message which needs to be set when [username] remains empty
@@ -40,6 +44,9 @@ class LoginViewModel(
     application: Application,
     private val loginInterface: LoginInterface
 ) : AndroidViewModel(application){
+
+    private val viewModelJob = SupervisorJob()
+    private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     var username: String = ""
     var password: String = ""

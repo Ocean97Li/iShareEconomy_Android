@@ -13,12 +13,17 @@ import com.ocean.ishareeconomy_android.models.ObjectUser
  * Defines the possible sql actions, concerning the local storage of objects of type [ObjectUser] in the DB
  */
 @Dao
-interface ObjectUserDatabaseDao {
+abstract class ObjectUserDatabaseDao {
 
     @Transaction
+    open fun putAllObjectUsers(vararg objectUsers: DatabaseObjectUser) {
+        deleteFromObjectUsers()
+        insertAllObjectUsers(*objectUsers)
+    }
+
     @Insert
-    fun insertAllObjectUsers(vararg objectUsers: DatabaseObjectUser)
+    abstract fun insertAllObjectUsers(vararg objectUsers: DatabaseObjectUser)
 
     @Query("DELETE FROM object_users")
-    fun deleteFromObjectUsers()
+    abstract fun deleteFromObjectUsers()
 }

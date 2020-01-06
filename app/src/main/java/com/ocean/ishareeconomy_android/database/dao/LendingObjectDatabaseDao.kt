@@ -12,15 +12,15 @@ import com.ocean.ishareeconomy_android.models.LendingObject
  * Defines the possible sql actions, concerning the local storage of objects of type [LendingObject] in the DB
  */
 @Dao
-interface LendObjectDatabaseDao {
+abstract class LendObjectDatabaseDao {
 
     @Transaction
     @Query("SELECT * from lendobjects where object_owner_id = :id")
-    fun getLendingObjectsFromUserById(id: String): LiveData<List<LendObjectWithObjectUsers>>
+    abstract fun getLendingObjectsFromUserById(id: String): LiveData<List<LendObjectWithObjectUsers>>
 
     @Transaction
     @Query("SELECT * from lendobjects where object_owner_id = :id")
-    fun lendingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
+    abstract fun lendingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
 
     @Transaction
     @Query(
@@ -29,7 +29,7 @@ interface LendObjectDatabaseDao {
             from lendobjects LO left join object_users OBU on LO.object_id = OBU.object_id  
             where OBU.current and OBU.user_id = :id"""
     )
-    fun getObjectsCurrentlyUsedByUser(id: String): LiveData<List<LendObjectWithObjectUsers>>
+    abstract fun getObjectsCurrentlyUsedByUser(id: String): LiveData<List<LendObjectWithObjectUsers>>
 
     @Transaction
     @Query(
@@ -38,16 +38,22 @@ interface LendObjectDatabaseDao {
             from lendobjects LO left join object_users OBU on LO.object_id = OBU.object_id  
             where OBU.current and OBU.user_id = :id"""
     )
-    fun usingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
+    abstract fun usingObjectsForUserById(id: String): List<LendObjectWithObjectUsers>
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllLendObjects(vararg objects: DatabaseLendObject)
+    abstract fun insertAllLendObjects(vararg objects: DatabaseLendObject)
 
     @Query("DELETE FROM lendobjects WHERE object_id = :id")
-    fun deleteObjectById(id: String)
+    abstract fun deleteObjectById(id: String)
 
     @Query("DELETE FROM lendobjects")
-    fun deleteFromObjects()
+    abstract fun deleteFromObjects()
+
+    @Transaction
+    open fun putAllLendObjects(vararg objects: DatabaseLendObject) {
+        deleteFromObjects()
+        insertAllLendObjects(*objects)
+    }
 
 }
